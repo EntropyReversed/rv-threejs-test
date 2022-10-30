@@ -2,6 +2,6 @@ export default [
   {
     name: 'model',
     type: 'glbModel',
-    path: '/Public/Models/rv.glb',
+    path: 'Models/rv.glb',
   },
 ];
