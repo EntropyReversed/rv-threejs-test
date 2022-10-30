@@ -3,7 +3,9 @@ import Sizes from './Utils/Sizes';
 import Camera from './Camera';
 import Renderer from './Renderer';
 import Time from './Utils/Time';
+import Resources from './Utils/Resources';
 import World from './World/World';
+import assets from './Utils/assets';
 
 export default class Manager {
   static instance;
@@ -20,6 +22,7 @@ export default class Manager {
     this.camera = new Camera();
     this.renderer = new Renderer();
 
+    this.resources = new Resources(assets);
     this.world = new World();
 
     this.sizes.on('resize', () => {
