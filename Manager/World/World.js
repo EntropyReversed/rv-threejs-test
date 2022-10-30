@@ -9,8 +9,11 @@ export default class World {
     this.scene = this.manager.scene;
     this.canvas = this.manager.canvas;
     this.camera = this.manager.camera;
+    this.resources = this.manager.resources;
 
-    this.model = new Model();
+    this.resources.on('ready', () => {
+      this.model = new Model();
+    });
   }
 
   resize() {}
