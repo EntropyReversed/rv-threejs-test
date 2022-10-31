@@ -11,7 +11,7 @@ export default class Controls {
     this.camera = this.manager.camera;
 
     this.dummyCurve = new THREE.Vector3(0, 0, 0);
-    this.progress = 0;
+
     this.lerp = {
       current: 0,
       target: 0,
@@ -19,6 +19,11 @@ export default class Controls {
     };
 
     this.position = new THREE.Vector3(0, 0, 0);
+    this.lookAtPosition = new THREE.Vector3(0, 0, 0);
+
+    this.directionalVector = new THREE.Vector3(0, 0, 0);
+    this.staticVector = new THREE.Vector3(0, -1, 0);
+    this.crossVector = new THREE.Vector3(0, 0, 0);
 
     this.setPath();
     this.onWheel();
@@ -27,14 +32,12 @@ export default class Controls {
   setPath() {
     //Create a closed wavey loop
     this.curve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-10, 0, 10),
-      new THREE.Vector3(-5, 5, 5),
-      new THREE.Vector3(0, 0, 0),
-      new THREE.Vector3(5, -5, 5),
-      new THREE.Vector3(10, 0, 10),
+      new THREE.Vector3(0, 20, 0),
+      new THREE.Vector3(10, 10, 5),
+      new THREE.Vector3(10, 5, 3),
     ]);
 
-    const points = this.curve.getPoints(50);
+    const points = this.curve.getPoints(30);
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
 
     const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
@@ -46,6 +49,7 @@ export default class Controls {
 
   onWheel() {
     window.addEventListener('wheel', (e) => {
+      console.log(this.lerp.current);
       if (e.deltaY > 0) {
         this.lerp.target += 0.05;
       } else {
@@ -62,10 +66,12 @@ export default class Controls {
       this.lerp.target,
       this.lerp.ease
     );
+
     this.lerp.current = GSAP.utils.clamp(0, 1, this.lerp.current);
     this.lerp.target = GSAP.utils.clamp(0, 1, this.lerp.target);
     this.curve.getPointAt(this.lerp.current, this.position);
     this.camera.perspectiveCamera.position.copy(this.position);
     this.camera.perspectiveCamera.lookAt(0, 0, 0);
+    this.camera.perspectiveCamera.rotation.z = 0;
   }
 }

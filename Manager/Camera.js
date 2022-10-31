@@ -20,7 +20,7 @@ export default class Camera {
       35,
       this.sizes.aspect,
       0.1,
-      20
+      50
     );
 
     this.scene.add(this.perspectiveCamera);
@@ -33,7 +33,7 @@ export default class Camera {
       35,
       this.sizes.aspect,
       0.1,
-      1000
+      50
     );
     this.scene.add(this.perspectiveCameraMain);
     this.perspectiveCameraMain.position.y = 40;
