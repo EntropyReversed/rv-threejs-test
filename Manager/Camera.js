@@ -1,5 +1,6 @@
 import Manager from './Manager';
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default class Camera {
   constructor() {
@@ -10,6 +11,8 @@ export default class Camera {
 
     this.createPerspectiveCamera();
     this.createPerspectiveCameraMain();
+
+    this.setOrbitControls();
   }
 
   createPerspectiveCamera() {
@@ -31,6 +34,21 @@ export default class Camera {
     );
     this.scene.add(this.perspectiveCameraMain);
     this.perspectiveCameraMain.position.z = 5;
+
+    const size = 10;
+    const divisions = 10;
+
+    const gridHelper = new THREE.GridHelper(size, divisions);
+    this.scene.add(gridHelper)
+
+    const axesHelper = new THREE.AxesHelper( 3 );
+    this.scene.add(axesHelper);
+  }
+
+  setOrbitControls() {
+    this.controls = new OrbitControls(this.perspectiveCameraMain, this.canvas);
+    this.controls.enableDamping = true;
+    this.controls.enableZoom = true;
   }
 
   resize() {
@@ -41,5 +59,7 @@ export default class Camera {
     this.perspectiveCameraMain.updateProjectionMatrix();
   }
 
-  update() {}
+  update() {
+    this.controls.update();
+  }
 }

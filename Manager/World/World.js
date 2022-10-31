@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import Manager from '../Manager';
 import Model from './Model';
+import Enviroment from './Enviroment';
 
 export default class World {
   constructor() {
@@ -12,6 +13,7 @@ export default class World {
     this.resources = this.manager.resources;
 
     this.resources.on('ready', () => {
+      this.enviroment = new Enviroment();
       this.model = new Model();
     });
   }

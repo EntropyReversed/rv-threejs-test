@@ -23,7 +23,12 @@ export default class Resources extends EventEmitter {
     this.loaders = {};
     this.loaders.gltfLoader = new GLTFLoader();
     this.loaders.dracoLoader = new DRACOLoader();
-    this.loaders.dracoLoader.setDecoderPath('/draco/gltf/');
+
+    //TODO: this needs to be fixed to point to examples draco
+    this.loaders.dracoLoader.setDecoderPath(
+      'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/'
+    );
+    this.loaders.dracoLoader.setDecoderConfig({ type: 'js' });
     this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader);
   }
 
@@ -31,7 +36,6 @@ export default class Resources extends EventEmitter {
     for (const asset of this.assets) {
       if (asset.type === 'glbModel') {
         this.loaders.gltfLoader.load(asset.path, (file) => {
-          console.log(file);
           this.singleAssetLoaded(asset, file);
         });
       }
