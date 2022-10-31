@@ -35,6 +35,7 @@ export default class Manager {
   }
 
   resize() {
+    this.camera.resize();
     this.renderer.resize();
   }
 
