@@ -35,5 +35,7 @@ export default class Renderer {
 
   update() {
     this.renderer.render(this.scene, this.camera.perspectiveCameraMain);
+
+    // this.renderer.render(this.scene, this.camera.perspectiveCameraMain);
   }
 }

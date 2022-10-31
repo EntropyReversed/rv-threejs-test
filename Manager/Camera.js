@@ -20,9 +20,12 @@ export default class Camera {
       35,
       this.sizes.aspect,
       0.1,
-      1000
+      20
     );
+
     this.scene.add(this.perspectiveCamera);
+    this.helper = new THREE.CameraHelper(this.perspectiveCamera);
+    this.scene.add(this.helper);
   }
 
   createPerspectiveCameraMain() {
@@ -35,13 +38,13 @@ export default class Camera {
     this.scene.add(this.perspectiveCameraMain);
     this.perspectiveCameraMain.position.y = 40;
 
-    const size = 10;
-    const divisions = 10;
+    const size = 20;
+    const divisions = 20;
 
     const gridHelper = new THREE.GridHelper(size, divisions);
-    this.scene.add(gridHelper)
+    this.scene.add(gridHelper);
 
-    const axesHelper = new THREE.AxesHelper( 3 );
+    const axesHelper = new THREE.AxesHelper(3);
     this.scene.add(axesHelper);
   }
 
@@ -61,5 +64,10 @@ export default class Camera {
 
   update() {
     this.controls.update();
+    this.perspectiveCamera.lookAt(0, 0, 0);
+    this.helper.matrixWorldNeedsUpdate = true;
+    this.helper.update();
+    this.helper.position.copy(this.perspectiveCameraMain.position);
+    this.helper.rotation.copy(this.perspectiveCameraMain.rotation);
   }
 }

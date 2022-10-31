@@ -16,10 +16,15 @@ export default class Model {
     this.actualModel.children.forEach((child) => {
       child.castShadow = true;
       child.recieveShadow = true;
+
+      if (child.name === 'circleGrad') {
+        console.log(child);
+        const scale = 0;
+        child.scale.set(scale, scale, scale);
+      }
     });
 
     this.scene.add(this.actualModel);
-    console.log(this.actualModel);
   }
 
   resize() {}
