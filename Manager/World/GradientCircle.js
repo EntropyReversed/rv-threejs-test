@@ -36,11 +36,11 @@ export default class GradientCircle {
       this.update();
     });
 
-    var texture = new THREE.Texture(this.generateTexture());
+    const texture = new THREE.Texture(this.generateTexture());
     texture.needsUpdate = true;
 
     // material
-    var material = new THREE.MeshLambertMaterial({ map: texture });
+    const material = new THREE.MeshLambertMaterial({ map: texture });
     this.circle.receiveShadow = true;
     console.log(this.circle);
 
