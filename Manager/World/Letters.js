@@ -13,15 +13,13 @@ const map = (n, start1, end1, start2, end2) => {
 };
 
 export default class Letters {
-  constructor() {
+  constructor(child) {
     this.manager = new Manager();
     this.scene = this.manager.scene;
     this.sizes = this.manager.sizes;
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
-    this.group = new THREE.Group();
-
-    this.scene.add(this.group)
+    this.letters = child;
 
     this.lerp = {
       current: 0,
@@ -61,6 +59,6 @@ export default class Letters {
       this.lerp.ease
     );
 
-    // console.log(this.letters.position);
+    console.log(this.letters.position);
   }
 }

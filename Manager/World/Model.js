@@ -23,7 +23,7 @@ export default class Model {
   }
 
   setModel() {
-    this.letters = new Letters();
+    
 
     this.actualModel.children.forEach((child) => {
       child.castShadow = true;
@@ -31,6 +31,10 @@ export default class Model {
 
       if (child.name === 'circleGrad') {
         this.gradientCircle = new GradientCircle(child);
+      }
+console.log(child)
+      if (child.name === 'letters') {
+        this.letters = new Letters(child);
       }
     });
 

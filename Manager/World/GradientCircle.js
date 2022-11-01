@@ -19,7 +19,7 @@ export default class GradientCircle {
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
     this.scale = 1;
-    this.maxScale = 7;
+    this.maxScale = 600;
     this.circle = circle;
 
     this.lerp = {
@@ -85,7 +85,7 @@ export default class GradientCircle {
   }
 
   setCircle(scale) {
-    this.circle.scale.set(scale, 1, scale);
+    this.circle.scale.set(scale, scale, scale);
   }
 
   update() {
