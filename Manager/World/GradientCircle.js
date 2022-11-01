@@ -41,8 +41,8 @@ export default class GradientCircle {
 
     // material
     const material = new THREE.MeshLambertMaterial({ map: texture });
+    material.toneMapped = false;
     this.circle.receiveShadow = true;
-    console.log(this.circle);
 
     this.circle.material = material;
 
