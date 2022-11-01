@@ -71,18 +71,14 @@ export default class GradientCircle {
     let canvas2 = document.createElement('canvas');
     canvas2.width = size;
     canvas2.height = size;
+    document.body.appendChild(canvas2);
 
     // get context
     var context = canvas2.getContext('2d');
 
     // draw gradient
     context.rect(0, 0, size, size);
-    var gradient = context.createLinearGradient(
-      0,
-      0,
-      Math.cos(180) * size,
-      Math.sin(180) * size
-    );
+    var gradient = context.createLinearGradient(size / 2, 0, size / 2, size);
     gradient.addColorStop(0, '#a59bf4');
     gradient.addColorStop(1, '#f2a0ac');
 
