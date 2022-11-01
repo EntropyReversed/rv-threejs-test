@@ -38,7 +38,7 @@ export default class Letters {
   }
 
   onScroll(e) {
-    const startPercent = 0.75;
+    const startPercent = 0.7;
     const endPercent = 0.76;
     if (e > startPercent && e < endPercent) {
       this.lerp.target = map(e, startPercent, endPercent, 0, 1);

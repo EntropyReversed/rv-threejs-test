@@ -36,7 +36,9 @@ export default class Camera {
       50
     );
     this.scene.add(this.perspectiveCameraMain);
+    this.perspectiveCameraMain.position.x = -2;
     this.perspectiveCameraMain.position.y = 40;
+    this.perspectiveCameraMain.position.z = 8;
 
     const size = 20;
     const divisions = 20;
