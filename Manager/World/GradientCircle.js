@@ -78,8 +78,8 @@ export default class GradientCircle {
     // draw gradient
     context.rect(0, 0, size, size);
     var gradient = context.createLinearGradient(0, 0, size, size);
-    gradient.addColorStop(0, '#FF0000'); // light blue
-    gradient.addColorStop(1, '#ffff00'); // dark blue
+    gradient.addColorStop(0, '#a59bf4');
+    gradient.addColorStop(1, '#f2a0ac');
     context.fillStyle = gradient;
     context.fill();
 

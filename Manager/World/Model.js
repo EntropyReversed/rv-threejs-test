@@ -30,8 +30,8 @@ export default class Model {
       if (child.name === 'circleGrad') {
         this.gradientCircle = new GradientCircle(child);
       }
-
-      if (child.name === 'letterV' || child.name === 'letterR') {
+      console.log(child);
+      if (child.name === 'letters') {
         this.letters = new Letters(child);
       }
     });

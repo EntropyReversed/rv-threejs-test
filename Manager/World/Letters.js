@@ -19,7 +19,7 @@ export default class Letters {
     this.sizes = this.manager.sizes;
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
-    this.offsetY = 0.12;
+    this.offsetY = 0;
     this.letters = child;
 
     this.lerp = {
