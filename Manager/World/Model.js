@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import GSAP from 'gsap';
 import Manager from '../Manager';
+import GradientCircle from './GradientCircle';
+import Letters from './Letters';
 
 export default class Model {
   constructor() {
@@ -21,13 +23,14 @@ export default class Model {
   }
 
   setModel() {
+    this.letters = new Letters();
+
     this.actualModel.children.forEach((child) => {
       child.castShadow = true;
       child.recieveShadow = true;
 
       if (child.name === 'circleGrad') {
-        const scale = 0;
-        child.scale.set(scale, scale, scale);
+        this.gradientCircle = new GradientCircle(child);
       }
     });
 

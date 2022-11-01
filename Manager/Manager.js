@@ -22,10 +22,9 @@ export default class Manager {
     this.sizes = new Sizes();
     this.camera = new Camera();
     this.renderer = new Renderer();
-    this.scrollTrigger = new TriggerScroll();
-
     this.resources = new Resources(assets);
     this.world = new World();
+    this.scrollTrigger = new TriggerScroll();
 
     this.sizes.on('resize', () => {
       this.resize();

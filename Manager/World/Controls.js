@@ -35,8 +35,12 @@ export default class Controls {
 
   onScroll(e) {
     //TODO: move this logic to camera.js
-    if (e > 0.3) {
-      this.lerp.target = map(e, 0.3, 1, 0, 1);
+    const startPercent = 0.3;
+    const endPercent = 0.6;
+    if (e > startPercent && e < endPercent) {
+      this.lerp.target = map(e, startPercent, endPercent, 0, 1);
+    } else if (e > endPercent) {
+      this.lerp.target = 1;
     } else {
       this.lerp.target = 0;
     }

@@ -19,7 +19,8 @@ footer {
   height: 40vh;
 }
 
-.hero, footer {
+.hero,
+footer {
   display: grid;
   justify-content: center;
   align-content: center;
