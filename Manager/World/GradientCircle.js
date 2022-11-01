@@ -19,7 +19,7 @@ export default class GradientCircle {
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
     this.scale = 1;
-    this.maxScale = 600;
+    this.maxScale = 7;
     this.circle = circle;
 
     this.lerp = {
@@ -40,7 +40,9 @@ export default class GradientCircle {
     texture.needsUpdate = true;
 
     // material
-    var material = new THREE.MeshBasicMaterial({ map: texture });
+    var material = new THREE.MeshLambertMaterial({ map: texture });
+    this.circle.receiveShadow = true;
+    console.log(this.circle);
 
     this.circle.material = material;
 
@@ -56,7 +58,7 @@ export default class GradientCircle {
       this.lerp.target = 1;
     } else if (e > endPercent + 0.2) {
       this.lerp.target =
-        1 - map(e, endPercent + 0.2, endPercent * 2 + 0.3, 0, 0.6);
+        1 - map(e, endPercent + 0.2, endPercent * 2 + 0.3, 0, 0.7);
     } else {
       this.lerp.target = 0;
     }
@@ -85,7 +87,7 @@ export default class GradientCircle {
   }
 
   setCircle(scale) {
-    this.circle.scale.set(scale, scale, scale);
+    this.circle.scale.set(scale, 1, scale);
   }
 
   update() {
