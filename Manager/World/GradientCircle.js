@@ -77,9 +77,15 @@ export default class GradientCircle {
 
     // draw gradient
     context.rect(0, 0, size, size);
-    var gradient = context.createLinearGradient(0, 0, size, size);
+    var gradient = context.createLinearGradient(
+      0,
+      0,
+      Math.cos(180) * size,
+      Math.sin(180) * size
+    );
     gradient.addColorStop(0, '#a59bf4');
     gradient.addColorStop(1, '#f2a0ac');
+
     context.fillStyle = gradient;
     context.fill();
 
