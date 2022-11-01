@@ -20,7 +20,7 @@ export default class Camera {
       35,
       this.sizes.aspect,
       0.1,
-      50
+      100
     );
 
     this.scene.add(this.perspectiveCamera);
@@ -33,12 +33,12 @@ export default class Camera {
       35,
       this.sizes.aspect,
       0.1,
-      50
+      100
     );
     this.scene.add(this.perspectiveCameraMain);
-    this.perspectiveCameraMain.position.x = -2;
-    this.perspectiveCameraMain.position.y = 40;
-    this.perspectiveCameraMain.position.z = 8;
+    this.perspectiveCameraMain.position.x = 0;
+    this.perspectiveCameraMain.position.y = 55;
+    this.perspectiveCameraMain.position.z = 60;
 
     const size = 20;
     const divisions = 20;
