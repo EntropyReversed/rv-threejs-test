@@ -21,7 +21,7 @@ export default class Letters {
     this.time = this.manager.time;
     this.offsetY = 0.12;
     this.letters = child;
-    
+
     this.lerp = {
       current: 0,
       target: 0,
@@ -39,7 +39,7 @@ export default class Letters {
 
   onScroll(e) {
     const startPercent = 0.65;
-    const endPercent = 0.68;
+    const endPercent = 0.66;
     if (e > startPercent && e < endPercent) {
       this.lerp.target = map(e, startPercent, endPercent, 0, 1);
     } else if (e > endPercent) {
@@ -56,7 +56,7 @@ export default class Letters {
       this.lerp.ease
     );
 
-    this.letters.position.y = this.lerp.current * 0.2 - this.offsetY
+    this.letters.position.y = this.lerp.current * 0.2 - this.offsetY;
     // console.log(this.letters.position);
   }
 }
