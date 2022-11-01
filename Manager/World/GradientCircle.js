@@ -16,6 +16,7 @@ export default class GradientCircle {
   constructor(circle) {
     this.manager = new Manager();
     this.sizes = this.manager.sizes;
+    this.scene = this.manager.scene;
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
     this.scale = 1;
@@ -38,27 +39,31 @@ export default class GradientCircle {
 
     const texture = new THREE.Texture(this.generateTexture());
     texture.needsUpdate = true;
+    texture.encoding = THREE.sRGBEncoding;
+    texture.center = new THREE.Vector2(0.5, 0.5);
+    texture.rotation = Math.PI / 2;
 
     // material
-    const material = new THREE.MeshLambertMaterial({ map: texture });
+    const material = new THREE.MeshStandardMaterial({
+      map: texture,
+      shading: THREE.FlatShading,
+    });
     material.toneMapped = false;
     this.circle.receiveShadow = true;
 
     this.circle.material = material;
-
-    // this.setCircle(this.scale);
   }
 
   onScroll(e) {
     const startPercent = 0;
-    const endPercent = 0.2;
+    const endPercent = 0.15;
     if (e > startPercent && e < endPercent) {
       this.lerp.target = map(e, startPercent, endPercent, 0, 1);
-    } else if (e > endPercent && e < endPercent + 0.19) {
+    } else if (e > endPercent && e < endPercent + 0.1) {
       this.lerp.target = 1;
-    } else if (e > endPercent + 0.19) {
+    } else if (e > endPercent + 0.1) {
       this.lerp.target =
-        1 - map(e, endPercent + 0.19, endPercent * 2 + 0.2, 0, 0.7);
+        1 - map(e, endPercent + 0.1, endPercent * 2 + 0.2, 0, 0.8);
     } else {
       this.lerp.target = 0;
     }

@@ -21,8 +21,9 @@ export default class Renderer {
 
     this.renderer.physicallyCorrectLights = true;
     this.renderer.outputEncoding = THREE.sRGBEncoding;
-    this.renderer.toneMapping = THREE.LinearToneMapping;
+    this.renderer.toneMapping = THREE.CineonToneMapping;
     this.renderer.toneMappingExposure = 1.75;
+    this.renderer.gammaOutput = true
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.setSize(this.sizes.width, this.sizes.height);
