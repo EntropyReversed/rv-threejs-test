@@ -50,7 +50,7 @@ export default class GradientCircle {
   }
 
   onScroll(e) {
-    const startPercent = 0.05;
+    const startPercent = 0;
     const endPercent = 0.2;
     if (e > startPercent && e < endPercent) {
       this.lerp.target = map(e, startPercent, endPercent, 0, 1);
@@ -58,7 +58,7 @@ export default class GradientCircle {
       this.lerp.target = 1;
     } else if (e > endPercent + 0.19) {
       this.lerp.target =
-        1 - map(e, endPercent + 0.19, endPercent * 2 + 0.3, 0, 0.7);
+        1 - map(e, endPercent + 0.19, endPercent * 2 + 0.2, 0, 0.7);
     } else {
       this.lerp.target = 0;
     }
