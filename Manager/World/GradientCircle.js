@@ -55,20 +55,19 @@ export default class GradientCircle {
 
   onScroll(e) {
     const startPercent = 0.01;
-    const midPercent = 0.25;
-    const endPercent = 0.28;
+    const waitFor = 0.2
+    const firstBreak = 0.27;
+    const secondBreak = 0.3;
+    const endPercent = secondBreak * 2 + 0.15;
     if (e < startPercent) {
       this.lerp.target = 0;
-    } else if (e >= startPercent && e < midPercent) {
-      this.lerp.target = map(e, startPercent, midPercent, 0, 1);
-    } else if (e >= midPercent && e < endPercent) {
+    } else if (e >= startPercent && e < firstBreak) {
+      this.lerp.target = map(e, startPercent, firstBreak, 0, 1);
+    } else if (e >= firstBreak && e < secondBreak + waitFor) {
       this.lerp.target = 1;
-    } else if (e > endPercent) {
-      this.lerp.target = 1 - map(e, endPercent, endPercent * 2 + 0.18, 0, 0.8);
+    } else if (e >= secondBreak + waitFor) {
+      this.lerp.target = 1 - map(e, secondBreak + waitFor, endPercent, 0, 0.8);
     }
-    // else {
-    //   this.lerp.target = 0;
-    // }
   }
 
   generateTexture() {
