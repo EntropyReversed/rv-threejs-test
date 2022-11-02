@@ -40,16 +40,16 @@ export default class Camera {
     this.perspectiveCameraMain.position.y = 55;
     this.perspectiveCameraMain.position.z = 60;
 
-    const size = 20;
-    const divisions = 20;
+    // const size = 20;
+    // const divisions = 20;
 
-    const gridHelper = new THREE.GridHelper(size, divisions);
-    gridHelper.position.y = -0.005;
-    this.scene.add(gridHelper);
+    // const gridHelper = new THREE.GridHelper(size, divisions);
+    // gridHelper.position.y = -0.005;
+    // this.scene.add(gridHelper);
 
-    const axesHelper = new THREE.AxesHelper(3);
-    axesHelper.position.y = -0.01;
-    this.scene.add(axesHelper);
+    // const axesHelper = new THREE.AxesHelper(3);
+    // axesHelper.position.y = -0.01;
+    // this.scene.add(axesHelper);
   }
 
   setOrbitControls() {

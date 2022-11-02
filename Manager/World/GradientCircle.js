@@ -41,13 +41,17 @@ export default class GradientCircle {
     const geometry = new THREE.CircleGeometry(2, 64);
     this.circle.geometry = geometry;
 
-    const material = new THREE.MeshStandardMaterial({
+    this.material = new THREE.MeshStandardMaterial({
       map: texture,
       shading: THREE.FlatShading,
     });
-    material.toneMapped = false;
+
+    this.material.toneMapped = false;
+    this.material.roughness = 0;
+    this.material.needsUpdate = true;
+
     this.circle.receiveShadow = true;
-    this.circle.material = material;
+    this.circle.material = this.material;
 
     this.circle.rotation.set(-Math.PI / 2, 0, 0);
     this.scene.add(this.circle);
@@ -55,7 +59,7 @@ export default class GradientCircle {
 
   onScroll(e) {
     const startPercent = 0.01;
-    const waitFor = 0.2
+    const waitFor = 0.2;
     const firstBreak = 0.27;
     const secondBreak = 0.3;
     const endPercent = secondBreak * 2 + 0.15;

@@ -11,20 +11,22 @@ import TriggerScroll from '../Manager/Utils/TriggerScroll';
 export default class Manager {
   static instance;
 
-  constructor(canvas) {
+  constructor(parent) {
     if (Manager.instance) {
       return Manager.instance;
     }
     Manager.instance = this;
-    this.canvas = canvas;
+    this.parent = parent;
+    this.canvas = this.parent.querySelector("canvas");
     this.scene = new THREE.Scene();
+    this.scrollTrigger = new TriggerScroll();
     this.time = new Time();
     this.sizes = new Sizes();
     this.camera = new Camera();
     this.renderer = new Renderer();
     this.resources = new Resources(assets);
     this.world = new World();
-    this.scrollTrigger = new TriggerScroll();
+
 
     this.sizes.on('resize', () => {
       this.resize();
@@ -33,6 +35,10 @@ export default class Manager {
     this.time.on('update', () => {
       this.update();
     });
+  }
+
+  setParent(parent) {
+    this.parent = parent;
   }
 
   resize() {
