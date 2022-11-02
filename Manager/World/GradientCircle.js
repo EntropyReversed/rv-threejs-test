@@ -1,8 +1,5 @@
 import * as THREE from 'three';
 import Manager from '../Manager';
-import Model from './Model';
-import Enviroment from './Enviroment';
-import Controls from './Controls';
 import GSAP from 'gsap';
 
 const map = (n, start1, end1, start2, end2) => {
@@ -13,7 +10,7 @@ const map = (n, start1, end1, start2, end2) => {
 };
 
 export default class GradientCircle {
-  constructor(circle) {
+  constructor() {
     this.manager = new Manager();
     this.sizes = this.manager.sizes;
     this.scene = this.manager.scene;
@@ -21,7 +18,7 @@ export default class GradientCircle {
     this.time = this.manager.time;
     this.scale = 1;
     this.maxScale = 7;
-    this.circle = circle;
+    this.circle = new THREE.Mesh();
 
     this.lerp = {
       current: 0,
@@ -40,18 +37,20 @@ export default class GradientCircle {
     const texture = new THREE.Texture(this.generateTexture());
     texture.needsUpdate = true;
     texture.encoding = THREE.sRGBEncoding;
-    texture.center = new THREE.Vector2(0.5, 0.5);
-    texture.rotation = Math.PI / 2;
 
-    // material
+    const geometry = new THREE.CircleGeometry(2, 64);
+    this.circle.geometry = geometry;
+
     const material = new THREE.MeshStandardMaterial({
       map: texture,
       shading: THREE.FlatShading,
     });
     material.toneMapped = false;
     this.circle.receiveShadow = true;
-
     this.circle.material = material;
+
+    this.circle.rotation.set(-Math.PI / 2, 0, 0);
+    this.scene.add(this.circle);
   }
 
   onScroll(e) {
@@ -71,17 +70,10 @@ export default class GradientCircle {
 
   generateTexture() {
     var size = 256;
-
-    // create canvas
     let canvas2 = document.createElement('canvas');
     canvas2.width = size;
     canvas2.height = size;
-    document.body.appendChild(canvas2);
-
-    // get context
     var context = canvas2.getContext('2d');
-
-    // draw gradient
     context.rect(0, 0, size, size);
     var gradient = context.createLinearGradient(size / 2, 0, size / 2, size);
     gradient.addColorStop(0, '#a59bf4');
@@ -90,11 +82,12 @@ export default class GradientCircle {
     context.fillStyle = gradient;
     context.fill();
 
+    document.body.appendChild(canvas2);
     return canvas2;
   }
 
   setCircle(scale) {
-    this.circle.scale.set(scale, 1, scale);
+    this.circle.scale.set(scale, scale, scale);
   }
 
   update() {

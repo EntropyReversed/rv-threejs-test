@@ -42,7 +42,6 @@ export default class Controls {
     } else if (e > endPercent) {
       this.lerp.target = 1;
     }
-    console.log(e, this.lerp.target);
   }
 
   setPath() {

@@ -23,14 +23,12 @@ export default class Model {
   }
 
   setModel() {
+    this.gradientCircle = new GradientCircle();
+
     this.actualModel.children.forEach((child) => {
       child.castShadow = true;
       child.recieveShadow = true;
 
-      if (child.name === 'circleGrad') {
-        this.gradientCircle = new GradientCircle(child);
-      }
-      console.log(child);
       if (child.name === 'letters') {
         this.letters = new Letters(child);
       }

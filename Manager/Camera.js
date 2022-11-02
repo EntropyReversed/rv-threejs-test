@@ -44,6 +44,7 @@ export default class Camera {
     const divisions = 20;
 
     const gridHelper = new THREE.GridHelper(size, divisions);
+    gridHelper.position.y = -0.001
     this.scene.add(gridHelper);
 
     const axesHelper = new THREE.AxesHelper(3);

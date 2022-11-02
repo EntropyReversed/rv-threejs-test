@@ -19,7 +19,6 @@ export default class Letters {
     this.sizes = this.manager.sizes;
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
-    this.offsetY = 0;
     this.letters = child;
 
     this.lerp = {
@@ -38,15 +37,7 @@ export default class Letters {
   }
 
   onScroll(e) {
-    const startPercent = 0.5;
-    const endPercent = 0.51;
-    if (e > startPercent && e < endPercent) {
-      this.lerp.target = map(e, startPercent, endPercent, 0, 1);
-    } else if (e > endPercent) {
-      this.lerp.target = 1;
-    } else {
-      this.lerp.target = 0;
-    }
+    e > 0.5 ? (this.lerp.target = 1) : (this.lerp.target = 0);
   }
 
   update() {
@@ -56,7 +47,7 @@ export default class Letters {
       this.lerp.ease
     );
 
-    this.letters.position.y = this.lerp.current * 0.2 - this.offsetY;
+    this.letters.position.y = this.lerp.current * 0.2;
     // console.log(this.letters.position);
   }
 }
