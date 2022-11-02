@@ -27,7 +27,7 @@ export default class Letters {
   }
 
   onScroll(e) {
-    e > 0.5 ? (this.lerp.target = 1) : (this.lerp.target = 0);
+    e > 0.75 ? (this.lerp.target = 1) : (this.lerp.target = 0);
   }
 
   update() {
