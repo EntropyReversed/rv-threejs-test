@@ -19,18 +19,18 @@ export default class Enviroment {
     this.lerp = {
       current: 0,
       target: 0,
-      ease: 0.1,
+      ease: 0.05,
     };
 
     this.setSunlight();
 
-    // this.scrollTrigger.on('scroll', (e) => {
-    //   this.onScroll(e);
-    // });
+    this.scrollTrigger.on('scroll', (e) => {
+      this.onScroll(e);
+    });
 
-    // this.time.on('update', () => {
-    //   this.update();
-    // });
+    this.time.on('update', () => {
+      this.update();
+    });
   }
 
   setSunlight() {
@@ -39,12 +39,12 @@ export default class Enviroment {
     this.sunLight.shadow.camera.far = 60;
     this.sunLight.shadow.mapSize.set(4096, 4096);
     this.sunLight.shadow.normalBias = 0.01;
-    // const helper = new THREE.CameraHelper(this.sunLight.shadow.camera);
-    // this.scene.add(helper);
+    const helper = new THREE.CameraHelper(this.sunLight.shadow.camera);
+    this.scene.add(helper);
     this.sunLight.position.set(-30, 20, -30);
     this.scene.add(this.sunLight);
 
-    this.ambientlight = new THREE.AmbientLight('#ffffff', 1);
+    this.ambientlight = new THREE.AmbientLight('#ffffff', 1.2);
     this.scene.add(this.ambientlight);
   }
 
@@ -63,6 +63,10 @@ export default class Enviroment {
       this.lerp.ease
     );
 
-    this.sunLight.position.set(-30, this.lerp.current * 15 + 10, -30);
+    this.sunLight.position.set(
+      this.lerp.current * -30 - 2,
+      this.lerp.current * 15 + 6,
+      -30
+    );
   }
 }

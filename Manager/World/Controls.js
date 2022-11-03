@@ -52,15 +52,15 @@ export default class Controls {
       new THREE.Vector3(5, 5, 5),
     ]);
 
-    // const points = this.curve.getPoints(30);
-    // const geometry = new THREE.BufferGeometry().setFromPoints(points);
+    const points = this.curve.getPoints(30);
+    const geometry = new THREE.BufferGeometry().setFromPoints(points);
 
-    // const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
+    const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
 
-    // const curveObject = new THREE.Line(geometry, material);
-    // this.scene.add(curveObject);
+    const curveObject = new THREE.Line(geometry, material);
+    this.scene.add(curveObject);
 
-    // this.scene.add(this.curve);
+    this.scene.add(this.curve);
   }
 
   resize() {}

@@ -19,6 +19,8 @@ export default class GradientCircle {
     this.scale = 1;
     this.maxScale = 7.2;
     this.circle = new THREE.Mesh();
+    this.texture = new THREE.Texture(this.generateTexture());
+    this.geometry = new THREE.CircleGeometry(2, 64);
 
     this.lerp = {
       current: 0,
@@ -34,23 +36,20 @@ export default class GradientCircle {
       this.update();
     });
 
-    const texture = new THREE.Texture(this.generateTexture());
-    texture.needsUpdate = true;
-    texture.encoding = THREE.sRGBEncoding;
-
-    const geometry = new THREE.CircleGeometry(2, 64);
-    this.circle.geometry = geometry;
+    this.texture.needsUpdate = true;
+    this.texture.encoding = THREE.sRGBEncoding;
 
     this.material = new THREE.MeshStandardMaterial({
-      map: texture,
+      map: this.texture,
       shading: THREE.FlatShading,
     });
-
+    
     this.material.toneMapped = false;
     this.material.roughness = 0;
     this.material.needsUpdate = true;
-
+    
     this.circle.receiveShadow = true;
+    this.circle.geometry = this.geometry;
     this.circle.material = this.material;
 
     this.circle.rotation.set(-Math.PI / 2, 0, 0);

@@ -19,13 +19,13 @@ export default class Camera {
     this.perspectiveCamera = new THREE.PerspectiveCamera(
       35,
       this.sizes.aspect,
-      0.1,
-      100
+      0.5,
+      200
     );
 
     this.scene.add(this.perspectiveCamera);
-    // this.helper = new THREE.CameraHelper(this.perspectiveCamera);
-    // this.scene.add(this.helper);
+    this.helper = new THREE.CameraHelper(this.perspectiveCamera);
+    this.scene.add(this.helper);
   }
 
   createPerspectiveCameraMain() {
@@ -33,19 +33,19 @@ export default class Camera {
       35,
       this.sizes.aspect,
       0.1,
-      100
+      200
     );
     this.scene.add(this.perspectiveCameraMain);
     this.perspectiveCameraMain.position.x = 0;
     this.perspectiveCameraMain.position.y = 55;
     this.perspectiveCameraMain.position.z = 60;
 
-    // const size = 20;
-    // const divisions = 20;
+    const size = 20;
+    const divisions = 20;
 
-    // const gridHelper = new THREE.GridHelper(size, divisions);
-    // gridHelper.position.y = -0.005;
-    // this.scene.add(gridHelper);
+    const gridHelper = new THREE.GridHelper(size, divisions);
+    gridHelper.position.y = -0.005;
+    this.scene.add(gridHelper);
 
     // const axesHelper = new THREE.AxesHelper(3);
     // axesHelper.position.y = -0.01;
@@ -69,8 +69,8 @@ export default class Camera {
   update() {
     this.controls.update();
 
-    // this.helper.matrixWorldNeedsUpdate = true;
-    // this.helper.update();
-    // this.helper.position.copy(this.perspectiveCameraMain.position);
+    this.helper.matrixWorldNeedsUpdate = true;
+    this.helper.update();
+    this.helper.position.copy(this.perspectiveCameraMain.position);
   }
 }

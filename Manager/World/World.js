@@ -18,8 +18,6 @@ export default class World {
     });
   }
 
-  resize() {}
-
   update() {
     if (this.model) {
       this.model.update();

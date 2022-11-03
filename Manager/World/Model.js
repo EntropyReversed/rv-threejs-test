@@ -11,6 +11,7 @@ export default class Model {
     this.resources = this.manager.resources;
     this.model = this.resources.items.model;
     this.actualModel = this.model.scene;
+    this.gradientCircle = new GradientCircle();
 
     // this.lerp = {
     //   current: 0,
@@ -23,7 +24,6 @@ export default class Model {
   }
 
   setModel() {
-    this.gradientCircle = new GradientCircle();
 
     this.actualModel.children.forEach((child) => {
       child.castShadow = true;
