@@ -69,8 +69,10 @@ export default class GradientCircle {
       this.lerp.target = map(e, startPercent, firstBreak, 0, 1);
     } else if (e >= firstBreak && e < secondBreak + waitFor) {
       this.lerp.target = 1;
-    } else if (e >= secondBreak + waitFor) {
+    } else if (e >= secondBreak + waitFor && e < endPercent) {
       this.lerp.target = 1 - map(e, secondBreak + waitFor, endPercent, 0, 0.8);
+    } else if (e >= endPercent) {
+      this.lerp.target = 1 - map(e, endPercent, 1, 0.8, 0.82);
     }
   }
 
@@ -87,8 +89,6 @@ export default class GradientCircle {
 
     context.fillStyle = gradient;
     context.fill();
-
-    document.body.appendChild(canvas2);
     return canvas2;
   }
 

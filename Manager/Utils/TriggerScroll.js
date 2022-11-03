@@ -7,7 +7,7 @@ export default class TriggerScroll extends EventEmitter {
   constructor() {
     super();
     this.manager = new Manager();
-    this.resources = this.manager.resources;
+    this.parent = this.manager.parent;
     GSAP.registerPlugin(ScrollTrigger);
     this.createTrigger();
   }
@@ -19,6 +19,10 @@ export default class TriggerScroll extends EventEmitter {
       // markers: true,
       end: 'bottom bottom',
       onUpdate: (self) => {
+        this.parent.style.setProperty(
+          '--scroll',
+          Math.round(self.progress * 100) / 100
+        );
         this.emit('scroll', self.progress);
       },
     });
