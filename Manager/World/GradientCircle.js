@@ -17,7 +17,7 @@ export default class GradientCircle {
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
     this.scale = 1;
-    this.maxScale = 7;
+    this.maxScale = 7.2;
     this.circle = new THREE.Mesh();
 
     this.lerp = {
