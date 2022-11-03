@@ -24,6 +24,7 @@ footer {
   display: grid;
   justify-content: center;
   align-content: center;
+  box-shadow: inset 0 0 0 1px white;
 }
 
 .scene {
@@ -31,23 +32,25 @@ footer {
   top: 0;
   width: 100vw;
   height: 100vh;
+  background: #222222;
 }
 
 .scene h2 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate3d(-50%, -50%, 0) scale(10);
+  transform: translate3d(-50%, -50%, 0) scale(10) rotateX(40deg);
   text-align: center;
   font-size: 40px;
   font-weight: 400;
   opacity: 0;
   font-family: sans-serif;
   transition: 0.3s ease-in-out;
+  user-select: none;
 }
 
 .scene h2.in {
-  transform: translate3d(-50%, calc(-50% - 35vh), 0) scale(1);
+  transform: translate3d(-50%, calc(-50% - 35vh), 0) scale(1) rotateX(0deg);
   opacity: 1;
 }
 
@@ -58,5 +61,4 @@ footer {
 
 .scene-wrap {
   height: 400vh;
-  background-color: black;
 }

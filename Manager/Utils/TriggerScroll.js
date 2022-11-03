@@ -16,7 +16,7 @@ export default class TriggerScroll extends EventEmitter {
     this.scrollTrigger = ScrollTrigger.create({
       trigger: '.scene-wrap',
       start: 'top top',
-      markers: true,
+      // markers: true,
       end: 'bottom bottom',
       onUpdate: (self) => {
         this.emit('scroll', self.progress);

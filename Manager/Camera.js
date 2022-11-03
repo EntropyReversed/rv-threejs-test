@@ -24,8 +24,8 @@ export default class Camera {
     );
 
     this.scene.add(this.perspectiveCamera);
-    this.helper = new THREE.CameraHelper(this.perspectiveCamera);
-    this.scene.add(this.helper);
+    // this.helper = new THREE.CameraHelper(this.perspectiveCamera);
+    // this.scene.add(this.helper);
   }
 
   createPerspectiveCameraMain() {
@@ -69,8 +69,8 @@ export default class Camera {
   update() {
     this.controls.update();
 
-    this.helper.matrixWorldNeedsUpdate = true;
-    this.helper.update();
-    this.helper.position.copy(this.perspectiveCameraMain.position);
+    // this.helper.matrixWorldNeedsUpdate = true;
+    // this.helper.update();
+    // this.helper.position.copy(this.perspectiveCameraMain.position);
   }
 }

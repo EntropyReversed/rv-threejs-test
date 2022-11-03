@@ -35,7 +35,7 @@ export default class Controls {
 
   onScroll(e) {
     //TODO: move this logic to camera.js
-    const startPercent = 0.35;
+    const startPercent = 0.32;
     const endPercent = 0.7;
     if (e > startPercent && e < endPercent) {
       this.lerp.target = map(e, startPercent, endPercent, 0, 1);
@@ -45,21 +45,22 @@ export default class Controls {
   }
 
   setPath() {
-    //Create a closed wavey loop
     this.curve = new THREE.CatmullRomCurve3([
       new THREE.Vector3(0, 20, 0),
       new THREE.Vector3(6, 10, 6),
       new THREE.Vector3(6, 6, 6),
+      new THREE.Vector3(5, 5, 5),
     ]);
 
-    const points = this.curve.getPoints(30);
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
+    // const points = this.curve.getPoints(30);
+    // const geometry = new THREE.BufferGeometry().setFromPoints(points);
 
-    const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
+    // const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
 
-    // Create the final object to add to the scene
-    const curveObject = new THREE.Line(geometry, material);
-    this.scene.add(curveObject);
+    // const curveObject = new THREE.Line(geometry, material);
+    // this.scene.add(curveObject);
+
+    // this.scene.add(this.curve);
   }
 
   resize() {}
