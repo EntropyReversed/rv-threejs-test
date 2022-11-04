@@ -12,7 +12,6 @@ const map = (n, start1, end1, start2, end2) => {
 export default class CircleTextures {
   constructor() {
     this.manager = new Manager();
-
     this.resources = this.manager.resources;
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
@@ -20,12 +19,10 @@ export default class CircleTextures {
 
     for (const [key, value] of Object.entries(this.resources.items)) {
       if (value.isTexture) {
+        value.encoding = THREE.sRGBEncoding;
         this.textures.push(value);
       }
     }
-
-    // this.textures.sort((t) => t.texIndex);
-    console.log(this.textures);
 
     this.tlerp = {
       current: 0,
@@ -47,7 +44,6 @@ export default class CircleTextures {
   setTexture(index) {
     const texture = this.textures[index];
     texture.needsUpdate = true;
-    texture.encoding = THREE.sRGBEncoding;
     return texture;
   }
 
@@ -66,7 +62,7 @@ export default class CircleTextures {
       this.tlerp.ease
     );
 
-    const index = Math.floor(map(this.tlerp.current, 0, 1, 0, 10));
+    const index = Math.floor(map(this.tlerp.current, 0, 1, 0, 7));
     if (index != this.lastIndex) {
       console.log(index);
       this.lastIndex = index;

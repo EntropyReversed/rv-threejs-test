@@ -24,7 +24,6 @@ export default class Model {
   }
 
   setModel() {
-
     this.actualModel.children.forEach((child) => {
       child.castShadow = true;
       child.recieveShadow = true;
