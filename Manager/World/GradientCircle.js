@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import Manager from '../Manager';
 import GSAP from 'gsap';
-import { UniformsLib } from 'three/src/renderers/shaders/UniformsLib.js';
-import CustomShader from './Shader.js';
+// import { UniformsLib } from 'three/src/renderers/shaders/UniformsLib.js';
+// import CustomShader from './Shader.js';
 
 const map = (n, start1, end1, start2, end2) => {
   const val = ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
@@ -16,12 +16,13 @@ export default class GradientCircle {
     this.manager = new Manager();
     this.sizes = this.manager.sizes;
     this.scene = this.manager.scene;
+    this.resources = this.manager.resources;
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
     this.scale = 1;
     this.maxScale = 7.2;
     this.circle = new THREE.Mesh();
-    this.texture = new THREE.Texture(this.generateTexture());
+    this.texture = this.resources.items.textureDefault;
     this.geometry = new THREE.CircleGeometry(2, 64);
 
     this.lerp = {
