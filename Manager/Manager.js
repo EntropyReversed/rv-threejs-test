@@ -17,7 +17,7 @@ export default class Manager {
     }
     Manager.instance = this;
     this.parent = parent;
-    this.canvas = this.parent.querySelector("canvas");
+    this.canvas = this.parent.querySelector('canvas');
     this.scene = new THREE.Scene();
     this.scrollTrigger = new TriggerScroll();
     this.time = new Time();
@@ -26,7 +26,6 @@ export default class Manager {
     this.renderer = new Renderer();
     this.resources = new Resources(assets);
     this.world = new World();
-
 
     this.sizes.on('resize', () => {
       this.resize();
@@ -43,7 +42,6 @@ export default class Manager {
 
   resize() {
     this.camera.resize();
-    this.world.resize();
     this.renderer.resize();
   }
 
