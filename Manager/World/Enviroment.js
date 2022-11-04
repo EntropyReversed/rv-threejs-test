@@ -2,13 +2,6 @@ import * as THREE from 'three';
 import Manager from '../Manager';
 import GSAP from 'gsap';
 
-const map = (n, start1, end1, start2, end2) => {
-  const val = ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
-  if (val < start2) return start2;
-  if (val > end2) return end2;
-  return val;
-};
-
 export default class Enviroment {
   constructor() {
     this.manager = new Manager();
@@ -37,7 +30,7 @@ export default class Enviroment {
     this.sunLight = new THREE.DirectionalLight('#ffffff', 2.5);
     this.sunLight.castShadow = true;
     this.sunLight.shadow.camera.far = 60;
-    this.sunLight.shadow.mapSize.set(4096, 4096);
+    this.sunLight.shadow.mapSize.set(8192, 8192);
     this.sunLight.shadow.normalBias = 0.05;
     // const helper = new THREE.CameraHelper(this.sunLight.shadow.camera);
     // this.scene.add(helper);

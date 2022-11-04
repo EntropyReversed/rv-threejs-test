@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import Manager from '../Manager';
 import GSAP from 'gsap';
+import { UniformsLib } from 'three/src/renderers/shaders/UniformsLib.js';
+import CustomShader from './Shader.js';
 
 const map = (n, start1, end1, start2, end2) => {
   const val = ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
@@ -39,15 +41,32 @@ export default class GradientCircle {
     this.texture.needsUpdate = true;
     this.texture.encoding = THREE.sRGBEncoding;
 
+    // const t = {
+    //   texture1: { value: new THREE.CanvasTexture(this.generateTexture()) },
+    // };
+    // const o = { uvOffset: { value: new THREE.Vector2(0, 0) } };
+    // const uniforms = THREE.UniformsUtils.merge([
+    //   t,
+    //   o,
+    //   THREE.UniformsLib.lights,
+    //   THREE.UniformsLib.fog,
+    // ]);
+
+    // this.material2 = new THREE.ShaderMaterial({
+    //   uniforms: uniforms,
+    //   ...CustomShader,
+    //   lights: true,
+    // });
+
     this.material = new THREE.MeshStandardMaterial({
       map: this.texture,
       shading: THREE.FlatShading,
     });
-    
+
     this.material.toneMapped = false;
     this.material.roughness = 0;
     this.material.needsUpdate = true;
-    
+
     this.circle.receiveShadow = true;
     this.circle.geometry = this.geometry;
     this.circle.material = this.material;
@@ -76,18 +95,19 @@ export default class GradientCircle {
   }
 
   generateTexture() {
-    var size = 256;
-    let canvas2 = document.createElement('canvas');
+    const size = 1024;
+    const canvas2 = document.createElement('canvas');
     canvas2.width = size;
     canvas2.height = size;
-    var context = canvas2.getContext('2d');
+    const context = canvas2.getContext('2d');
     context.rect(0, 0, size, size);
-    var gradient = context.createLinearGradient(size / 2, 0, size / 2, size);
+    const gradient = context.createLinearGradient(size / 2, 0, size / 2, size);
     gradient.addColorStop(0, '#a59bf4');
     gradient.addColorStop(1, '#f2a0ac');
-
     context.fillStyle = gradient;
     context.fill();
+
+    document.body.appendChild(canvas2);
     return canvas2;
   }
 
