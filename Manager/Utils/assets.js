@@ -7,6 +7,6 @@ export default [
   {
     name: 'textureDefault',
     type: 'image',
-    path: '/Public/tex1.png',
+    path: '/Public/tex.png',
   },
 ];
