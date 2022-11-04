@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 import Manager from '../Manager';
+import CircleTextures from './CircleTextures';
 import GSAP from 'gsap';
-// import { UniformsLib } from 'three/src/renderers/shaders/UniformsLib.js';
-// import CustomShader from './Shader.js';
 
 const map = (n, start1, end1, start2, end2) => {
   const val = ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
@@ -22,10 +21,17 @@ export default class GradientCircle {
     this.scale = 1;
     this.maxScale = 7.2;
     this.circle = new THREE.Mesh();
-    this.texture = this.resources.items.textureDefault;
+    this.textures = new CircleTextures();
+    this.texture = this.textures.setTexture(0);
     this.geometry = new THREE.CircleGeometry(2, 64);
 
     this.lerp = {
+      current: 0,
+      target: 0,
+      ease: 0.1,
+    };
+
+    this.tlerp = {
       current: 0,
       target: 0,
       ease: 0.1,
@@ -39,25 +45,9 @@ export default class GradientCircle {
       this.update();
     });
 
-    this.texture.needsUpdate = true;
-    this.texture.encoding = THREE.sRGBEncoding;
-
-    // const t = {
-    //   texture1: { value: new THREE.CanvasTexture(this.generateTexture()) },
-    // };
-    // const o = { uvOffset: { value: new THREE.Vector2(0, 0) } };
-    // const uniforms = THREE.UniformsUtils.merge([
-    //   t,
-    //   o,
-    //   THREE.UniformsLib.lights,
-    //   THREE.UniformsLib.fog,
-    // ]);
-
-    // this.material2 = new THREE.ShaderMaterial({
-    //   uniforms: uniforms,
-    //   ...CustomShader,
-    //   lights: true,
-    // });
+    // this.texture.needsUpdate = true;
+    // this.texture.encoding = THREE.sRGBEncoding;
+    this.lastIndex = 0;
 
     this.material = new THREE.MeshStandardMaterial({
       map: this.texture,
@@ -95,22 +85,22 @@ export default class GradientCircle {
     }
   }
 
-  generateTexture() {
-    const size = 1024;
-    const canvas2 = document.createElement('canvas');
-    canvas2.width = size;
-    canvas2.height = size;
-    const context = canvas2.getContext('2d');
-    context.rect(0, 0, size, size);
-    const gradient = context.createLinearGradient(size / 2, 0, size / 2, size);
-    gradient.addColorStop(0, '#a59bf4');
-    gradient.addColorStop(1, '#f2a0ac');
-    context.fillStyle = gradient;
-    context.fill();
+  // generateTexture() {
+  //   const size = 1024;
+  //   const canvas = document.createElement('canvas');
+  //   const ctx = canvas.getContext('2d');
+  //   canvas.width = size;
+  //   canvas.height = size;
+  //   ctx.rect(0, 0, size, size);
+  //   const gradient = ctx.createLinearGradient(size / 2, 0, size / 2, size);
+  //   gradient.addColorStop(0, '#a59bf4');
+  //   gradient.addColorStop(1, '#f2a0ac');
+  //   ctx.fillStyle = gradient;
+  //   ctx.fill();
 
-    document.body.appendChild(canvas2);
-    return canvas2;
-  }
+  //   // document.body.appendChild(canvas);
+  //   return canvas;
+  // }
 
   setCircle(scale) {
     this.circle.scale.set(scale, scale, scale);
