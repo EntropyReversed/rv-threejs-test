@@ -9,7 +9,7 @@ const map = (n, start1, end1, start2, end2) => {
   return val;
 };
 
-export default class CircleTexture {
+export default class CircleTextures {
   constructor() {
     this.manager = new Manager();
 
@@ -24,7 +24,8 @@ export default class CircleTexture {
       }
     }
 
-    this.textures.sort((t) => t.texIndex);
+    // this.textures.sort((t) => t.texIndex);
+    console.log(this.textures);
 
     this.tlerp = {
       current: 0,
