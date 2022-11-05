@@ -13,7 +13,7 @@ export default class Resources extends EventEmitter {
     this.assets = assets;
 
     this.items = {};
-    this.queue = this.assets.length - 1;
+    this.queue = this.assets.length;
     this.loaded = 0;
 
     this.setLoaders();
