@@ -21,7 +21,7 @@ export default class GradientCircle {
     this.scale = 1;
     this.maxScale = 7.2;
     this.circle = new THREE.Mesh();
-    this.textures = new CircleTextures();
+    this.textures = new CircleTextures(this);
     this.texture = this.textures.setTexture(0);
     this.geometry = new THREE.CircleGeometry(2, 64);
 
@@ -76,23 +76,6 @@ export default class GradientCircle {
       this.lerp.target = 1 - map(e, endPercent, 1, 0.8, 0.82);
     }
   }
-
-  // generateTexture() {
-  //   const size = 1024;
-  //   const canvas = document.createElement('canvas');
-  //   const ctx = canvas.getContext('2d');
-  //   canvas.width = size;
-  //   canvas.height = size;
-  //   ctx.rect(0, 0, size, size);
-  //   const gradient = ctx.createLinearGradient(size / 2, 0, size / 2, size);
-  //   gradient.addColorStop(0, '#a59bf4');
-  //   gradient.addColorStop(1, '#f2a0ac');
-  //   ctx.fillStyle = gradient;
-  //   ctx.fill();
-
-  //   // document.body.appendChild(canvas);
-  //   return canvas;
-  // }
 
   setCircle(scale) {
     this.circle.scale.set(scale, scale, scale);

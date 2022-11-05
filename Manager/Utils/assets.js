@@ -47,10 +47,10 @@ export default [
     type: 'image',
     path: '/Public/tex7.png',
   },
-  // {
-  //   name: 'texture8',
-  //   texIndex: 8,
-  //   type: 'image',
-  //   path: '/Public/tex8.png',
-  // },
+  {
+    name: 'texture8',
+    texIndex: 8,
+    type: 'image',
+    path: '/Public/tex8.png',
+  },
 ];

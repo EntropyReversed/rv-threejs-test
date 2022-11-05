@@ -10,7 +10,8 @@ const map = (n, start1, end1, start2, end2) => {
 };
 
 export default class CircleTextures {
-  constructor() {
+  constructor(circle) {
+    this.circle = circle
     this.manager = new Manager();
     this.resources = this.manager.resources;
     this.scrollTrigger = this.manager.scrollTrigger;
@@ -62,9 +63,10 @@ export default class CircleTextures {
       this.tlerp.ease
     );
 
-    const index = Math.floor(map(this.tlerp.current, 0, 1, 0, 7));
+    const index = Math.floor(map(this.tlerp.current, 0, 1, 0, 8));
     if (index != this.lastIndex) {
-      console.log(index);
+      this.circle.material.map = this.textures[index];
+      this.circle.material.needsUpdate = true;
       this.lastIndex = index;
     }
   }
