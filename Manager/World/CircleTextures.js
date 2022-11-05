@@ -28,11 +28,11 @@ export default class CircleTextures {
     this.tlerp = {
       current: 0,
       target: 0,
-      ease: 0.1,
+      ease: 0.15,
     };
 
     this.scrollTrigger.on('scroll', (e) => {
-      this.onTextureScroll(e);
+      // this.onTextureScroll(e);
     });
 
     this.time.on('update', () => {
@@ -63,7 +63,7 @@ export default class CircleTextures {
       this.tlerp.ease
     );
 
-    const index = Math.floor(map(this.tlerp.current, 0, 1, 0, 8));
+    const index = Math.floor(map(this.tlerp.current, 0, 1, 0, 16));
     if (index != this.lastIndex) {
       this.circle.material.map = this.textures[index];
       this.circle.material.needsUpdate = true;
