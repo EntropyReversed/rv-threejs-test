@@ -22,7 +22,7 @@ export default class GradientCircle {
     this.maxScale = 7.2;
     this.circle = new THREE.Mesh();
     this.textures = new CircleTextures();
-    this.texture = this.textures.setTexture(6);
+    this.texture = this.textures.setTexture(0);
     this.geometry = new THREE.CircleGeometry(2, 64);
 
     this.lerp = {
