@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import Manager from '../Manager';
 import CircleTextures from './CircleTextures';
+import Shader2 from './Shader2';
+import Shader from './Shader';
 import GSAP from 'gsap';
 
 const map = (n, start1, end1, start2, end2) => {
@@ -41,14 +43,31 @@ export default class GradientCircle {
 
     this.lastIndex = 0;
 
-    this.material = new THREE.MeshStandardMaterial({
-      map: this.texture,
-      shading: THREE.FlatShading,
-    });
+    // this.material = new THREE.MeshStandardMaterial({
+    //   map: this.texture,
+    //   shading: THREE.FlatShading,
+    // });
 
-    this.material.toneMapped = false;
-    this.material.roughness = 0;
-    this.material.needsUpdate = true;
+    // this.material.toneMapped = false;
+    // this.material.roughness = 0;
+    // this.material.needsUpdate = true;
+
+    const t = {
+      texture1: { value: this.texture },
+    };
+    const o = { uvOffset: { value: new THREE.Vector2(0, 0) } };
+    const uniforms = THREE.UniformsUtils.merge([
+      t,
+      o,
+      THREE.UniformsLib.lights,
+      THREE.UniformsLib.fog,
+    ]);
+
+    this.material2 = new THREE.ShaderMaterial({
+      uniforms: uniforms,
+      ...Shader,
+      lights: true,
+    });
 
     this.circle.receiveShadow = true;
     this.circle.geometry = this.geometry;
