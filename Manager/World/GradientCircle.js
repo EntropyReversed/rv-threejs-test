@@ -55,7 +55,7 @@ export default class GradientCircle {
     const uniforms = THREE.UniformsUtils.merge([
       { texture1: { value: null } },
       { uvOffset: { value: new THREE.Vector2(0, 0) } },
-      { lightIntensity: { value: 1.0 } },
+
       THREE.UniformsLib.lights,
     ]);
 
@@ -73,6 +73,17 @@ export default class GradientCircle {
     this.circle.receiveShadow = true;
     this.circle.geometry = this.geometry;
     this.circle.material = this.material2;
+
+    // this.circle.material = new THREE.MeshPhysicalMaterial({
+    //   metalness: 1,
+    //   roughness: 0,
+    //   envMapIntensity: 0.9,
+    //   clearcoat: 0.5,
+    //   transparent: true,
+    //   transmission: 0,
+    //   opacity: 1,
+    //   reflectivity: 1,
+    // })
 
     this.circle.rotation.set(-Math.PI / 2, 0, 0);
     this.scene.add(this.circle);
