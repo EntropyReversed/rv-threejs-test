@@ -52,26 +52,27 @@ export default class GradientCircle {
     // this.material.roughness = 0;
     // this.material.needsUpdate = true;
 
-    const t = {
-      texture1: { value: this.texture },
-    };
-    const o = { uvOffset: { value: new THREE.Vector2(0, 0) } };
     const uniforms = THREE.UniformsUtils.merge([
-      t,
-      o,
+      { texture1: { value: null } },
+      { uvOffset: { value: new THREE.Vector2(0, 0) } },
+      { lightIntensity: { value: 1.0 } },
       THREE.UniformsLib.lights,
-      THREE.UniformsLib.fog,
     ]);
 
     this.material2 = new THREE.ShaderMaterial({
       uniforms: uniforms,
       ...Shader,
       lights: true,
+      // wireframe: true
     });
+
+    // THREE.UniformsUtils.merge() calls THREE.clone() on each uniform. 
+    // Texture needs to be assigned here so it's not cloned
+    this.material2.uniforms.texture1.value = this.texture;
 
     this.circle.receiveShadow = true;
     this.circle.geometry = this.geometry;
-    this.circle.material = this.material;
+    this.circle.material = this.material2;
 
     this.circle.rotation.set(-Math.PI / 2, 0, 0);
     this.scene.add(this.circle);
