@@ -25,6 +25,7 @@ export default class GradientCircle {
     this.circle = new THREE.Mesh();
     this.textures = new CircleTextures(this);
     this.texture = this.textures.setTexture(0);
+    // this.geometry = new THREE.PlaneGeometry( 4, 4 );
     this.geometry = new THREE.CircleGeometry(2, 64);
 
     this.lerp = {
@@ -55,6 +56,11 @@ export default class GradientCircle {
     const uniforms = THREE.UniformsUtils.merge([
       { texture1: { value: null } },
       { uvOffset: { value: new THREE.Vector2(0, 0) } },
+      {
+        u_resolution: {
+          value: new THREE.Vector2(this.sizes.width, this.sizes.height),
+        },
+      },
 
       THREE.UniformsLib.lights,
     ]);
@@ -64,9 +70,10 @@ export default class GradientCircle {
       ...Shader,
       lights: true,
       // wireframe: true
+      // transparent: true,
     });
 
-    // THREE.UniformsUtils.merge() calls THREE.clone() on each uniform. 
+    // THREE.UniformsUtils.merge() calls THREE.clone() on each uniform.
     // Texture needs to be assigned here so it's not cloned
     this.material2.uniforms.texture1.value = this.texture;
 

@@ -9,6 +9,8 @@ export default {
       vUv = uv; 
       vec3 objectNormal = vec3( normal );
       vec3 transformedNormal = normalMatrix * objectNormal;
+      gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
+
       #include <begin_vertex>
       #include <project_vertex>
       #include <worldpos_vertex>
@@ -28,6 +30,14 @@ export default {
 
     uniform vec2 uvOffset;
     uniform sampler2D texture1;
+    uniform vec2 u_resolution;
+
+    float circle(in vec2 _st, in float _radius){
+      vec2 dist = _st-vec2(0.5);
+      return 1.-smoothstep(_radius-(_radius*0.01),
+                           _radius+(_radius*0.01),
+                           dot(dist,dist)*4.0);
+    }
 
     void main() {
       // ------------------------------
@@ -40,6 +50,13 @@ export default {
       // ------------------------------
 
       gl_FragColor = vec4( mix(finalColor, shadowColor, (1.0 - getShadowMask() ) * shadowPower), 0.0);
+
+
+      // vec2 st = gl_FragCoord.xy/u_resolution.xy;
+
+      // vec3 color = vec3(circle(st,0.9));
+    
+      // gl_FragColor = vec4( color, 1.0 );
     }
   `,
 };
