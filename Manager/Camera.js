@@ -24,8 +24,8 @@ export default class Camera {
     );
 
     this.scene.add(this.perspectiveCamera);
-    // this.helper = new THREE.CameraHelper(this.perspectiveCamera);
-    // this.scene.add(this.helper);
+    this.helper = new THREE.CameraHelper(this.perspectiveCamera);
+    this.scene.add(this.helper);
   }
 
   createPerspectiveCameraMain() {
