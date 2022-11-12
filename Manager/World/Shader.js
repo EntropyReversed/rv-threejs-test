@@ -52,9 +52,9 @@ export default {
       gl_FragColor = vec4( mix(finalColor, shadowColor, (1.0 - getShadowMask() ) * shadowPower), 1.0);
 
 
-      // vec2 st = gl_FragCoord.xy/u_resolution.xy;
+      // vec2 st = vUv.xy;
 
-      // vec3 color = vec3(circle(st,0.9));
+      // vec3 color = vec3(circle(st,1.0));
     
       // gl_FragColor = vec4( color, 1.0 );
     }
