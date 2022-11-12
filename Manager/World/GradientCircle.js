@@ -23,15 +23,22 @@ export default class GradientCircle {
     this.scale = 1;
     this.maxScale = 7.2;
     this.circle = new THREE.Mesh();
+    this.circleMetal = new THREE.Mesh();
     this.textures = new CircleTextures(this);
     this.texture = this.textures.setTexture(0);
     this.geometry = new THREE.PlaneGeometry(4, 4);
-    // this.geometry = new THREE.CircleGeometry(2, 64);
+    this.geometryMetal = new THREE.CircleGeometry(2, 64);
 
     this.lerp = {
       current: 0,
       target: 0,
       ease: 0.1,
+    };
+
+    this.u_lerp = {
+      current: 0,
+      target: 0,
+      ease: 0.05,
     };
 
     this.scrollTrigger.on('scroll', (e) => {
@@ -42,20 +49,10 @@ export default class GradientCircle {
       this.update();
     });
 
-    this.lastIndex = 0;
-
-    // this.material = new THREE.MeshStandardMaterial({
-    //   map: this.texture,
-    //   shading: THREE.FlatShading,
-    // });
-
-    // this.material.toneMapped = false;
-    // this.material.roughness = 0;
-    // this.material.needsUpdate = true;
-
-    const uniforms = THREE.UniformsUtils.merge([
+    this.uniforms = THREE.UniformsUtils.merge([
       { texture1: { value: null } },
       { uvOffset: { value: new THREE.Vector2(0, 0) } },
+      { progress: { value: 0 } },
       {
         u_resolution: {
           value: new THREE.Vector2(this.sizes.width, this.sizes.height),
@@ -65,8 +62,8 @@ export default class GradientCircle {
       THREE.UniformsLib.lights,
     ]);
 
-    this.material2 = new THREE.ShaderMaterial({
-      uniforms: uniforms,
+    this.materialGrad = new THREE.ShaderMaterial({
+      uniforms: this.uniforms,
       ...Shader,
       lights: true,
       // wireframe: true,
@@ -75,25 +72,34 @@ export default class GradientCircle {
 
     // THREE.UniformsUtils.merge() calls THREE.clone() on each uniform.
     // Texture needs to be assigned here so it's not cloned
-    this.material2.uniforms.texture1.value = this.texture;
+    this.materialGrad.uniforms.texture1.value = this.texture;
 
     this.circle.receiveShadow = true;
     this.circle.geometry = this.geometry;
-    this.circle.material = this.material2;
+    this.circle.material = this.materialGrad;
 
-    // this.circle.material = new THREE.MeshPhysicalMaterial({
-    //   metalness: 1,
-    //   roughness: 0,
-    //   envMapIntensity: 0.9,
-    //   clearcoat: 0.5,
-    //   transparent: true,
-    //   transmission: 0,
-    //   opacity: 1,
-    //   reflectivity: 1,
-    // })
+    this.circleMetalMat = new THREE.MeshPhysicalMaterial({
+      metalness: 1,
+      roughness: 0,
+      envMapIntensity: 0.9,
+      clearcoat: 0.5,
+      transparent: true,
+      transmission: 0,
+      opacity: 1,
+      reflectivity: 1,
+    });
+    this.materialGrad.depthWrite = false;
+
+    this.circleMetal.receiveShadow = true;
+    this.circleMetal.geometry = this.geometryMetal;
+    this.circleMetal.material = this.circleMetalMat;
 
     this.circle.rotation.set(-Math.PI / 2, 0, 0);
+    this.circle.position.y = 0.001;
     this.scene.add(this.circle);
+
+    this.circleMetal.rotation.set(-Math.PI / 2, 0, 0);
+    this.scene.add(this.circleMetal);
   }
 
   onScroll(e) {
@@ -109,14 +115,20 @@ export default class GradientCircle {
     } else if (e >= firstBreak && e < secondBreak + waitFor) {
       this.lerp.target = 1;
     } else if (e >= secondBreak + waitFor && e < endPercent) {
-      this.lerp.target = 1 - map(e, secondBreak + waitFor, endPercent, 0, 0.8);
-    } else if (e >= endPercent) {
-      this.lerp.target = 1 - map(e, endPercent, 1, 0.8, 0.82);
+      this.lerp.target = 1 - map(e, secondBreak + waitFor, endPercent, 0, 0.83);
+    }
+
+    if (e >= endPercent) {
+      this.lerp.target = 0.17;
+      this.u_lerp.target = 1;
+    } else {
+      this.u_lerp.target = 0;
     }
   }
 
   setCircle(scale) {
     this.circle.scale.set(scale, scale, scale);
+    this.circleMetal.scale.set(scale, scale, scale);
   }
 
   update() {
@@ -126,6 +138,13 @@ export default class GradientCircle {
       this.lerp.ease
     );
 
+    this.u_lerp.current = GSAP.utils.interpolate(
+      this.u_lerp.current,
+      this.u_lerp.target,
+      this.u_lerp.ease
+    );
+
+    this.materialGrad.uniforms.progress.value = this.u_lerp.current;
     this.setCircle(this.lerp.current * this.maxScale);
   }
 }
