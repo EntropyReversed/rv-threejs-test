@@ -41,15 +41,23 @@ export default {
 
     void main() {
       // ------------------------------
+      vec2 uv = vUv;
+
       vec4 color = texture2D(texture1, vUv);
       vec3 finalColor = vec3(color.rgb);
       
       vec3 shadowColor = vec3(0, 0, 0);
       float shadowPower = 0.4;
-      vec3 circleMask = vec3(circle(vUv,1.0));
+
+      uv.y = 1.0 - uv.y;
+
+      float progress = 0.0;
+      vec3 circleMask = vec3(circle(uv,1.0));
+      vec3 alphaMask = circleMask * smoothstep(progress,progress+.05,(uv.x + uv.y) / 2.0);
       // ------------------------------
 
-      gl_FragColor = vec4( mix(finalColor, shadowColor, (1.0 - getShadowMask() ) * shadowPower), circleMask);
+
+      gl_FragColor = vec4( mix(finalColor, shadowColor, (1.0 - getShadowMask() ) * shadowPower), alphaMask);
 
     }
   `,
