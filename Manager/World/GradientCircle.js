@@ -38,7 +38,7 @@ export default class GradientCircle {
     this.u_lerp = {
       current: 0,
       target: 0,
-      ease: 0.05,
+      ease: 0.04,
     };
 
     this.scrollTrigger.on('scroll', (e) => {
@@ -66,7 +66,6 @@ export default class GradientCircle {
       uniforms: this.uniforms,
       ...Shader,
       lights: true,
-      // wireframe: true,
       transparent: true,
     });
 

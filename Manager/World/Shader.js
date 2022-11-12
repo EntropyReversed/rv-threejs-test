@@ -51,9 +51,12 @@ export default {
       float shadowPower = 0.4;
 
       uv.y = 1.0 - uv.y;
-
+      
       vec3 circleMask = vec3(circle(uv,1.0));
+      
+      uv.y += (sin(uv.y*20.0)/20.0) * progress;
       vec3 alphaMask = circleMask * smoothstep(progress,progress+.05,(uv.x + uv.y) / 2.0);
+
       // ------------------------------
 
 
