@@ -34,8 +34,8 @@ export default {
 
     float circle(in vec2 _st, in float _radius){
       vec2 dist = _st-vec2(0.5);
-      return 1.-smoothstep(_radius-(_radius*0.01),
-                           _radius+(_radius*0.01),
+      return 1.-smoothstep(_radius-(_radius*0.005),
+                           _radius+(_radius*0.005),
                            dot(dist,dist)*4.0);
     }
 
@@ -44,19 +44,13 @@ export default {
       vec4 color = texture2D(texture1, vUv);
       vec3 finalColor = vec3(color.rgb);
       
-
       vec3 shadowColor = vec3(0, 0, 0);
       float shadowPower = 0.4;
+      vec3 circleMask = vec3(circle(vUv,1.0));
       // ------------------------------
 
-      gl_FragColor = vec4( mix(finalColor, shadowColor, (1.0 - getShadowMask() ) * shadowPower), 1.0);
+      gl_FragColor = vec4( mix(finalColor, shadowColor, (1.0 - getShadowMask() ) * shadowPower), circleMask);
 
-
-      // vec2 st = vUv.xy;
-
-      // vec3 color = vec3(circle(st,1.0));
-    
-      // gl_FragColor = vec4( color, 1.0 );
     }
   `,
 };
