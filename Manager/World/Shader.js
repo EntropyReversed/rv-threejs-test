@@ -49,7 +49,7 @@ export default {
       float shadowPower = 0.4;
       // ------------------------------
 
-      gl_FragColor = vec4( mix(finalColor, shadowColor, (1.0 - getShadowMask() ) * shadowPower), 0.0);
+      gl_FragColor = vec4( mix(finalColor, shadowColor, (1.0 - getShadowMask() ) * shadowPower), 1.0);
 
 
       // vec2 st = gl_FragCoord.xy/u_resolution.xy;
