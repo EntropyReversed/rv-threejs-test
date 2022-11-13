@@ -7,6 +7,7 @@ import Resources from './Utils/Resources';
 import World from './World/World';
 import assets from './Utils/assets';
 import TriggerScroll from '../Manager/Utils/TriggerScroll';
+import GSAP from 'gsap';
 
 export default class Manager {
   static instance;
@@ -26,6 +27,7 @@ export default class Manager {
     this.renderer = new Renderer();
     this.resources = new Resources(assets);
     this.world = new World();
+    this.masterTimeline = GSAP.timeline();
 
     this.sizes.on('resize', () => {
       this.resize();

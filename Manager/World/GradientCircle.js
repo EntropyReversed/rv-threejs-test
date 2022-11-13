@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import Manager from '../Manager';
 import CircleTextures from './CircleTextures';
-import Shader2 from './Shader2';
 import Shader from './Shader';
 import GSAP from 'gsap';
 
@@ -22,11 +21,7 @@ export default class GradientCircle {
     this.time = this.manager.time;
     this.scale = 1;
     this.maxScale = 7.2;
-    this.circle = new THREE.Mesh();
-    this.circleMetal = new THREE.Mesh();
-    this.textures = new CircleTextures(this);
-    this.texture = this.textures.setTexture(0);
-    this.geometry = new THREE.PlaneGeometry(4, 4);
+
     this.geometryMetal = new THREE.CircleGeometry(2, 64);
 
     this.lerp = {
@@ -63,20 +58,7 @@ export default class GradientCircle {
       THREE.UniformsLib.lights,
     ]);
 
-    this.materialGrad = new THREE.ShaderMaterial({
-      uniforms: this.uniforms,
-      ...Shader,
-      lights: true,
-      transparent: true,
-    });
-
-    // THREE.UniformsUtils.merge() calls THREE.clone() on each uniform.
-    // Texture needs to be assigned here so it's not cloned
-    this.materialGrad.uniforms.texture1.value = this.texture;
-
-    this.circle.receiveShadow = true;
-    this.circle.geometry = this.geometry;
-    this.circle.material = this.materialGrad;
+    this.setCircleGrad();
 
     this.circleMetalMat = new THREE.MeshPhysicalMaterial({
       metalness: 1,
@@ -88,19 +70,44 @@ export default class GradientCircle {
       opacity: 1,
       reflectivity: 1,
     });
-    this.materialGrad.depthWrite = false;
 
     this.circleMetal.receiveShadow = true;
     this.circleMetal.geometry = this.geometryMetal;
     this.circleMetal.material = this.circleMetalMat;
 
-    this.circle.rotation.set(-Math.PI / 2, 0, 0);
-    this.circle.position.y = 0.001;
-    this.scene.add(this.circle);
-
     this.circleMetal.rotation.set(-Math.PI / 2, 0, 0);
     this.scene.add(this.circleMetal);
   }
+
+  setCircleGrad() {
+    this.circle = new THREE.Mesh();
+    this.circleMetal = new THREE.Mesh();
+    this.textures = new CircleTextures(this);
+    this.texture = this.textures.setTexture(0);
+    this.geometry = new THREE.PlaneGeometry(4, 4);
+
+    this.materialGrad = new THREE.ShaderMaterial({
+      uniforms: this.uniforms,
+      ...Shader,
+      lights: true,
+      transparent: true,
+    });
+    this.materialGrad.depthWrite = false;
+
+    // THREE.UniformsUtils.merge() calls THREE.clone() on each uniform.
+    // Texture needs to be assigned here so it's not cloned
+    this.materialGrad.uniforms.texture1.value = this.texture;
+
+    this.circle.receiveShadow = true;
+    this.circle.geometry = this.geometry;
+    this.circle.material = this.materialGrad;
+
+    this.circle.rotation.set(-Math.PI / 2, 0, 0);
+    this.circle.position.y = 0.001;
+    this.scene.add(this.circle);
+  }
+
+  setCircleMetal() {}
 
   onScroll(e) {
     const startPercent = 0.01;
