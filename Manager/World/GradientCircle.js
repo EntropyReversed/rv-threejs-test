@@ -53,6 +53,7 @@ export default class GradientCircle {
       { texture1: { value: null } },
       { uvOffset: { value: new THREE.Vector2(0, 0) } },
       { progress: { value: 0 } },
+      { randomF: { value: 0 } },
       {
         u_resolution: {
           value: new THREE.Vector2(this.sizes.width, this.sizes.height),
@@ -116,7 +117,6 @@ export default class GradientCircle {
     } else if (e >= secondBreak + waitFor && e < endPercent) {
       this.lerp.target = 1 - map(e, secondBreak + waitFor, endPercent, 0, 0.83);
     }
-
     if (e >= endPercent) {
       this.lerp.target = 0.17;
       this.u_lerp.target = 1;

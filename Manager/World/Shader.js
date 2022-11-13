@@ -30,7 +30,7 @@ export default {
 
     uniform vec2 uvOffset;
     uniform sampler2D texture1;
-    uniform vec2 u_resolution;
+    uniform float randomF;
     uniform float progress;
 
     float circle(in vec2 _st, in float _radius){
@@ -53,8 +53,10 @@ export default {
       uv.y = 1.0 - uv.y;
       
       vec3 circleMask = vec3(circle(uv,1.0));
-      
-      uv.y += (sin(uv.y*20.0)/20.0) * progress;
+
+      float randomVal = (randomF + 1.0) * 10.0;
+      uv.y += (sin(uv.y*randomVal)/randomVal);
+
       vec3 alphaMask = circleMask * smoothstep(progress,progress+.05,(uv.x + uv.y) / 2.0);
 
       // ------------------------------
