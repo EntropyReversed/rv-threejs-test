@@ -22,8 +22,6 @@ export default class GradientCircle {
     this.scale = 1;
     this.maxScale = 7.2;
 
-    this.geometryMetal = new THREE.CircleGeometry(2, 64);
-
     this.lerp = {
       current: 0,
       target: 0,
@@ -44,39 +42,8 @@ export default class GradientCircle {
       this.update();
     });
 
-    this.uniforms = THREE.UniformsUtils.merge([
-      { texture1: { value: null } },
-      { uvOffset: { value: new THREE.Vector2(0, 0) } },
-      { progress: { value: 0 } },
-      { randomF: { value: 0 } },
-      {
-        u_resolution: {
-          value: new THREE.Vector2(this.sizes.width, this.sizes.height),
-        },
-      },
-
-      THREE.UniformsLib.lights,
-    ]);
-
     this.setCircleGrad();
-
-    this.circleMetalMat = new THREE.MeshPhysicalMaterial({
-      metalness: 1,
-      roughness: 0,
-      envMapIntensity: 0.9,
-      clearcoat: 0.5,
-      transparent: true,
-      transmission: 0,
-      opacity: 1,
-      reflectivity: 1,
-    });
-
-    this.circleMetal.receiveShadow = true;
-    this.circleMetal.geometry = this.geometryMetal;
-    this.circleMetal.material = this.circleMetalMat;
-
-    this.circleMetal.rotation.set(-Math.PI / 2, 0, 0);
-    this.scene.add(this.circleMetal);
+    this.setCircleMetal();
   }
 
   setCircleGrad() {
@@ -85,6 +52,13 @@ export default class GradientCircle {
     this.textures = new CircleTextures(this);
     this.texture = this.textures.setTexture(0);
     this.geometry = new THREE.PlaneGeometry(4, 4);
+
+    this.uniforms = THREE.UniformsUtils.merge([
+      { texture1: { value: null } },
+      { progress: { value: 0 } },
+
+      THREE.UniformsLib.lights,
+    ]);
 
     this.materialGrad = new THREE.ShaderMaterial({
       uniforms: this.uniforms,
@@ -107,7 +81,26 @@ export default class GradientCircle {
     this.scene.add(this.circle);
   }
 
-  setCircleMetal() {}
+  setCircleMetal() {
+    this.geometryMetal = new THREE.CircleGeometry(2, 64);
+    this.circleMetalMat = new THREE.MeshPhysicalMaterial({
+      metalness: 1,
+      roughness: 0,
+      envMapIntensity: 0.9,
+      clearcoat: 0.5,
+      transparent: true,
+      transmission: 0,
+      opacity: 1,
+      reflectivity: 1,
+    });
+
+    this.circleMetal.receiveShadow = true;
+    this.circleMetal.geometry = this.geometryMetal;
+    this.circleMetal.material = this.circleMetalMat;
+
+    this.circleMetal.rotation.set(-Math.PI / 2, 0, 0);
+    this.scene.add(this.circleMetal);
+  }
 
   onScroll(e) {
     const startPercent = 0.01;
