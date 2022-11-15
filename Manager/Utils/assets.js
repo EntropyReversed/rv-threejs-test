@@ -5,7 +5,7 @@ export default [
   //   path: '/Public/rvModel.glb',
   // },
   {
-    name: 'model2',
+    name: 'model',
     type: 'glbModel',
     path: '/Public/rvModelLines.glb',
   },

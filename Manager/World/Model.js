@@ -24,16 +24,24 @@ export default class Model {
   }
 
   setModel() {
+    const lettersGroup = new THREE.Group();
+    // group.add( cubeA );
+    // group.add( cubeB );
+
+    // scene.add( group );
+
     this.actualModel.children.forEach((child) => {
       child.castShadow = true;
       child.recieveShadow = true;
 
-      console.log(child)
-      if (child.name === 'letters') {
-        this.letters = new Letters(child);
+      console.log(child);
+      if (child.name === 'LetterRMesh' || child.name === 'LetterVMesh') {
+        // lettersGroup.add(child);
       }
     });
 
+    // this.letters = new Letters(lettersGroup);
+    this.scene.add(lettersGroup);
     this.scene.add(this.actualModel);
   }
 
