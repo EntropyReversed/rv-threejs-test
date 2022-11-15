@@ -1,8 +1,13 @@
 export default [
+  // {
+  //   name: 'model',
+  //   type: 'glbModel',
+  //   path: '/Public/rvModel.glb',
+  // },
   {
-    name: 'model',
+    name: 'model2',
     type: 'glbModel',
-    path: '/Public/rvModel.glb',
+    path: '/Public/rvModelLines.glb',
   },
   {
     name: 'gradientTexture',
