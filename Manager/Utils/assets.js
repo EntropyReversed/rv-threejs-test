@@ -7,7 +7,7 @@ export default [
   {
     name: 'model',
     type: 'glbModel',
-    path: '/Public/rvModelLines.glb',
+    path: '/Public/rvModel2.glb',
   },
   {
     name: 'gradientTexture',
