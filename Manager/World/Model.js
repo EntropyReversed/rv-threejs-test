@@ -3,7 +3,6 @@ import GSAP from 'gsap';
 import Manager from '../Manager';
 import GradientCircle from './GradientCircle';
 import Letters from './Letters';
-import Lines from './Lines';
 
 export default class Model {
   constructor() {
@@ -12,7 +11,6 @@ export default class Model {
     this.resources = this.manager.resources;
     this.model = this.resources.items.model;
     this.actualModel = this.model.scene;
-    this.lines = new Lines();
     this.gradientCircle = new GradientCircle();
 
     // this.lerp = {

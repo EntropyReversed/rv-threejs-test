@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import Sizes from './Utils/Sizes';
 import Camera from './Camera';
 import Renderer from './Renderer';
+import SvgRenderer from './SvgRenderer'
 import Time from './Utils/Time';
 import Resources from './Utils/Resources';
 import World from './World/World';
@@ -21,10 +22,12 @@ export default class Manager {
     this.parent = parent;
     this.canvas = this.parent.querySelector('canvas');
     this.scene = new THREE.Scene();
+    this.SvgScene = new THREE.Scene();
     this.time = new Time();
     this.sizes = new Sizes();
     this.camera = new Camera();
     this.renderer = new Renderer();
+    this.svgRenderer = new SvgRenderer();
     this.resources = new Resources(assets);
     this.masterTimeline = GSAP.timeline();
     this.scrollTrigger = new TriggerScroll();
@@ -48,12 +51,14 @@ export default class Manager {
   resize() {
     this.camera.resize();
     this.renderer.resize();
+    this.svgRenderer.resize();
   }
 
   update() {
     this.camera.update();
     this.world.update();
     this.renderer.update();
+    this.svgRenderer.update();
     // this.stats.update();
   }
 }

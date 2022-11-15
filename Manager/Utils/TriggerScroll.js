@@ -22,10 +22,10 @@ export default class TriggerScroll extends EventEmitter {
       scrub: true,
       animation: this.masterTimeline,
       onUpdate: (self) => {
-        this.parent.style.setProperty(
-          '--scroll',
-          Math.round(self.progress * 100) / 100
-        );
+        // this.parent.style.setProperty(
+        //   '--scroll',
+        //   Math.round(self.progress * 100) / 100
+        // );
         this.emit('scroll', self.progress);
       },
     });

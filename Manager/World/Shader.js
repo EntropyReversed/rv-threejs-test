@@ -42,7 +42,6 @@ export default {
       vec2 uv = vUv;
 
       vec4 color = texture2D(u_texture, uv);
-      vec3 finalColor = vec3(color.rgb);
       
       vec3 shadowColor = vec3(0, 0, 0);
       float shadowPower = 0.4;
@@ -58,7 +57,7 @@ export default {
       // ------------------------------
 
 
-      gl_FragColor = vec4( mix(finalColor, shadowColor, (1.0 - getShadowMask() ) * shadowPower), alphaMask);
+      gl_FragColor = vec4( mix(color.rgb, shadowColor, (1.0 - getShadowMask() ) * shadowPower), alphaMask);
 
     }
   `,

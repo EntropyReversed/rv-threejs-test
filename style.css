@@ -87,6 +87,8 @@ footer {
 .scene h2.in {
   transform: translate3d(-50%, calc(-50% - 35vh), 0) scale(1) rotateX(0deg);
   opacity: 1;
+  /* user-select: auto;
+  pointer-events: all; */
 }
 
 .scene-canvas {
@@ -99,11 +101,13 @@ footer {
   height: 400vh;
 }
 
-.lines-svg {
+.scene-wrap .scene svg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
+  background-color: transparent !important;
+  pointer-events: none;
 }
