@@ -8,6 +8,7 @@ import World from './World/World';
 import assets from './Utils/assets';
 import TriggerScroll from '../Manager/Utils/TriggerScroll';
 import GSAP from 'gsap';
+import Stats from 'three/addons/libs/stats.module.js';
 
 export default class Manager {
   static instance;
@@ -20,14 +21,16 @@ export default class Manager {
     this.parent = parent;
     this.canvas = this.parent.querySelector('canvas');
     this.scene = new THREE.Scene();
-    this.scrollTrigger = new TriggerScroll();
     this.time = new Time();
     this.sizes = new Sizes();
     this.camera = new Camera();
     this.renderer = new Renderer();
     this.resources = new Resources(assets);
-    this.world = new World();
     this.masterTimeline = GSAP.timeline();
+    this.scrollTrigger = new TriggerScroll();
+    this.world = new World();
+    // this.stats = new Stats();
+    // document.body.appendChild( this.stats.dom );
 
     this.sizes.on('resize', () => {
       this.resize();
@@ -51,5 +54,6 @@ export default class Manager {
     this.camera.update();
     this.world.update();
     this.renderer.update();
+    // this.stats.update();
   }
 }

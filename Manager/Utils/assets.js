@@ -5,7 +5,7 @@ export default [
     path: '/Public/rvModel.glb',
   },
   {
-    name: 'texture0',
+    name: 'gradientTexture',
     type: 'image',
     path: '/Public/texture0.png',
   },

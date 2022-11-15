@@ -17,6 +17,7 @@ export default class Controls {
     this.time = this.manager.time;
     this.camera = this.manager.camera;
     this.scrollTrigger = this.manager.scrollTrigger;
+    this.masterTimeline = this.manager.masterTimeline;
 
     this.lerp = {
       current: 0,
@@ -31,6 +32,27 @@ export default class Controls {
     });
 
     this.setPath();
+
+    // this.cameraTimeline = GSAP.timeline().to(this.lerp, {
+    //   current: 1,
+    //   duration: 1,
+    //   onComplete: () => {
+    //     console.log('camera completed');
+    //   },
+    //   onUpdate: () => {
+    //     this.lerp.current = GSAP.utils.interpolate(
+    //       this.lerp.current,
+    //       this.lerp.target,
+    //       this.lerp.ease
+    //     );
+
+    //     this.curve.getPointAt(this.lerp.current, this.position);
+    //     this.camera.perspectiveCamera.position.copy(this.position);
+    //     this.camera.perspectiveCamera.lookAt(0, 0, 0);
+    //     this.camera.perspectiveCamera.rotation.z = 0;
+    //   },
+    // }, 0)
+    // this.masterTimeline.add(this.cameraTimeline);
   }
 
   onScroll(e) {
@@ -41,6 +63,8 @@ export default class Controls {
       this.lerp.target = map(e, startPercent, endPercent, 0, 1);
     } else if (e > endPercent) {
       this.lerp.target = 1;
+    } else {
+      this.lerp.target = 0;
     }
   }
 

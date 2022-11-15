@@ -4,13 +4,6 @@ import CircleTextures from './CircleTextures';
 import Shader from './Shader';
 import GSAP from 'gsap';
 
-const map = (n, start1, end1, start2, end2) => {
-  const val = ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
-  if (val < start2) return start2;
-  if (val > end2) return end2;
-  return val;
-};
-
 export default class GradientCircle {
   constructor() {
     this.manager = new Manager();
@@ -19,8 +12,10 @@ export default class GradientCircle {
     this.resources = this.manager.resources;
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
+    this.masterTimeline = this.manager.masterTimeline;
     this.scale = 1;
     this.maxScale = 7.2;
+    this.timeline = GSAP.timeline();
 
     this.lerp = {
       current: 0,
@@ -54,7 +49,7 @@ export default class GradientCircle {
     this.geometry = new THREE.PlaneGeometry(4, 4);
 
     this.uniforms = THREE.UniformsUtils.merge([
-      { texture1: { value: null } },
+      { u_texture: { value: null } },
       { progress: { value: 0 } },
 
       THREE.UniformsLib.lights,
@@ -70,7 +65,7 @@ export default class GradientCircle {
 
     // THREE.UniformsUtils.merge() calls THREE.clone() on each uniform.
     // Texture needs to be assigned here so it's not cloned
-    this.materialGrad.uniforms.texture1.value = this.texture;
+    this.materialGrad.uniforms.u_texture.value = this.texture;
 
     this.circle.receiveShadow = true;
     this.circle.geometry = this.geometry;
@@ -79,19 +74,22 @@ export default class GradientCircle {
     this.circle.rotation.set(-Math.PI / 2, 0, 0);
     this.circle.position.y = 0.001;
     this.scene.add(this.circle);
+
+    // console.log(this.circle)
+
+    // this.timeline.to(this.circle.scale, { scale: 0.5}, 0);
+
+    // this.masterTimeline.add(this.timeline);
   }
 
   setCircleMetal() {
     this.geometryMetal = new THREE.CircleGeometry(2, 64);
     this.circleMetalMat = new THREE.MeshPhysicalMaterial({
       metalness: 1,
-      roughness: 0,
-      envMapIntensity: 0.9,
-      clearcoat: 0.5,
+      roughness: 0.05,
       transparent: true,
       transmission: 0,
       opacity: 1,
-      reflectivity: 1,
     });
 
     this.circleMetal.receiveShadow = true;
@@ -103,25 +101,29 @@ export default class GradientCircle {
   }
 
   onScroll(e) {
-    const startPercent = 0.01;
-    const waitFor = 0.2;
-    const firstBreak = 0.27;
-    const secondBreak = 0.3;
-    const endPercent = secondBreak * 2 + 0.15;
-    if (e < startPercent) {
-      this.lerp.target = 0;
-    } else if (e >= startPercent && e < firstBreak) {
-      this.lerp.target = map(e, startPercent, firstBreak, 0, 1);
-    } else if (e >= firstBreak && e < secondBreak + waitFor) {
-      this.lerp.target = 1;
-    } else if (e >= secondBreak + waitFor && e < endPercent) {
-      this.lerp.target = 1 - map(e, secondBreak + waitFor, endPercent, 0, 0.83);
-    }
-    if (e >= endPercent) {
-      this.lerp.target = 0.17;
-      this.u_lerp.target = 1;
-    } else {
-      this.u_lerp.target = 0;
+    const frames = [0.01, 0.27, 0.5, 0.75];
+    this.u_lerp.target = 0;
+
+    switch (true) {
+      case e < frames[0]:
+        this.lerp.target = 0;
+        break;
+      case e < frames[1]:
+        this.lerp.target = GSAP.utils.mapRange(frames[0], frames[1], 0, 1, e);
+        break;
+      case e < frames[2]:
+        this.lerp.target = 1;
+        break;
+      case e < frames[3]:
+        this.lerp.target =
+          1 - GSAP.utils.mapRange(frames[2], frames[3], 0, 1 - 0.17, e);
+        break;
+      case e >= frames[3]:
+        this.lerp.target = 0.17;
+        this.u_lerp.target = 1;
+        break;
+      default:
+        break;
     }
   }
 

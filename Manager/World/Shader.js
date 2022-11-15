@@ -27,9 +27,7 @@ export default {
     #include <shadowmask_pars_fragment>
 
     varying vec2 vUv;
-
-    uniform sampler2D texture1;
-
+    uniform sampler2D u_texture;
     uniform float progress;
 
     float circle(in vec2 _st, in float _radius){
@@ -43,7 +41,7 @@ export default {
       // ------------------------------
       vec2 uv = vUv;
 
-      vec4 color = texture2D(texture1, vUv);
+      vec4 color = texture2D(u_texture, uv);
       vec3 finalColor = vec3(color.rgb);
       
       vec3 shadowColor = vec3(0, 0, 0);
