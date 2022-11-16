@@ -1,6 +1,6 @@
 import Manager from './Manager';
 import * as THREE from 'three';
-import { SVGRenderer } from 'three/addons/renderers/SVGRenderer.js';
+import { SVGRenderer, SVGObject } from 'three/addons/renderers/SVGRenderer.js';
 
 export default class SvgRenderer {
   constructor() {
@@ -21,18 +21,18 @@ export default class SvgRenderer {
     this.parent.querySelector('.scene').appendChild( this.renderer.domElement );
 
 
-    // const node = document.createElementNS( 'http://www.w3.org/2000/svg', 'circle' );
-    // node.setAttribute( 'stroke', 'white' );
-    // node.setAttribute( 'fill', 'transparent' );
-    // node.setAttribute( 'r', '10' );
-    // node.setAttribute( 'stroke-width', '10' );
-    // node.style.cursor = 'pointer';
-    // var object = new THREE.SVGObject( node );
-    // object.position.x = 0;
-    // object.position.y = 0;
-    // object.position.z = 1500;
-    // this.scene.add( object );
-    console.dir(THREE)
+    const node = document.createElementNS( 'http://www.w3.org/2000/svg', 'circle' );
+    node.setAttribute( 'stroke', 'white' );
+    node.setAttribute( 'fill', 'transparent' );
+    node.setAttribute( 'r', '10' );
+    node.setAttribute( 'stroke-width', '10' );
+    node.style.cursor = 'pointer';
+    var object = new SVGObject( node );
+    object.position.x = 0;
+    object.position.y = 0;
+    object.position.z = 1500;
+    this.scene.add( object );
+    
   }
 
   setSize() {

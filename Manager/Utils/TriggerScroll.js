@@ -19,7 +19,7 @@ export default class TriggerScroll extends EventEmitter {
       start: 'top top',
       // markers: true,
       end: 'bottom bottom',
-      scrub: true,
+      // scrub: true,
       animation: this.masterTimeline,
       onUpdate: (self) => {
         // this.parent.style.setProperty(

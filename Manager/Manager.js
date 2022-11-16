@@ -27,7 +27,7 @@ export default class Manager {
     this.sizes = new Sizes();
     this.camera = new Camera();
     this.renderer = new Renderer();
-    this.svgRenderer = new SvgRenderer();
+    // this.svgRenderer = new SvgRenderer();
     this.resources = new Resources(assets);
     this.masterTimeline = GSAP.timeline();
     this.scrollTrigger = new TriggerScroll();
@@ -51,14 +51,14 @@ export default class Manager {
   resize() {
     this.camera.resize();
     this.renderer.resize();
-    this.svgRenderer.resize();
+    // this.svgRenderer.resize();
   }
 
   update() {
     this.camera.update();
     this.world.update();
     this.renderer.update();
-    this.svgRenderer.update();
+    // this.svgRenderer.update();
     // this.stats.update();
   }
 }

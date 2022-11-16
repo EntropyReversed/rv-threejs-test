@@ -3,6 +3,7 @@ import GSAP from 'gsap';
 import Manager from '../Manager';
 import GradientCircle from './GradientCircle';
 import Letters from './Letters';
+import Cutout from './Cutout';
 
 export default class Model {
   constructor() {
@@ -11,7 +12,7 @@ export default class Model {
     this.resources = this.manager.resources;
     this.model = this.resources.items.model;
     this.actualModel = this.model.scene;
-    this.gradientCircle = new GradientCircle();
+    
 
     // this.lerp = {
     //   current: 0,
@@ -21,27 +22,33 @@ export default class Model {
 
     // this.onMouseMove();
     this.setModel();
+
+    window.scrollTo(0, 0);
   }
 
   setModel() {
-    const lettersGroup = new THREE.Group();
-    // group.add( cubeA );
-    // group.add( cubeB );
 
-    // scene.add( group );
 
     this.actualModel.children.forEach((child) => {
       child.castShadow = true;
       child.recieveShadow = true;
 
-      console.log(child);
-      if (child.name === 'LetterRMesh' || child.name === 'LetterVMesh') {
-        // lettersGroup.add(child);
+      if (child.name === 'letters') {
+        this.letters = new Letters(child);
       }
+
+      if (child.name === 'circleFill') {
+        this.gradientCircle = new GradientCircle(child);
+      }
+
+      if (child.name === 'cutout') {
+        this.cutout = new Cutout(child);
+      }
+
+      console.log(child)
     });
 
-    // this.letters = new Letters(lettersGroup);
-    this.scene.add(lettersGroup);
+
     this.scene.add(this.actualModel);
   }
 
