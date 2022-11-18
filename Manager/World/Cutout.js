@@ -24,7 +24,7 @@ export default class Cutout {
     });
 
     // this.cutout.geometry = this.geometry;
-    // this.cutout.receiveShadow = true;
+    this.cutout.receiveShadow = true;
     this.cutout.material = this.mat;
     // this.cutout.scale.set(1.01, 1.01, 1.01);
 

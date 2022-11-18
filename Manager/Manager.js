@@ -32,8 +32,8 @@ export default class Manager {
     this.masterTimeline = GSAP.timeline();
     this.scrollTrigger = new TriggerScroll();
     this.world = new World();
-    // this.stats = new Stats();
-    // document.body.appendChild( this.stats.dom );
+    this.stats = new Stats();
+    document.body.appendChild( this.stats.dom );
 
     this.sizes.on('resize', () => {
       this.resize();
@@ -59,6 +59,6 @@ export default class Manager {
     this.world.update();
     this.renderer.update();
     // this.svgRenderer.update();
-    // this.stats.update();
+    this.stats.update();
   }
 }

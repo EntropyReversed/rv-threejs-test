@@ -7,11 +7,11 @@ export default [
   {
     name: 'model',
     type: 'glbModel',
-    path: '/Public/rvModel2.glb',
+    path: './Public/rvModel2.glb',
   },
   {
     name: 'gradientTexture',
     type: 'image',
-    path: '/Public/texture0.png',
+    path: './Public/texture0.png',
   },
 ];
