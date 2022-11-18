@@ -19,6 +19,7 @@ export default class Renderer {
       alpha: true,
     });
 
+    this.renderer.powerPreference = "high-performance";
     this.renderer.physicallyCorrectLights = true;
     this.renderer.outputEncoding = THREE.sRGBEncoding;
     this.renderer.toneMapping = THREE.ACESfilmicToneMapping;

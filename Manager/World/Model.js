@@ -12,7 +12,6 @@ export default class Model {
     this.resources = this.manager.resources;
     this.model = this.resources.items.model;
     this.actualModel = this.model.scene;
-    
 
     // this.lerp = {
     //   current: 0,
@@ -27,27 +26,23 @@ export default class Model {
   }
 
   setModel() {
-
-
     this.actualModel.children.forEach((child) => {
       child.castShadow = true;
       child.recieveShadow = true;
 
-      if (child.name === 'letters') {
-        this.letters = new Letters(child);
-      }
+      console.log(child);
+      // if (child.name === 'letters') {
+      this.letters = new Letters(child, this.model.animations);
+      // }
 
-      if (child.name === 'circleFill') {
-        this.gradientCircle = new GradientCircle(child);
-      }
+      // if (child.name === 'circleFill') {
+      //   this.gradientCircle = new GradientCircle(child);
+      // }
 
-      if (child.name === 'cutout') {
-        this.cutout = new Cutout(child);
-      }
-
-      console.log(child)
+      // if (child.name === 'cutout') {
+      //   this.cutout = new Cutout(child);
+      // }
     });
-
 
     this.scene.add(this.actualModel);
   }

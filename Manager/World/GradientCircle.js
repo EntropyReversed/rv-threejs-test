@@ -13,7 +13,7 @@ export default class GradientCircle {
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
     this.masterTimeline = this.manager.masterTimeline;
-    this.circleCut = circleCut;
+    // this.circleCut = circleCut;
     this.scale = 1;
     this.maxScale = 7.2;
     this.timeline = GSAP.timeline();
@@ -39,15 +39,15 @@ export default class GradientCircle {
     });
 
     this.setCircleGrad();
-    this.setCircleMetal();
+    // this.setCircleMetal();
   }
 
   setCircleGrad() {
     this.circle = new THREE.Mesh();
-    
+
     this.textures = new CircleTextures(this);
     this.texture = this.textures.setTexture(0);
-    this.geometry = new THREE.PlaneGeometry(4.68, 4.68);
+    this.geometry = new THREE.PlaneGeometry(4.3, 4.3);
 
     this.uniforms = THREE.UniformsUtils.merge([
       { u_texture: { value: null } },
@@ -134,7 +134,7 @@ export default class GradientCircle {
 
   setCircle(scale) {
     this.circle.scale.set(scale, scale, scale);
-    this.circleCut.scale.set(scale, scale, scale);
+    // this.circleCut.scale.set(scale, scale, scale);
   }
 
   update() {
