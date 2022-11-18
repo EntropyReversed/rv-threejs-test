@@ -7,13 +7,13 @@ export default [
   {
     name: 'model',
     type: 'glbModel',
-    // path: '/Public/rvModel2.glb',
-    path: '../../3dassets/rvModel2.glb',
+    path: './rvModel2.glb',
+    // path: '../../src/rvModel2.glb?url',
   },
   {
     name: 'gradientTexture',
     type: 'image',
-    // path: '/Public/texture0.png',
-    path: '../../3dassets/texture0.png',
+    path: './texture0.png',
+    // path: '../../src/texture0.png?url',
   },
 ];
