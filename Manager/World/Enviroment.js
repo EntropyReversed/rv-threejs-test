@@ -27,7 +27,7 @@ export default class Enviroment {
   }
 
   setSunlight() {
-    this.sunLight = new THREE.DirectionalLight('#ffffff', 2.5);
+    this.sunLight = new THREE.DirectionalLight('#ffffff', 222.5);
     this.sunLight.castShadow = true;
     this.sunLight.shadow.camera.far = 60;
     this.sunLight.shadow.mapSize.set(8192, 8192);
@@ -42,7 +42,7 @@ export default class Enviroment {
   }
 
   onScroll(e) {
-    if (e > 0.9) {
+    if (e > 0.75) {
       this.lerp.target = 1;
     } else {
       this.lerp.target = 0;

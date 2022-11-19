@@ -2,6 +2,10 @@ export default {
   vertexShader: `
   #include <common>
   #include <shadowmap_pars_vertex>
+  // TODO: figure out how to read vertex color
+  // #ifdef USE_COLOR
+  //   varying vec3 vColor;
+  // #endif
 
   varying vec2 vUv; 
 

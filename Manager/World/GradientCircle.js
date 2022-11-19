@@ -39,7 +39,6 @@ export default class GradientCircle {
     });
 
     this.setCircleGrad();
-    // this.setCircleMetal();
   }
 
   setCircleGrad() {
@@ -51,7 +50,7 @@ export default class GradientCircle {
 
     this.uniforms = THREE.UniformsUtils.merge([
       { u_texture: { value: null } },
-      { progress: { value: 0 } },
+      { progress: { value: 1 } },
 
       THREE.UniformsLib.lights,
     ]);
@@ -84,25 +83,6 @@ export default class GradientCircle {
     // this.masterTimeline.add(this.timeline);
   }
 
-  setCircleMetal() {
-    this.circleMetal = new THREE.Mesh();
-    // this.geometryMetal = new THREE.CircleGeometry(2, 64);
-    this.circleMetalMat = new THREE.MeshPhysicalMaterial({
-      metalness: 0.99,
-      roughness: 0.05,
-      transparent: true,
-      transmission: 0,
-      opacity: 1,
-    });
-
-    this.circleCut.receiveShadow = true;
-    // this.circleCut.geometry = this.geometryMetal;
-    this.circleCut.material = this.circleMetalMat;
-
-    // this.circleMetal.rotation.set(-Math.PI / 2, 0, 0);
-    // this.scene.add(this.circleMetal);
-  }
-
   onScroll(e) {
     const frames = [0.01, 0.27, 0.5, 0.75, 0.9];
     this.u_lerp.target = 0;
@@ -116,14 +96,15 @@ export default class GradientCircle {
         break;
       case e < frames[2]:
         this.lerp.target = 1;
+        this.lerp.target =
+          1 - GSAP.utils.mapRange(frames[1], frames[2], 0, 1 - 0.138, e);
         break;
       case e < frames[3]:
-        this.lerp.target =
-          1 - GSAP.utils.mapRange(frames[2], frames[3], 0, 1 - 0.138, e);
+        this.lerp.target = 0.138;
         break;
 
       case e < frames[4]:
-        this.lerp.target = 0.138;
+        this.u_lerp.target = 1;
         break;
       case e >= frames[4]:
         this.u_lerp.target = 1;
@@ -135,7 +116,6 @@ export default class GradientCircle {
 
   setCircle(scale) {
     this.circle.scale.set(scale, scale, scale);
-    // this.circleCut.scale.set(scale, scale, scale);
   }
 
   update() {
@@ -151,7 +131,7 @@ export default class GradientCircle {
       this.u_lerp.ease
     );
 
-    this.materialGrad.uniforms.progress.value = this.u_lerp.current;
-    this.setCircle(this.lerp.current * this.maxScale);
+    // this.materialGrad.uniforms.progress.value = this.u_lerp.current;
+    // this.setCircle(this.lerp.current * this.maxScale);
   }
 }
