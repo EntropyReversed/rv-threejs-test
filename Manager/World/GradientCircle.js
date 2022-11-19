@@ -71,9 +71,10 @@ export default class GradientCircle {
     this.circle.receiveShadow = true;
     this.circle.geometry = this.geometry;
     this.circle.material = this.materialGrad;
+    this.circle.depthWrite = true;
 
     this.circle.rotation.set(-Math.PI / 2, 0, 0);
-    this.circle.position.y = 0.0107;
+    this.circle.position.y = 0.001;
     this.scene.add(this.circle);
 
     // console.log(this.circle)

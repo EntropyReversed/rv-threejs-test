@@ -10,7 +10,7 @@ export default class Letters {
     this.sizes = this.manager.sizes;
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
-    this.offsetY = 0.14;
+    this.offsetY = 0.065;
     this.circle  = child.children[0];
     this.letters = child.children[1];
     this.animation = animation;
@@ -46,7 +46,7 @@ export default class Letters {
     this.lerp = {
       current: 0,
       target: 0,
-      ease: 0.05,
+      ease: 0.07,
     };
 
     this.scrollTrigger.on('scroll', (e) => {
@@ -57,17 +57,15 @@ export default class Letters {
       this.update();
     });
 
-    // this.mat = new THREE.MeshPhysicalMaterial({
-    //   metalness: 0,
-    //   roughness: 0.05,
-    //   transparent: true,
-    //   transmission: 0,
-    //   opacity: 1,
-    // });
+    this.mat = new THREE.MeshPhysicalMaterial({
+      metalness: 0,
+      roughness: 0.05,
+      transmission: 0,
+    });
 
     // this.letters.receiveShadow = true;
     // // this.circleCut.geometry = this.geometryMetal;
-    // this.letters.material = this.mat;
+    this.letters.material = this.mat;
     // this.letters.position.y = -this.offsetY;
   }
 
@@ -77,7 +75,7 @@ export default class Letters {
     if (e > 0.9) {
       this.lerp.target = 1;
     } else {
-      this.lerp.target = 0.065;
+      this.lerp.target = 0.01;
     }
   }
 
@@ -91,8 +89,8 @@ export default class Letters {
     const lerpC =
       this.lerp.current > 0.999
         ? 1
-        : this.lerp.current < 0.0001
-        ? 0.065
+        : this.lerp.current < 0.001
+        ? 0.01
         : this.lerp.current;
     // this.letters.position.y = this.lerp.current * 0.2 - this.offsetY;
     this.letters.material.metalness = lerpC * 0.99;
