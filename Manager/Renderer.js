@@ -19,7 +19,7 @@ export default class Renderer {
       alpha: true,
     });
 
-    this.renderer.powerPreference = "high-performance";
+    this.renderer.powerPreference = 'high-performance';
     this.renderer.physicallyCorrectLights = true;
     this.renderer.outputEncoding = THREE.sRGBEncoding;
     this.renderer.toneMapping = THREE.ACESfilmicToneMapping;
@@ -42,20 +42,20 @@ export default class Renderer {
     this.renderer.render(this.scene, this.camera.perspectiveCamera);
 
     // second screen
-    this.renderer.setScissorTest(true);
-    this.renderer.setViewport(
-      this.sizes.width - this.sizes.width / 3,
-      this.sizes.height - this.sizes.height / 3,
-      this.sizes.width / 3,
-      this.sizes.height / 3
-    );
-    this.renderer.setScissor(
-      this.sizes.width - this.sizes.width / 3,
-      this.sizes.height - this.sizes.height / 3,
-      this.sizes.width / 3,
-      this.sizes.height / 3
-    );
-    this.renderer.render(this.scene, this.camera.perspectiveCameraMain);
-    this.renderer.setScissorTest(false);
+    // this.renderer.setScissorTest(true);
+    // this.renderer.setViewport(
+    //   this.sizes.width - this.sizes.width / 3,
+    //   this.sizes.height - this.sizes.height / 3,
+    //   this.sizes.width / 3,
+    //   this.sizes.height / 3
+    // );
+    // this.renderer.setScissor(
+    //   this.sizes.width - this.sizes.width / 3,
+    //   this.sizes.height - this.sizes.height / 3,
+    //   this.sizes.width / 3,
+    //   this.sizes.height / 3
+    // );
+    // this.renderer.render(this.scene, this.camera.perspectiveCameraMain);
+    // this.renderer.setScissorTest(false);
   }
 }

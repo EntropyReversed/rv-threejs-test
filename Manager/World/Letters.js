@@ -23,8 +23,10 @@ export default class Letters {
     this.circle.material.depthWrite = true
     this.letters.material.depthWrite = true
 
-    this.circle.material.castShadows = true
-    this.letters.material.castShadows = true
+    this.circle.castShadow = true
+    this.letters.castShadow = true
+    this.circle.receiveShadow = true
+    this.letters.receiveShadow = true
 
     // this.letters.children[0].material.opacity = 0;
     // this.letters.children[0].material.transparent = true;
@@ -75,7 +77,7 @@ export default class Letters {
     if (e > 0.9) {
       this.lerp.target = 1;
     } else {
-      this.lerp.target = 0.1;
+      this.lerp.target = 0.065;
     }
   }
 
@@ -90,7 +92,7 @@ export default class Letters {
       this.lerp.current > 0.999
         ? 1
         : this.lerp.current < 0.0001
-        ? 0.1
+        ? 0.065
         : this.lerp.current;
     // this.letters.position.y = this.lerp.current * 0.2 - this.offsetY;
     this.letters.material.metalness = lerpC * 0.99;
