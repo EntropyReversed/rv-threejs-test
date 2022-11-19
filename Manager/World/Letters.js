@@ -11,10 +11,20 @@ export default class Letters {
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
     this.offsetY = 0.14;
+    this.circle  = child.children[0];
     this.letters = child.children[1];
     this.animation = animation;
     this.mixer = new THREE.AnimationMixer(this.letters);
     new GradientCircle(child);
+
+    this.circle.morphTargetInfluences = [1,1]
+    this.letters.morphTargetInfluences = [1,1]
+
+    this.circle.material.depthWrite = true
+    this.letters.material.depthWrite = true
+
+    this.circle.material.castShadows = true
+    this.letters.material.castShadows = true
 
     // this.letters.children[0].material.opacity = 0;
     // this.letters.children[0].material.transparent = true;
@@ -34,7 +44,7 @@ export default class Letters {
     this.lerp = {
       current: 0,
       target: 0,
-      ease: 0.1,
+      ease: 0.05,
     };
 
     this.scrollTrigger.on('scroll', (e) => {
@@ -60,10 +70,12 @@ export default class Letters {
   }
 
   onScroll(e) {
+
+
     if (e > 0.9) {
       this.lerp.target = 1;
     } else {
-      this.lerp.target = 0;
+      this.lerp.target = 0.1;
     }
   }
 
@@ -78,7 +90,7 @@ export default class Letters {
       this.lerp.current > 0.999
         ? 1
         : this.lerp.current < 0.0001
-        ? 0
+        ? 0.1
         : this.lerp.current;
     // this.letters.position.y = this.lerp.current * 0.2 - this.offsetY;
     this.letters.material.metalness = lerpC * 0.99;
@@ -88,5 +100,8 @@ export default class Letters {
       this.colorEnd,
       lerpC
     );
+
+    this.circle.morphTargetInfluences = [lerpC,lerpC]
+    this.letters.morphTargetInfluences = [lerpC,lerpC]
   }
 }
