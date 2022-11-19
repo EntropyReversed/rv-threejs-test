@@ -79,11 +79,12 @@ export default class Letters {
     this.lerpCol.target = 0;
     this.lerp.target = 0;
 
-    if (e > 0.75 && e < 0.8) {
+    if (e > 0.75 ) {
       this.lerpCol.target = 1;
-    } else if (e >= 0.8) {
+    }
+    if (e > 0.8) {
+      this.lerpCol.target = 1;
       this.lerp.target = 1;
-      this.lerpCol.target = 1;
     }
   }
 
