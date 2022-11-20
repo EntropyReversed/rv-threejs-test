@@ -11,10 +11,10 @@ export default class Letters {
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
     this.offsetY = 0.065;
-    this.circle = child.children[0];
-    this.letters = child.children[1];
-    this.animation = animation;
-    this.mixer = new THREE.AnimationMixer(this.letters);
+    // this.circle = child.children[0];
+    // this.letters = child.children[1];
+    // this.animation = animation;
+    // this.mixer = new THREE.AnimationMixer(this.letters);
     new GradientCircle(child);
 
     // this.mat = new THREE.MeshPhysicalMaterial({
@@ -29,8 +29,8 @@ export default class Letters {
     //   transmission: 0,
     // });
 
-    this.circle.morphTargetInfluences = [0, 0];
-    this.letters.morphTargetInfluences = [0, 0];
+    // this.circle.morphTargetInfluences = [0, 0];
+    // this.letters.morphTargetInfluences = [0, 0];
 
     // this.circle.material.depthWrite = true;
     // this.circle.material.metalness = 0;
@@ -47,20 +47,20 @@ export default class Letters {
 
 
 
-    this.circle.material.needsUpdate = true;
-    this.letters.material.needsUpdate = true;
+    // this.circle.material.needsUpdate = true;
+    // this.letters.material.needsUpdate = true;
 
-    this.colorStart = new THREE.Color(0xffffff);
-    this.colorEnd = new THREE.Color(0x000000);
-    this.color = new THREE.Color();
+    // this.colorStart = new THREE.Color(0xffffff);
+    // this.colorEnd = new THREE.Color(0x000000);
+    // this.color = new THREE.Color();
 
-    this.letters.material.metalness = 1;
-    this.letters.material.roughness = 0.05;
-    this.circle.material.roughness = 0.05;
-    this.letters.material.color = this.colorEnd;
-    this.letters.material.needsUpdate = true;
+    // this.letters.material.metalness = 1;
+    // this.letters.material.roughness = 0.05;
+    // this.circle.material.roughness = 0.05;
+    // this.letters.material.color = this.colorEnd;
+    // this.letters.material.needsUpdate = true;
 
-    console.log(this.circle.material, this.letters.material.metalness)
+    // console.log(this.circle.material, this.letters.material.metalness)
 
     // console.log(this.animation);
     // this.clip = THREE.Animation.Clip.findByName(this.animations, "Key.001Action");
@@ -127,14 +127,14 @@ export default class Letters {
     //   this.lerpCol.current
     // );
 
-    const lerpC =
-      this.lerp.current > 0.999
-        ? 1
-        : this.lerp.current < 0.001
-        ? 0
-        : this.lerp.current;
+    // const lerpC =
+    //   this.lerp.current > 0.999
+    //     ? 1
+    //     : this.lerp.current < 0.001
+    //     ? 0
+    //     : this.lerp.current;
 
-    this.circle.morphTargetInfluences = [lerpC, 0];
-    this.letters.morphTargetInfluences = [lerpC, 0];
+    // this.circle.morphTargetInfluences = [lerpC, 0];
+    // this.letters.morphTargetInfluences = [lerpC, 0];
   }
 }

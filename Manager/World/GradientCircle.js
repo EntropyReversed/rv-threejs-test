@@ -13,7 +13,7 @@ export default class GradientCircle {
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
     this.masterTimeline = this.manager.masterTimeline;
-    // this.circleCut = circleCut;
+    this.circleCut = circleCut;
     this.scale = 1;
     this.maxScale = 7.2;
     this.timeline = GSAP.timeline();
@@ -131,7 +131,7 @@ export default class GradientCircle {
       this.u_lerp.ease
     );
 
-    // this.materialGrad.uniforms.progress.value = this.u_lerp.current;
-    // this.setCircle(this.lerp.current * this.maxScale);
+    this.materialGrad.uniforms.progress.value = this.u_lerp.current;
+    this.setCircle(this.lerp.current * this.maxScale);
   }
 }

@@ -26,11 +26,11 @@ export default class Model {
   }
 
   setModel() {
+    console.log(this.model);
     this.actualModel.children.forEach((child) => {
       child.castShadow = true;
       child.recieveShadow = true;
 
-      console.log(child);
       // if (child.name === 'letters') {
       this.letters = new Letters(child, this.model.animations);
       // }

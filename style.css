@@ -56,6 +56,11 @@ footer {
   background: #222222;
 }
 
+.scene canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 .scene:before {
   position: absolute;
   content: '';
