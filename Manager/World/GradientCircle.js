@@ -67,6 +67,7 @@ export default class GradientCircle {
     // Texture needs to be assigned here so it's not cloned
     this.materialGrad.uniforms.u_texture.value = this.texture;
 
+    this.circle.castShadow = false;
     this.circle.receiveShadow = true;
     this.circle.geometry = this.geometry;
     this.circle.material = this.materialGrad;
