@@ -5,7 +5,7 @@ import Shader from './Shader';
 import GSAP from 'gsap';
 
 export default class GradientCircle {
-  constructor(circleCut) {
+  constructor() {
     this.manager = new Manager();
     this.sizes = this.manager.sizes;
     this.scene = this.manager.scene;
@@ -13,7 +13,6 @@ export default class GradientCircle {
     this.scrollTrigger = this.manager.scrollTrigger;
     this.time = this.manager.time;
     this.masterTimeline = this.manager.masterTimeline;
-    this.circleCut = circleCut;
     this.scale = 1;
     this.maxScale = 3;
     this.timeline = GSAP.timeline();
@@ -73,15 +72,8 @@ export default class GradientCircle {
     this.circle.material = this.materialGrad;
     this.circle.depthWrite = true;
 
-    // this.circle.rotation.set(-Math.PI / 2, 0, 0);
     this.circle.position.y = 0.001;
     this.scene.add(this.circle);
-
-    // console.log(this.circle)
-
-    // this.timeline.to(this.circle.scale, { scale: 0.5}, 0);
-
-    // this.masterTimeline.add(this.timeline);
   }
 
   onScroll(e) {

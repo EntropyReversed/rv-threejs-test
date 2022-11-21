@@ -28,8 +28,12 @@ export default class Manager {
     this.renderer = new Renderer();
     this.resources = new Resources(assets);
     this.masterTimeline = GSAP.timeline();
-    this.scrollTrigger = new TriggerScroll();
     this.world = new World();
+
+
+    
+
+
     this.stats = new Stats();
     document.body.appendChild( this.stats.dom );
 
@@ -42,9 +46,6 @@ export default class Manager {
     });
   }
 
-  setParent(parent) {
-    this.parent = parent;
-  }
 
   resize() {
     this.camera.resize();

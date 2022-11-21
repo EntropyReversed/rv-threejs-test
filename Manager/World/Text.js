@@ -8,12 +8,12 @@ export default class Text {
     this.scrollTrigger = this.manager.scrollTrigger;
     this.text = this.manager.parent.querySelector('h2');
 
-    this.scrollTrigger.on('scroll', (e) => {
-      this.onScroll(e);
-    });
+    // this.scrollTrigger.on('scroll', (e) => {
+    //   this.onScroll(e);
+    // });
   }
 
-  onScroll(e) {
-    e > 0.75 ? this.text.classList.add('in') : this.text.classList.remove('in');
-  }
+  // onScroll(e) {
+  //   e > 0.75 ? this.text.classList.add('in') : this.text.classList.remove('in');
+  // }
 }

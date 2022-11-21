@@ -7,7 +7,6 @@ export default class TriggerScroll extends EventEmitter {
   constructor() {
     super();
     this.manager = new Manager();
-    this.parent = this.manager.parent;
     this.masterTimeline = this.manager.masterTimeline;
     GSAP.registerPlugin(ScrollTrigger);
     this.createTrigger();
@@ -18,11 +17,8 @@ export default class TriggerScroll extends EventEmitter {
       scrollTrigger: {
         trigger: '.scene-wrap',
         start: 'top top',
-        markers: true,
+        scrub: 2,
         end: 'bottom bottom',
-        onUpdate: (self) => {
-          this.emit('scroll', self.progress);
-        },
       },
     }).add(this.masterTimeline);
   }
