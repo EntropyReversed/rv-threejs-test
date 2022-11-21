@@ -7,7 +7,7 @@ export default [
   {
     name: 'model',
     type: 'glbModel',
-    path: '/Public/animationTest3.glb',
+    path: '/Public/rvModel.glb',
     // path: '../../src/rvModel2.glb?url',
   },
   {
