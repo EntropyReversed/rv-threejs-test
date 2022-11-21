@@ -22,10 +22,11 @@ export default class Camera {
       0.5,
       200
     );
-
+    this.perspectiveCamera.position.z = 5;
+    this.perspectiveCamera.lookAt(0, 0, 0);
     this.scene.add(this.perspectiveCamera);
-    // this.helper = new THREE.CameraHelper(this.perspectiveCamera);
-    // this.scene.add(this.helper);
+    this.helper = new THREE.CameraHelper(this.perspectiveCamera);
+    this.scene.add(this.helper);
   }
 
   createPerspectiveCameraMain() {

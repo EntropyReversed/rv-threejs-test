@@ -14,39 +14,16 @@ export default class TriggerScroll extends EventEmitter {
   }
 
   createTrigger() {
-    this.scrollTrigger = ScrollTrigger.create({
-      trigger: '.scene-wrap',
-      start: 'top top',
-      // markers: true,
-      end: 'bottom bottom',
-      // scrub: true,
-      animation: this.masterTimeline,
-      onUpdate: (self) => {
-        // this.parent.style.setProperty(
-        //   '--scroll',
-        //   Math.round(self.progress * 100) / 100
-        // );
-        this.emit('scroll', self.progress);
+    GSAP.timeline({
+      scrollTrigger: {
+        trigger: '.scene-wrap',
+        start: 'top top',
+        markers: true,
+        end: 'bottom bottom',
+        onUpdate: (self) => {
+          this.emit('scroll', self.progress);
+        },
       },
-    });
-
-    // GSAP.timeline({
-    //   scrollTrigger: {
-    //     trigger: ".scene-wrap",
-    //     start: 'top top',
-    //     markers: true,
-    //     end: 'bottom bottom',
-    //     onEnter: () => console.log("animation-start"),
-    //     onLeave: () => console.log("animation-end"),
-    //     onUpdate: (self) => {
-    //       this.parent.style.setProperty(
-    //         '--scroll',
-    //         Math.round(self.progress * 100) / 100
-    //       );
-    //       this.emit('scroll', self.progress);
-    //     },
-    //   }
-    // }).add(this.masterTimeline);
+    }).add(this.masterTimeline);
   }
-  
 }

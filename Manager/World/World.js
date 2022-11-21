@@ -1,8 +1,6 @@
-import * as THREE from 'three';
 import Manager from '../Manager';
 import Model from './Model';
 import Enviroment from './Enviroment';
-import Controls from './Controls';
 import Text from './Text';
 
 export default class World {
@@ -14,16 +12,12 @@ export default class World {
     this.resources.on('ready', () => {
       this.enviroment = new Enviroment();
       this.model = new Model();
-      this.controls = new Controls();
     });
   }
 
   update() {
     if (this.model) {
       this.model.update();
-    }
-    if (this.controls) {
-      this.controls.update();
     }
   }
 }

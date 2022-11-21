@@ -15,7 +15,7 @@ export default class GradientCircle {
     this.masterTimeline = this.manager.masterTimeline;
     this.circleCut = circleCut;
     this.scale = 1;
-    this.maxScale = 7.2;
+    this.maxScale = 3;
     this.timeline = GSAP.timeline();
 
     this.lerp = {
@@ -73,7 +73,7 @@ export default class GradientCircle {
     this.circle.material = this.materialGrad;
     this.circle.depthWrite = true;
 
-    this.circle.rotation.set(-Math.PI / 2, 0, 0);
+    // this.circle.rotation.set(-Math.PI / 2, 0, 0);
     this.circle.position.y = 0.001;
     this.scene.add(this.circle);
 
