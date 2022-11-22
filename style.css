@@ -67,7 +67,7 @@ footer {
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
   text-align: center;
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 400;
   /* opacity: 0; */
   font-family: sans-serif;
@@ -97,7 +97,7 @@ footer {
 }
 
 .scene-wrap {
-  height: 700vh;
+  height: 900vh;
 }
 
 .scene-wrap .scene svg {

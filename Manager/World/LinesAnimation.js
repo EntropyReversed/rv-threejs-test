@@ -1,7 +1,10 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
 
-const circleMaterial = new THREE.MeshBasicMaterial();
+const circleMaterial = new THREE.MeshBasicMaterial({
+  transparent: true,
+  depthWrite: false,
+});
 const createCircle = (r, width, pos, c = 'rgb(40,40,40)') => {
   const geometry = new THREE.RingGeometry(r, r + width, 100, null, 0, 0);
   const material = circleMaterial.clone();
@@ -44,6 +47,7 @@ const createLine = (w, h, pos, ang, origin, c = 'rgb(40,40,40)') => {
   geometry.translate(...offset);
   const material = new THREE.MeshBasicMaterial({
     color: new THREE.Color(c),
+    transparent: true,
   });
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(...position);
@@ -86,6 +90,7 @@ export default class LinesAnimation {
   constructor(scene) {
     this.scene = scene;
     this.group = new THREE.Group();
+    this.group.name = 'Lines';
     this.r = 2.8;
     this.w = 0.02;
 
@@ -126,7 +131,7 @@ export default class LinesAnimation {
     this.lineMid = new AnimatableLine(
       12,
       this.w,
-      new THREE.Vector3(0, 0, -0.001),
+      new THREE.Vector3(0, 0, -0.002),
       halfPI,
       'btm'
     );
@@ -212,7 +217,7 @@ export default class LinesAnimation {
     this.lineD1 = new AnimatableLine(
       18,
       this.w,
-      new THREE.Vector3(0, 0, -0.001),
+      new THREE.Vector3(0, 0, -0.0015),
       halfPI * 0.5,
       ''
     );
@@ -247,7 +252,7 @@ export default class LinesAnimation {
     );
     this.circleMain = new AnimatableCircle(
       this.r - this.g,
-      this.w * 1.5,
+      this.w * 2,
       new THREE.Vector3(0, 0, 0),
       'rgb(255,255,255)'
     );
@@ -259,32 +264,32 @@ export default class LinesAnimation {
     this.circleRight = new AnimatableCircle(
       this.r,
       this.w,
-      new THREE.Vector3(this.r * 2 + this.w, 0, 0.001)
+      new THREE.Vector3(this.r * 2 + this.w, 0, 0.002)
     );
     this.circleTop = new AnimatableCircle(
       this.r,
       this.w,
-      new THREE.Vector3(0, this.r * 2 + this.w, 0)
+      new THREE.Vector3(0, this.r * 2 + this.w, 0.0025)
     );
     this.circleTopS = new AnimatableCircle(
       this.r / 2,
       this.w,
-      new THREE.Vector3(this.r / 2, this.r * 1.5 + this.w, 0)
+      new THREE.Vector3(this.r / 2, this.r * 1.5 + this.w, 0.0028)
     );
     this.circleTopXS = new AnimatableCircle(
       this.r / 4,
       this.w,
-      new THREE.Vector3(this.r / 2, this.r * 1.25 + this.w, 0)
+      new THREE.Vector3(this.r / 2, this.r * 1.25 + this.w, 0.003)
     );
     this.circleBtm = new AnimatableCircle(
       this.r,
       this.w,
-      new THREE.Vector3(0, this.r * -2 - this.w, 0)
+      new THREE.Vector3(0, this.r * -2 - this.w, 0.0031)
     );
     this.circleBtmS = new AnimatableCircle(
       this.r / 2,
       this.w,
-      new THREE.Vector3(this.r / 2, this.r * -1.5 - this.w, 0)
+      new THREE.Vector3(this.r / 2, this.r * -1.5 - this.w, 0.0035)
     );
 
     this.group.add(this.circleMid.circle);
@@ -328,7 +333,7 @@ export default class LinesAnimation {
       [this.circleTopS, '<+0.15'],
       [this.circleTopXS, '<+0.15'],
       [this.circleTop, '<-0.15'],
-      [this.circleLeft, '<-0.3'],
+      [this.circleLeft, '<-0.2'],
       [this.circleBtm, '<+0.1'],
       [this.circleBtmS, '<+0.15'],
       [this.circleMain, '<+1.2'],
@@ -349,6 +354,14 @@ export default class LinesAnimation {
         step[1]
       );
     });
+
+    steps.forEach((step, i) => {
+      this.circlesTimeline.to(
+        step[0].circle.material,
+        { opacity: 0.3, duration: dur / 2 },
+        '<'
+      );
+    });
   }
 
   createCirclesReverseTimeline() {
@@ -363,6 +376,10 @@ export default class LinesAnimation {
       [this.circleBtmS, '<'],
     ];
     const dur = 0.4;
+
+    this.circlesTimelineReverse.to(this.circleMain.circle.material, {
+      opacity: 1,
+    });
 
     steps.forEach((step) => {
       this.circlesTimelineReverse.to(
@@ -403,6 +420,14 @@ export default class LinesAnimation {
         { x: 0 },
         { x: 1, duration: dur },
         step[1]
+      );
+    });
+
+    steps.forEach((step) => {
+      this.linesTimeline.to(
+        step[0].line.material,
+        { opacity: 0.3, duration: dur / 2 },
+        '<'
       );
     });
   }
