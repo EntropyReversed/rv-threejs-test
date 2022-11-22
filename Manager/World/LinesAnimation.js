@@ -94,15 +94,20 @@ export default class LinesAnimation {
     this.color = 'rgb(60,60,60)';
 
     this.timeline = gsap.timeline();
-    this.circlesTimeline = gsap.timeline();
+    this.circlesTimeline = this.createCirclesTimeline.bind(this);
     this.linesTimeline = gsap.timeline();
+
+    // this.timelineReverse = gsap.timeline()
+    // this.circlesTimelineReverse = this.createCirclesTimeline.bind(this);
+
+    // this.timelineReverse.add(this.circlesTimelineReverse)
 
     this.timeline.add(this.circlesTimeline).add(this.linesTimeline);
     this.generateCircles();
     this.generateLines();
 
     this.scene.add(this.group);
-    this.createCirclesTimeline();
+    // this.createCirclesTimeline();
     this.createLinesTimeline();
   }
 
@@ -185,7 +190,11 @@ export default class LinesAnimation {
     this.lineMidB = new AnimatableLine(
       18,
       this.w,
-      new THREE.Vector3(0, (this.r * 0.5 + this.w * 0.5 - this.g) * -1 + 0.1, -0.001),
+      new THREE.Vector3(
+        0,
+        (this.r * 0.5 + this.w * 0.5 - this.g) * -1 + 0.1,
+        -0.001
+      ),
       0,
       'right'
     );
@@ -283,7 +292,8 @@ export default class LinesAnimation {
 
   createCirclesTimeline() {
     const dur = 0.8;
-    this.circlesTimeline
+    const timeline = gsap
+      .timeline()
       .fromTo(
         this.group.position,
         { x: -3, y: -2, z: 1 },
@@ -406,6 +416,8 @@ export default class LinesAnimation {
         },
         '<+1.5'
       );
+
+    return timeline;
   }
 
   createLinesTimeline() {
