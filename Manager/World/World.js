@@ -30,10 +30,4 @@ export default class World {
       .add(modelTimeline2, '-=0.8');
     this.scrollTrigger = new TriggerScroll();
   }
-
-  update() {
-    if (this.model) {
-      this.model.update();
-    }
-  }
 }

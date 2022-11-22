@@ -54,7 +54,6 @@ export default class Manager {
 
   update() {
     this.camera.update();
-    this.world.update();
     this.renderer.update();
     this.stats.update();
   }

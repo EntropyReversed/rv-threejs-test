@@ -85,6 +85,4 @@ export default class Model {
   }
 
   resize() {}
-
-  update() {}
 }
