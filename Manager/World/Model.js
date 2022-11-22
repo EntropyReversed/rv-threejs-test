@@ -66,7 +66,7 @@ export default class Model {
         this.group.position,
         { z: 12, x: -0.5, duration: 0.2, ease: 'power3.in' },
         '<'
-      );
+      ).to(this.group.scale, { x: 3, y: 3, duration: 0.2 }, "<");
 
     this.timeline2 = gsap
       .timeline()
