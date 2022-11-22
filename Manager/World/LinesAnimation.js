@@ -96,8 +96,13 @@ export default class LinesAnimation {
     this.circlesTimeline = gsap.timeline();
     this.linesTimeline = gsap.timeline();
 
+    this.reversedTimeline = gsap.timeline();
     this.circlesTimelineReverse = gsap.timeline();
     this.linesTimelineReverse = gsap.timeline();
+
+    this.reversedTimeline
+      .add(this.linesTimelineReverse)
+      .add(this.circlesTimelineReverse, '<+0.2');
 
     this.timeline
       .add(this.groupTimeline)
@@ -109,6 +114,7 @@ export default class LinesAnimation {
 
     this.scene.add(this.group);
     this.createCirclesReverseTimeline();
+    this.createLinesReverseTimeline();
 
     this.createGroupTimeline();
     this.createCirclesTimeline();
@@ -394,13 +400,35 @@ export default class LinesAnimation {
     steps.forEach((step) => {
       this.linesTimeline.fromTo(
         step[0].line.scale,
-        {
-          x: 0,
-        },
-        {
-          x: 1,
-          duration: dur,
-        },
+        { x: 0 },
+        { x: 1, duration: dur },
+        step[1]
+      );
+    });
+  }
+
+  createLinesReverseTimeline() {
+    const steps = [
+      [this.lineMid, ''],
+      [this.lineD1, '<'],
+      [this.lineD2, '<'],
+      [this.lineLeft, '<+0.25'],
+      [this.lineTop, '<'],
+      [this.lineTopI, '<'],
+      [this.lineBtmI, '<'],
+      [this.lineLeftI, '<'],
+      [this.lineRightI, '<'],
+      [this.lineBtm, '<'],
+      [this.lineRight, '<'],
+      [this.lineMidT, '<+0.1'],
+      [this.lineMidB, '<'],
+    ];
+    const dur = 0.6;
+
+    steps.forEach((step) => {
+      this.linesTimelineReverse.to(
+        step[0].line.scale,
+        { x: 0, duration: dur },
         step[1]
       );
     });

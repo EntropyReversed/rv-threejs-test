@@ -3,7 +3,6 @@ import gsap from 'gsap';
 import Manager from '../Manager';
 import GradientCircle from './GradientCircle';
 import LinesAnimation from './LinesAnimation';
-import Letters from './Letters';
 
 export default class Model {
   constructor() {
@@ -11,7 +10,7 @@ export default class Model {
     this.scene = this.manager.scene;
     this.resources = this.manager.resources;
     this.model = this.resources.items.model;
-    // this.gradientCircle = new GradientCircle();
+    this.gradientCircle = new GradientCircle();
     this.lines = new LinesAnimation(this.scene);
 
     this.setOverlay();
@@ -81,7 +80,7 @@ export default class Model {
         { x: 0, z: 0.1, duration: 0.4, ease: 'power3.out' },
         '<'
       )
-      .to(this.overlay.material, { opacity: 0.4 }, '<');
+      // .to(this.overlay.material, { opacity: 0.4 }, '<');
   }
 
   resize() {}

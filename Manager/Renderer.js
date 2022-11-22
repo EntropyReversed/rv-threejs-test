@@ -22,8 +22,8 @@ export default class Renderer {
     this.renderer.powerPreference = 'high-performance';
     this.renderer.physicallyCorrectLights = true;
     this.renderer.outputEncoding = THREE.sRGBEncoding;
-    this.renderer.toneMapping = THREE.ACESfilmicToneMapping;
-    // this.renderer.toneMapping = THREE.CineonToneMapping;
+    // this.renderer.toneMapping = THREE.ACESfilmicToneMapping;
+    this.renderer.toneMapping = THREE.CineonToneMapping;
     this.renderer.toneMappingExposure = 2;
     this.renderer.gammaOutput = true;
     this.renderer.shadowMap.enabled = true;

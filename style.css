@@ -7,7 +7,7 @@
 body {
   width: 100vw;
   overflow-x: hidden;
-  background-color: #222222;
+  background-color: #131313;
   color: white;
 }
 
@@ -53,25 +53,12 @@ footer {
   top: 0;
   width: 100vw;
   height: 100vh;
-  background: #222222;
+  background: #131313;
 }
 
 .scene canvas {
   width: 100% !important;
   height: 100% !important;
-}
-
-.scene:before {
-  position: absolute;
-  content: '';
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) scaleX(var(--scroll));
-  height: 2px;
-  width: 100%;
-  transition: all 0.2s linear;
-  background: white;
-  opacity: calc(var(--scroll) * 0.5);
 }
 
 .scene h2 {
@@ -87,8 +74,6 @@ footer {
   transition: 0.3s ease-in-out;
   user-select: none;
   pointer-events: none;
-
-
 }
 
 .scene h2 div {
@@ -112,8 +97,7 @@ footer {
 }
 
 .scene-wrap {
-  --scroll: 0;
-  height: 600vh;
+  height: 700vh;
 }
 
 .scene-wrap .scene svg {

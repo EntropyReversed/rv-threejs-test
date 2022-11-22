@@ -21,7 +21,7 @@ export default class World {
   setUpTimeline() {
     const linesTimeline = this.model.lines.timeline;
 
-    const linesReverse = this.model.lines.circlesTimelineReverse;
+    const linesReverse = this.model.lines.reversedTimeline;
 
     const modelTimeline1 = this.model.timeline;
     const modelTimeline2 = this.model.timeline2;
