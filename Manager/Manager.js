@@ -5,7 +5,7 @@ import Renderer from './Renderer';
 import Resources from './Utils/Resources';
 import World from './World/World';
 import assets from './Utils/assets';
-import GSAP from 'gsap';
+import gsap from 'gsap';
 import Stats from 'three/addons/libs/stats.module.js';
 
 export default class Manager {
@@ -23,7 +23,7 @@ export default class Manager {
     this.camera = new Camera();
     this.renderer = new Renderer();
     this.resources = new Resources(assets);
-    this.masterTimeline = GSAP.timeline();
+    this.masterTimeline = gsap.timeline();
     this.world = new World();
 
     this.stats = new Stats();
@@ -34,6 +34,18 @@ export default class Manager {
     };
     window.addEventListener('resize', () => {
       this.resize();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+
+      this.world.enviroment.sunLight.position.x = gsap.utils.mapRange(
+        0,
+        this.sizes.width,
+        -1,
+        1,
+        e.clientX
+      );
+
     });
 
     this.update();

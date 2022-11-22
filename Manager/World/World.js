@@ -10,9 +10,9 @@ export default class World {
     this.masterTimeline = this.manager.masterTimeline;
     this.resources = this.manager.resources;
     this.firstText = new Text('.secondTitle', true);
+    this.enviroment = new Enviroment();
 
     this.resources.on('ready', () => {
-      this.enviroment = new Enviroment();
       this.model = new Model();
       this.setUpTimeline();
     });
