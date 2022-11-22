@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import GSAP from 'gsap';
+import gsap from 'gsap';
 import Manager from '../Manager';
 import GradientCircle from './GradientCircle';
 import LinesAnimation from './LinesAnimation';
@@ -15,18 +15,20 @@ export default class Model {
     this.lines = new LinesAnimation(this.scene);
 
     this.setModel();
+    this.createTimeline();
 
     window.scrollTo(0, 0);
   }
 
   setModel() {
     this.group = this.model.scene.children[0];
-    this.group.scale.set(0.8, 0.8, 0.8);
+    this.group.scale.set(2.6, 2.6, 2.6);
+    this.group.position.set(0, 0, 0.01);
 
     this.circle = this.group.children[0];
     this.circle.material.metalness = 0;
     this.circle.material.color = new THREE.Color('rgb(255,255,255)');
-    this.circle.material.opacity = 0;
+    // this.circle.material.opacity = 0.3;
 
     this.lettersTop = this.group.children[1];
     this.lettersTop.material.transparent = true;
@@ -37,6 +39,17 @@ export default class Model {
     this.letters.material.opacity = 0;
 
     this.scene.add(this.group);
+  }
+
+  createTimeline() {
+    this.timeline = gsap
+      .timeline()
+      .to(this.circle.material, { opacity: 0.3 })
+      .to(this.group.scale, { x: 2.4, y: 2.4, duration: 1 }, '<+0.3')
+      .to(this.group.scale, { x: 2.6, y: 2.6, duration: 0.2 })
+      .to(this.circle.material, { opacity: 1 }, '<')
+      .to(this.group.position, { z: 12, x: -0.5, duration: 0.2 }, '<')
+      .to(this.group.rotation, { z: 0.6, duration: 0.2 }, '<');
   }
 
   resize() {}
