@@ -96,6 +96,9 @@ export default class LinesAnimation {
     this.circlesTimeline = gsap.timeline();
     this.linesTimeline = gsap.timeline();
 
+    this.circlesTimelineReverse = gsap.timeline();
+    this.linesTimelineReverse = gsap.timeline();
+
     this.timeline
       .add(this.groupTimeline)
       .add(this.circlesTimeline, '<')
@@ -105,6 +108,8 @@ export default class LinesAnimation {
     this.generateLines();
 
     this.scene.add(this.group);
+    this.createCirclesReverseTimeline();
+
     this.createGroupTimeline();
     this.createCirclesTimeline();
     this.createLinesTimeline();
@@ -311,136 +316,93 @@ export default class LinesAnimation {
   }
 
   createCirclesTimeline() {
+    const steps = [
+      [this.circleRight, ''],
+      [this.circleMid, '<+0.1'],
+      [this.circleTopS, '<+0.15'],
+      [this.circleTopXS, '<+0.15'],
+      [this.circleTop, '<-0.15'],
+      [this.circleLeft, '<-0.3'],
+      [this.circleBtm, '<+0.1'],
+      [this.circleBtmS, '<+0.15'],
+      [this.circleMain, '<+1.2'],
+    ];
     const dur = 0.8;
-    this.circlesTimeline
-      .to(this.circleRight.obj, {
-        progress: Math.PI * 2,
-        duration: dur,
-        onUpdate: () => {
-          updateCircle(this.circleRight.circle, this.circleRight.obj.progress);
-        },
-      })
-      .to(
-        this.circleMid.obj,
+
+    steps.forEach((step) => {
+      const twoPI = Math.PI * 2;
+      this.circlesTimeline.to(
+        step[0].obj,
         {
-          progress: Math.PI * 2,
+          progress: twoPI,
           duration: dur,
           onUpdate: () => {
-            updateCircle(this.circleMid.circle, this.circleMid.obj.progress);
+            updateCircle(step[0].circle, step[0].obj.progress);
           },
         },
-        '<+0.1'
-      )
-      .to(
-        this.circleTopS.obj,
-        {
-          progress: Math.PI * 2,
-          duration: dur,
-          onUpdate: () => {
-            updateCircle(this.circleTopS.circle, this.circleTopS.obj.progress);
-          },
-        },
-        '<+0.15'
-      )
-      .to(
-        this.circleTopXS.obj,
-        {
-          progress: Math.PI * 2,
-          duration: dur,
-          onUpdate: () => {
-            updateCircle(
-              this.circleTopXS.circle,
-              this.circleTopXS.obj.progress
-            );
-          },
-        },
-        '<+0.15'
-      )
-      .to(
-        this.circleTop.obj,
-        {
-          progress: Math.PI * 2,
-          duration: dur,
-          onUpdate: () => {
-            updateCircle(this.circleTop.circle, this.circleTop.obj.progress);
-          },
-        },
-        '<-0.15'
-      )
-      .to(
-        this.circleLeft.obj,
-        {
-          progress: Math.PI * 2,
-          duration: dur,
-          onUpdate: () => {
-            updateCircle(this.circleLeft.circle, this.circleLeft.obj.progress);
-          },
-        },
-        '<-0.3'
-      )
-      .to(
-        this.circleBtm.obj,
-        {
-          progress: Math.PI * 2,
-          duration: dur,
-          onUpdate: () => {
-            updateCircle(this.circleBtm.circle, this.circleBtm.obj.progress);
-          },
-        },
-        '<+0.1'
-      )
-      .to(
-        this.circleBtmS.obj,
-        {
-          progress: Math.PI * 2,
-          duration: dur,
-          onUpdate: () => {
-            updateCircle(this.circleBtmS.circle, this.circleBtmS.obj.progress);
-          },
-        },
-        '<+0.15'
-      )
-      .to(
-        this.circleMain.obj,
-        {
-          progress: Math.PI * 2,
-          duration: dur,
-          onUpdate: () => {
-            updateCircle(this.circleMain.circle, this.circleMain.obj.progress);
-          },
-        },
-        '<+1.5'
+        step[1]
       );
+    });
+  }
+
+  createCirclesReverseTimeline() {
+    const steps = [
+      [this.circleTopXS, ''],
+      [this.circleMid, '<'],
+      [this.circleTopS, '<'],
+      [this.circleRight, '<'],
+      [this.circleTop, '<'],
+      [this.circleLeft, '<'],
+      [this.circleBtm, '<'],
+      [this.circleBtmS, '<'],
+    ];
+    const dur = 0.4;
+
+    steps.forEach((step) => {
+      this.circlesTimelineReverse.to(
+        step[0].obj,
+        {
+          progress: 0,
+          duration: dur,
+          onUpdate: () => {
+            updateCircle(step[0].circle, step[0].obj.progress);
+          },
+        },
+        step[1]
+      );
+    });
   }
 
   createLinesTimeline() {
-    this.linesTimeline
-      .fromTo(this.lineRight.line.scale, { x: 0 }, { x: 1, duration: 1 })
-      .fromTo(this.lineLeft.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<')
-      .fromTo(this.lineTop.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<')
-      .fromTo(
-        this.lineMidT.line.scale,
-        { x: 0 },
-        { x: 1, duration: 1 },
-        '<+0.2'
-      )
-      .fromTo(this.lineTopI.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<')
-      .fromTo(this.lineBtmI.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<')
-      .fromTo(this.lineLeftI.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<')
-      .fromTo(this.lineRightI.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<')
-      .fromTo(
-        this.lineMidB.line.scale,
-        { x: 0 },
-        { x: 1, duration: 1 },
-        '<+0.2'
-      )
-      .fromTo(this.lineBtm.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<')
-      .fromTo(this.lineMid.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<+0.5')
-      .fromTo(this.lineD1.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<')
-      .fromTo(this.lineD2.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<');
-  }
+    const steps = [
+      [this.lineRight, ''],
+      [this.lineLeft, '<'],
+      [this.lineTop, '<'],
+      [this.lineMidT, '<+0.2'],
+      [this.lineTopI, '<'],
+      [this.lineBtmI, '<'],
+      [this.lineLeftI, '<'],
+      [this.lineRightI, '<'],
+      [this.lineMidB, '<+0.2'],
+      [this.lineBtm, '<'],
+      [this.lineMid, '<+0.5'],
+      [this.lineD1, '<'],
+      [this.lineD2, '<'],
+    ];
+    const dur = 1;
 
-  getTimeline() {
-    return this.timeline;
+    steps.forEach((step) => {
+      this.linesTimeline.fromTo(
+        step[0].line.scale,
+        {
+          x: 0,
+        },
+        {
+          x: 1,
+          duration: dur,
+        },
+        step[1]
+      );
+    });
   }
 }

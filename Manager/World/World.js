@@ -19,7 +19,9 @@ export default class World {
   }
 
   setUpTimeline() {
-    const linesTimeline = this.model.lines.getTimeline();
+    const linesTimeline = this.model.lines.timeline;
+
+    const linesReverse = this.model.lines.circlesTimelineReverse;
 
     const modelTimeline1 = this.model.timeline;
     const modelTimeline2 = this.model.timeline2;
@@ -27,8 +29,9 @@ export default class World {
     this.masterTimeline
       .add(modelTimeline1)
       .add(linesTimeline, '-=0.45')
-      .add(modelTimeline2, '-=1');
-      
+      .add(modelTimeline2, '-=1')
+      .add(linesReverse);
+
     this.scrollTrigger = new TriggerScroll();
   }
 }
