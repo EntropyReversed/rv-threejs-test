@@ -5,7 +5,6 @@ import Manager from '../Manager';
 export default class TriggerScroll {
   constructor() {
     this.manager = new Manager();
-    this.masterTimeline = this.manager.masterTimeline;
     gsap.registerPlugin(ScrollTrigger);
     this.createTrigger();
   }
@@ -20,6 +19,6 @@ export default class TriggerScroll {
           end: 'bottom bottom',
         },
       })
-      .add(this.masterTimeline);
+      .add(this.manager.masterTimeline);
   }
 }
