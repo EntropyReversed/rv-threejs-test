@@ -33,7 +33,6 @@ export default {
     varying vec2 vUv;
     uniform sampler2D u_texture;
     uniform float progress;
-    uniform float warp;
 
     float circle(in vec2 _st, in float _radius){
       vec2 dist = _st-vec2(0.5);
@@ -56,9 +55,9 @@ export default {
       
       vec3 circleMask = vec3(circle(uv,1.0));
 
-      uv.x += (sin(uv.y*(10.0 * warp + 1.))/20.0);
+      uv.x += (sin(uv.y*10.)/20.0);
 
-      vec3 alphaMask = circleMask * smoothstep(progress,progress+(warp * 0.15),uv.x);
+      vec3 alphaMask = circleMask * smoothstep(progress,progress+0.05,uv.x);
 
       // ------------------------------
 

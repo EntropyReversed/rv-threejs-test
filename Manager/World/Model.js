@@ -13,7 +13,7 @@ export default class Model {
     this.setModel();
 
     this.lines = new LinesAnimation(this.scene);
-    this.gradientCircle = new GradientCircle();
+    this.gradientCircle = new GradientCircle(this.lines, this);
 
     // this.setOverlay();
     this.createTimeline();
@@ -39,18 +39,40 @@ export default class Model {
     this.group.position.set(0, 0, 0.01);
 
     this.circle = this.group.children[0];
+    this.circle.material.transparent = true;
     this.circle.material.metalness = 0;
     this.circle.material.color = new THREE.Color('rgb(255,255,255)');
+    this.circle.material.morphTargets = true;
+    this.circle.material.side = THREE.DoubleSide;
 
     this.lettersTop = this.group.children[1];
     this.lettersTop.material.transparent = true;
     this.lettersTop.material.opacity = 0;
+    this.lettersTop.material.color = new THREE.Color('rgb(255,255,255)');
+    this.lettersTop.material.morphTargets = true;
+    this.lettersTop.material.side = THREE.DoubleSide;
 
     this.letters = this.group.children[2];
     this.letters.material.transparent = true;
     this.letters.material.opacity = 0;
+    this.letters.material.color = new THREE.Color('rgb(255,255,255)');
+    this.letters.material.morphTargets = true;
+    this.letters.material.side = THREE.DoubleSide;
+
+
+    this.lettersTop.morphTargetInfluences = [0.001, 0.001];
+    this.letters.morphTargetInfluences = [0.001, 0.001];
+    this.circle.morphTargetInfluences = [0.001, 0.001];
 
     this.scene.add(this.group);
+  }
+
+  setMaterial(mat) {
+    mat.material.transparent = true;
+    mat.material.opacity = 0;
+    mat.material.color = new THREE.Color('rgb(255,255,255)');
+    mat.material.morphTargets = true;
+    mat.material.side = THREE.DoubleSide;
   }
 
   createTimeline() {
