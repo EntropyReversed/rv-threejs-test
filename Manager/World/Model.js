@@ -36,13 +36,15 @@ export default class Model {
   setModel() {
     this.group = this.model.scene.children[0];
     this.group.scale.set(2.6, 2.6, 2.6);
-    this.group.position.set(0, 0, 0.01);
+    this.group.position.set(0, 0, 0.1);
 
     this.circle = this.group.children[0];
     this.circle.material.transparent = true;
     this.circle.material.metalness = 0;
+    this.circle.material.roughness = 0.1;
     this.circle.material.color = new THREE.Color('rgb(255,255,255)');
     this.circle.material.morphTargets = true;
+    this.circle.material.depthWrite = false;
     this.circle.material.side = THREE.DoubleSide;
 
     this.lettersTop = this.group.children[1];
@@ -50,30 +52,40 @@ export default class Model {
     this.lettersTop.material.opacity = 0;
     this.lettersTop.material.color = new THREE.Color('rgb(255,255,255)');
     this.lettersTop.material.morphTargets = true;
-    this.lettersTop.material.side = THREE.DoubleSide;
+    this.lettersTop.material.depthWrite = true;
+    this.lettersTop.material.roughness = 0.1;
 
     this.letters = this.group.children[2];
     this.letters.material.transparent = true;
     this.letters.material.opacity = 0;
     this.letters.material.color = new THREE.Color('rgb(255,255,255)');
     this.letters.material.morphTargets = true;
+    this.letters.material.depthWrite = true;
     this.letters.material.side = THREE.DoubleSide;
+    this.letters.material.roughness = 0.1;
 
+    this.circle.frustumCulled = false;
+    this.lettersTop.frustumCulled = false;
+    this.letters.frustumCulled = false;
 
-    this.lettersTop.morphTargetInfluences = [0.001, 0.001];
-    this.letters.morphTargetInfluences = [0.001, 0.001];
-    this.circle.morphTargetInfluences = [0.001, 0.001];
+    this.circle.receiveShadow  = true;
+    this.lettersTop.receiveShadow  = true;
+    this.letters.receiveShadow  = true;
+
+    // this.circle.castShadow = true;
+    // this.lettersTop.castShadow = true;
+    // this.letters.castShadow = true;
 
     this.scene.add(this.group);
   }
 
-  setMaterial(mat) {
-    mat.material.transparent = true;
-    mat.material.opacity = 0;
-    mat.material.color = new THREE.Color('rgb(255,255,255)');
-    mat.material.morphTargets = true;
-    mat.material.side = THREE.DoubleSide;
-  }
+  // setMaterial(mat) {
+  //   mat.material.transparent = true;
+  //   mat.material.opacity = 0;
+  //   mat.material.color = new THREE.Color('rgb(255,255,255)');
+  //   mat.material.morphTargets = true;
+  //   mat.material.side = THREE.DoubleSide;
+  // }
 
   createTimeline() {
     this.timeline = gsap

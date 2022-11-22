@@ -9,6 +9,8 @@ export default class Renderer {
     this.canvas = this.manager.canvas;
     this.camera = this.manager.camera;
 
+    this.scissorMult = 2;
+
     this.setRenderer();
   }
 
@@ -44,16 +46,16 @@ export default class Renderer {
     // second screen
     // this.renderer.setScissorTest(true);
     // this.renderer.setViewport(
-    //   this.sizes.width - this.sizes.width / 3,
-    //   this.sizes.height - this.sizes.height / 3,
-    //   this.sizes.width / 3,
-    //   this.sizes.height / 3
+    //   this.sizes.width - this.sizes.width / this.scissorMult,
+    //   this.sizes.height - this.sizes.height / this.scissorMult,
+    //   this.sizes.width / this.scissorMult,
+    //   this.sizes.height / this.scissorMult
     // );
     // this.renderer.setScissor(
-    //   this.sizes.width - this.sizes.width / 3,
-    //   this.sizes.height - this.sizes.height / 3,
-    //   this.sizes.width / 3,
-    //   this.sizes.height / 3
+    //   this.sizes.width - this.sizes.width / this.scissorMult,
+    //   this.sizes.height - this.sizes.height / this.scissorMult,
+    //   this.sizes.width / this.scissorMult,
+    //   this.sizes.height / this.scissorMult
     // );
     // this.renderer.render(this.scene, this.camera.perspectiveCameraMain);
     // this.renderer.setScissorTest(false);

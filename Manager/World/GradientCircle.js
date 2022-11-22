@@ -46,10 +46,10 @@ export default class GradientCircle {
     this.circle.receiveShadow = true;
     this.circle.geometry = this.geometry;
     this.circle.material = this.materialGrad;
-    this.circle.depthWrite = true;
-    this.circle.depthTest = false;
-    // this.circle.position.z = -0.001;
-    this.circle.renderOrder = 1;
+    // this.circle.depthWrite = true;
+    // this.circle.depthTest = true;
+    this.circle.position.z = 0.0001;
+    // this.circle.renderOrder = 1;
     this.model.group.add(this.circle);
   }
 
@@ -60,15 +60,19 @@ export default class GradientCircle {
         { x: 0, y: 0 },
         { x: 1.5, y: 1.5, duration: 0.8 }
       )
-      .to(this.model.group.rotation, { x: -1, z: -0.5, duration: 1 })
       .set(this.lines.circleMain.circle.material, { opacity: 0 })
+      .to(this.model.group.rotation, { x: -1, z: -0.5, duration: 1 })
       .to(this.model.group.position, { z: 4, duration: 0.8 }, '<')
       .to(this.circle.scale, { x: 0.462, y: 0.462 }, '<+0.3')
       .set(this.model.circle.material, { metalness: 0.98 })
-      .set(this.model.letters.material, { metalness: 0.98})
-      .set(this.model.circle.material, { opacity: 1})
-      .set(this.model.letters.material, { opacity: 1})
-      .to(this.model.lettersTop.material, { metalness: 0.98, duration: 0.1 }, '<')
+      .set(this.model.letters.material, { metalness: 0.98 })
+      .set(this.model.circle.material, { opacity: 1 })
+      .set(this.model.letters.material, { opacity: 1 })
+      .to(
+        this.model.lettersTop.material,
+        { metalness: 0.98, duration: 0.1 },
+        '<'
+      )
       .to(
         this.circle.material.uniforms.progress,
         {
@@ -77,7 +81,16 @@ export default class GradientCircle {
           ease: 'power3.out',
         },
         '<'
-      );
+      )
+      .set(this.model.circle.material, { depthWrite: true })
+      .set(this.model.letters.material, { depthWrite: true })
+      .set(this.model.lettersTop.material, { depthWrite: true })
+      .to(this.model.circle.morphTargetInfluences, [0, 1], '<+0.15')
+      .to(this.model.letters.morphTargetInfluences, [0, 1], '<')
+      .to(this.model.lettersTop.morphTargetInfluences, [0, 1], '<')
+      .to(this.model.circle.morphTargetInfluences, [1, 1])
+      .to(this.model.letters.morphTargetInfluences, [1, 1], '<')
+      .to(this.model.lettersTop.morphTargetInfluences, [1, 1], '<');
   }
 
   generateTexture() {

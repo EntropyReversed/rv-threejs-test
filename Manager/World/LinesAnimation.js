@@ -3,7 +3,7 @@ import gsap from 'gsap';
 
 const circleMaterial = new THREE.MeshBasicMaterial({
   transparent: true,
-  depthWrite: false,
+  depthWrite: true,
 });
 const createCircle = (r, width, pos, c = 'rgb(40,40,40)') => {
   const geometry = new THREE.RingGeometry(r, r + width, 100, null, 0, 0);
@@ -131,21 +131,21 @@ export default class LinesAnimation {
     this.lineMid = new AnimatableLine(
       12,
       this.w,
-      new THREE.Vector3(0, 0, -0.002),
+      new THREE.Vector3(0, 0, -0.0025),
       halfPI,
       'btm'
     );
     this.lineRight = new AnimatableLine(
       12,
       this.w,
-      new THREE.Vector3(this.r + this.w * 0.5, 0, -0.001),
+      new THREE.Vector3(this.r + this.w * 0.5, 0, -0.0015),
       halfPI,
       'btm'
     );
     this.lineLeft = new AnimatableLine(
       12,
       this.w,
-      new THREE.Vector3((this.r + this.w * 0.5) * -1, 0, -0.001),
+      new THREE.Vector3((this.r + this.w * 0.5) * -1, 0, -0.0030),
       halfPI,
       'btm'
     );
@@ -153,14 +153,14 @@ export default class LinesAnimation {
     this.lineTop = new AnimatableLine(
       18,
       this.w,
-      new THREE.Vector3(0, this.r + this.w * 0.5, -0.001),
+      new THREE.Vector3(0, this.r + this.w * 0.5, -0.0035),
       0,
       'left'
     );
     this.lineBtm = new AnimatableLine(
       18,
       this.w,
-      new THREE.Vector3(0, (this.r + this.w * 0.5) * -1, -0.001),
+      new THREE.Vector3(0, (this.r + this.w * 0.5) * -1, -0.004),
       0,
       'right'
     );
@@ -168,28 +168,28 @@ export default class LinesAnimation {
     this.lineTopI = new AnimatableLine(
       18,
       this.w,
-      new THREE.Vector3(0, this.r + this.w * 0.5 - this.g, -0.001),
+      new THREE.Vector3(0, this.r + this.w * 0.5 - this.g, -0.0045),
       0,
       'left'
     );
     this.lineBtmI = new AnimatableLine(
       18,
       this.w,
-      new THREE.Vector3(0, (this.r + this.w * 0.5 - this.g) * -1, -0.001),
+      new THREE.Vector3(0, (this.r + this.w * 0.5 - this.g) * -1, -0.005),
       0,
       'right'
     );
     this.lineRightI = new AnimatableLine(
       12,
       this.w,
-      new THREE.Vector3(this.r + this.w * 0.5 - this.g, 0, -0.0015),
+      new THREE.Vector3(this.r + this.w * 0.5 - this.g, 0, -0.0055),
       halfPI,
       'top'
     );
     this.lineLeftI = new AnimatableLine(
       12,
       this.w,
-      new THREE.Vector3((this.r + this.w * 0.5 - this.g) * -1, 0, -0.0015),
+      new THREE.Vector3((this.r + this.w * 0.5 - this.g) * -1, 0, -0.006),
       halfPI,
       'btm'
     );
@@ -197,7 +197,7 @@ export default class LinesAnimation {
     this.lineMidT = new AnimatableLine(
       18,
       this.w,
-      new THREE.Vector3(0, this.r * 0.5 + this.w * 0.5 - this.g - 0.1, -0.001),
+      new THREE.Vector3(0, this.r * 0.5 + this.w * 0.5 - this.g - 0.1, -0.0065),
       0,
       'left'
     );
@@ -208,7 +208,7 @@ export default class LinesAnimation {
       new THREE.Vector3(
         0,
         (this.r * 0.5 + this.w * 0.5 - this.g) * -1 + 0.1,
-        -0.001
+        -0.007
       ),
       0,
       'right'
@@ -217,14 +217,14 @@ export default class LinesAnimation {
     this.lineD1 = new AnimatableLine(
       18,
       this.w,
-      new THREE.Vector3(0, 0, -0.0015),
+      new THREE.Vector3(0, 0, -0.0075),
       halfPI * 0.5,
       ''
     );
     this.lineD2 = new AnimatableLine(
       18,
       this.w,
-      new THREE.Vector3(0, 0, -0.001),
+      new THREE.Vector3(0, 0, -0.008),
       halfPI * -0.5,
       ''
     );
