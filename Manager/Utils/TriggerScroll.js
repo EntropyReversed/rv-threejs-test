@@ -18,7 +18,6 @@ export default class TriggerScroll extends EventEmitter {
         trigger: '.scene-wrap',
         start: 'top top',
         scrub: 2,
-        markers: true,
         end: 'bottom bottom',
       },
     }).add(this.masterTimeline);

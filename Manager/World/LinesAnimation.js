@@ -177,7 +177,7 @@ export default class LinesAnimation {
     this.lineMidT = new AnimatableLine(
       18,
       this.w,
-      new THREE.Vector3(0, this.r * 0.5 + this.w * 0.5 - this.g, -0.001),
+      new THREE.Vector3(0, this.r * 0.5 + this.w * 0.5 - this.g - 0.1, -0.001),
       0,
       'left'
     );
@@ -185,7 +185,7 @@ export default class LinesAnimation {
     this.lineMidB = new AnimatableLine(
       18,
       this.w,
-      new THREE.Vector3(0, (this.r * 0.5 + this.w * 0.5 - this.g) * -1, -0.001),
+      new THREE.Vector3(0, (this.r * 0.5 + this.w * 0.5 - this.g) * -1 + 0.1, -0.001),
       0,
       'right'
     );

@@ -20,10 +20,14 @@ export default class World {
 
   setUpTimeline() {
     const linesTimeline = this.model.lines.getTimeline();
-    const modelTimeline = this.model.timeline;
 
+    const modelTimeline1 = this.model.timeline;
+    const modelTimeline2 = this.model.timeline2;
 
-    this.masterTimeline.add(modelTimeline).add(linesTimeline, "-=0.3");
+    this.masterTimeline
+      .add(modelTimeline1)
+      .add(linesTimeline, '-=0.3')
+      .add(modelTimeline2, '-=0.8');
     this.scrollTrigger = new TriggerScroll();
   }
 
