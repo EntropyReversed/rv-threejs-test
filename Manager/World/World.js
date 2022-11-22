@@ -26,8 +26,8 @@ export default class World {
 
     this.masterTimeline
       .add(modelTimeline1)
-      .add(linesTimeline, '-=0.3')
-      .add(modelTimeline2, '-=0.8');
+      .add(linesTimeline, '-=0.45')
+      .add(modelTimeline2, '-=1');
       
     this.scrollTrigger = new TriggerScroll();
   }

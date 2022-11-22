@@ -92,14 +92,20 @@ export default class LinesAnimation {
     this.g = 0.2;
 
     this.timeline = gsap.timeline();
+    this.groupTimeline = gsap.timeline();
     this.circlesTimeline = gsap.timeline();
     this.linesTimeline = gsap.timeline();
 
-    this.timeline.add(this.circlesTimeline).add(this.linesTimeline);
+    this.timeline
+      .add(this.groupTimeline)
+      .add(this.circlesTimeline, '<')
+      .add(this.linesTimeline);
+
     this.generateCircles();
     this.generateLines();
 
     this.scene.add(this.group);
+    this.createGroupTimeline();
     this.createCirclesTimeline();
     this.createLinesTimeline();
   }
@@ -283,9 +289,8 @@ export default class LinesAnimation {
     this.group.add(this.circleBtmS.circle);
   }
 
-  createCirclesTimeline() {
-    const dur = 0.8;
-    this.circlesTimeline
+  createGroupTimeline() {
+    this.groupTimeline
       .fromTo(
         this.group.position,
         { x: -3, y: -2, z: 1 },
@@ -297,20 +302,24 @@ export default class LinesAnimation {
         { x: 1, y: 1, duration: 2 },
         '<'
       )
-      .to(
-        this.circleRight.obj,
-        {
-          progress: Math.PI * 2,
-          duration: dur,
-          onUpdate: () => {
-            updateCircle(
-              this.circleRight.circle,
-              this.circleRight.obj.progress
-            );
-          },
+      .fromTo(
+        this.group.rotation,
+        { x: -0.8, y: 0.1 },
+        { x: 0, y: 0, duration: 2 },
+        '<+0.5'
+      );
+  }
+
+  createCirclesTimeline() {
+    const dur = 0.8;
+    this.circlesTimeline
+      .to(this.circleRight.obj, {
+        progress: Math.PI * 2,
+        duration: dur,
+        onUpdate: () => {
+          updateCircle(this.circleRight.circle, this.circleRight.obj.progress);
         },
-        '<'
-      )
+      })
       .to(
         this.circleMid.obj,
         {
@@ -346,12 +355,6 @@ export default class LinesAnimation {
           },
         },
         '<+0.15'
-      )
-      .fromTo(
-        this.group.rotation,
-        { x: -0.8, y: 0.1 },
-        { x: 0, y: 0, duration: 2 },
-        '<+0.5'
       )
       .to(
         this.circleTop.obj,
@@ -407,20 +410,6 @@ export default class LinesAnimation {
           },
         },
         '<+1.5'
-      )
-      .to(
-        this.circleRight.obj,
-        {
-          progress: 0,
-          duration: dur,
-          onUpdate: () => {
-            updateCircle(
-              this.circleRight.circle,
-              this.circleRight.obj.progress
-            );
-          },
-        },
-        '4'
       );
   }
 
@@ -446,7 +435,7 @@ export default class LinesAnimation {
         '<+0.2'
       )
       .fromTo(this.lineBtm.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<')
-      .fromTo(this.lineMid.line.scale, { x: 0 }, { x: 1, duration: 1 })
+      .fromTo(this.lineMid.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<+0.5')
       .fromTo(this.lineD1.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<')
       .fromTo(this.lineD2.line.scale, { x: 0 }, { x: 1, duration: 1 }, '<');
   }
