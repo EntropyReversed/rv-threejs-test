@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 
 const circleMaterial = new THREE.MeshBasicMaterial();
-const createCircle = (r, width, pos, c = 'rgb(60,60,60)') => {
+const createCircle = (r, width, pos, c = 'rgb(40,40,40)') => {
   const geometry = new THREE.RingGeometry(r, r + width, 100, null, 0, 0);
   const material = circleMaterial.clone();
   material.color = new THREE.Color(c);
@@ -17,7 +17,7 @@ const createCircle = (r, width, pos, c = 'rgb(60,60,60)') => {
   return mesh;
 };
 
-const createLine = (w, h, pos, ang, origin, c = 'rgb(60,60,60)') => {
+const createLine = (w, h, pos, ang, origin, c = 'rgb(40,40,40)') => {
   let offset, position;
   if (origin === 'top') {
     offset = new THREE.Vector3(-w * 0.5, 0, 0);
@@ -90,8 +90,6 @@ export default class LinesAnimation {
     this.w = 0.02;
 
     this.g = 0.2;
-
-    this.color = 'rgb(60,60,60)';
 
     this.timeline = gsap.timeline();
     this.circlesTimeline = gsap.timeline();
@@ -409,6 +407,20 @@ export default class LinesAnimation {
           },
         },
         '<+1.5'
+      )
+      .to(
+        this.circleRight.obj,
+        {
+          progress: 0,
+          duration: dur,
+          onUpdate: () => {
+            updateCircle(
+              this.circleRight.circle,
+              this.circleRight.obj.progress
+            );
+          },
+        },
+        '4'
       );
   }
 

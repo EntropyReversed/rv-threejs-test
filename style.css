@@ -78,22 +78,32 @@ footer {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate3d(-50%, -50%, 0) scale(10) rotateX(40deg);
+  transform: translate3d(-50%, -50%, 0);
   text-align: center;
   font-size: 40px;
   font-weight: 400;
-  opacity: 0;
+  /* opacity: 0; */
   font-family: sans-serif;
   transition: 0.3s ease-in-out;
   user-select: none;
   pointer-events: none;
+
+
 }
 
-.scene h2.in {
-  transform: translate3d(-50%, calc(-50% - 35vh), 0) scale(1) rotateX(0deg);
-  opacity: 1;
-  /* user-select: auto;
-  pointer-events: all; */
+.scene h2 div {
+  display: inline-block;
+}
+
+.scene h2.firstTitle span:first-child {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  word-break: keep-all;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .scene-canvas {

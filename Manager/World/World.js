@@ -9,7 +9,7 @@ export default class World {
     this.manager = new Manager();
     this.masterTimeline = this.manager.masterTimeline;
     this.resources = this.manager.resources;
-    this.text = new Text();
+    this.firstText = new Text('.firstTitle', true);
 
     this.resources.on('ready', () => {
       this.enviroment = new Enviroment();

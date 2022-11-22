@@ -78,7 +78,7 @@ export default class Model {
       .to(this.group.scale, { x: 2.6, y: 2.6, duration: 0.2 })
       .to(
         this.group.position,
-        { x: 0, z: 0, duration: 0.4, ease: 'power3.out' },
+        { x: 0, z: 0.1, duration: 0.4, ease: 'power3.out' },
         '<'
       )
       .to(this.overlay.material, { opacity: 0.4 }, '<');

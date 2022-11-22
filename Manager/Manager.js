@@ -32,17 +32,13 @@ export default class Manager {
     this.stats = new Stats();
     document.body.appendChild(this.stats.dom);
 
-    // this.sizes.on('resize', () => {
-    //   this.resize();
-    // });
-
+    document.body.onmousedown = function (e) {
+      if (e.button === 1) return false;
+    };
     window.addEventListener('resize', () => {
       this.resize();
     });
 
-    // this.time.on('update', () => {
-    //   this.update();
-    // });
     this.update();
   }
 
