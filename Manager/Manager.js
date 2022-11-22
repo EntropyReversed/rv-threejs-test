@@ -2,11 +2,10 @@ import * as THREE from 'three';
 import Sizes from './Utils/Sizes';
 import Camera from './Camera';
 import Renderer from './Renderer';
-import Time from './Utils/Time';
+// import Time from './Utils/Time';
 import Resources from './Utils/Resources';
 import World from './World/World';
 import assets from './Utils/assets';
-import TriggerScroll from '../Manager/Utils/TriggerScroll';
 import GSAP from 'gsap';
 import Stats from 'three/addons/libs/stats.module.js';
 
@@ -22,7 +21,7 @@ export default class Manager {
     this.canvas = this.parent.querySelector('canvas');
     this.scene = new THREE.Scene();
     this.SvgScene = new THREE.Scene();
-    this.time = new Time();
+    // this.time = new Time();
     this.sizes = new Sizes();
     this.camera = new Camera();
     this.renderer = new Renderer();
@@ -30,24 +29,25 @@ export default class Manager {
     this.masterTimeline = GSAP.timeline();
     this.world = new World();
 
-
-    
-
-
     this.stats = new Stats();
-    document.body.appendChild( this.stats.dom );
+    document.body.appendChild(this.stats.dom);
 
-    this.sizes.on('resize', () => {
+    // this.sizes.on('resize', () => {
+    //   this.resize();
+    // });
+
+    window.addEventListener('resize', () => {
       this.resize();
     });
 
-    this.time.on('update', () => {
-      this.update();
-    });
+    // this.time.on('update', () => {
+    //   this.update();
+    // });
+    this.update();
   }
 
-
   resize() {
+    this.sizes.resize();
     this.camera.resize();
     this.renderer.resize();
   }
@@ -56,5 +56,7 @@ export default class Manager {
     this.camera.update();
     this.renderer.update();
     this.stats.update();
+
+    window.requestAnimationFrame(() => this.update());
   }
 }
