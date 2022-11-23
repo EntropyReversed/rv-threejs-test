@@ -39,7 +39,6 @@ export default class Model {
     this.group.position.set(0, 0, 0.1);
 
     this.circle = this.group.children[0];
-    console.log(this.circle.geometry);
     this.circle.material.transparent = true;
     this.circle.material.metalness = 0;
     this.circle.material.roughness = 0.1;
@@ -65,13 +64,14 @@ export default class Model {
     this.letters.material.side = THREE.DoubleSide;
     this.letters.material.roughness = 0.1;
 
-    this.circle.frustumCulled = false;
-    this.lettersTop.frustumCulled = false;
-    this.letters.frustumCulled = false;
+    // this.circle.frustumCulled = false;
+    // this.lettersTop.frustumCulled = false;
+    // this.letters.frustumCulled = false;
 
     this.circle.receiveShadow = true;
     this.lettersTop.receiveShadow = true;
     this.letters.receiveShadow = true;
+
 
     this.circle.castShadow = true;
     this.lettersTop.castShadow = true;

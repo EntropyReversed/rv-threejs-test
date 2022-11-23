@@ -36,18 +36,6 @@ export default class Manager {
       this.resize();
     });
 
-    window.addEventListener('mousemove', (e) => {
-
-      this.world.enviroment.sunLight.position.x = gsap.utils.mapRange(
-        0,
-        this.sizes.width,
-        -1,
-        1,
-        e.clientX
-      );
-
-    });
-
     this.update();
   }
 
