@@ -5,55 +5,7 @@ const circleMaterial = new THREE.MeshBasicMaterial({
   transparent: true,
   depthWrite: true,
 });
-const createCircle = (r, width, pos, c = 'rgb(40,40,40)') => {
-  const geometry = new THREE.RingGeometry(r, r + width, 100, null, 0, 0);
-  const material = circleMaterial.clone();
-  material.color = new THREE.Color(c);
-  material.needsUpdate = true;
-  const mesh = new THREE.Mesh(geometry, material);
 
-  mesh.userData = {
-    radius: r,
-    width: r + width,
-  };
-  mesh.position.set(pos.x, pos.y, pos.z);
-  return mesh;
-};
-
-const createLine = (w, h, pos, ang, origin, c = 'rgb(40,40,40)') => {
-  let offset, position;
-  if (origin === 'top') {
-    offset = new THREE.Vector3(-w * 0.5, 0, 0);
-    position = new THREE.Vector3(pos.x, pos.y + w * 0.5, pos.z);
-  }
-  if (origin === 'btm') {
-    offset = new THREE.Vector3(w * 0.5, 0, 0);
-    position = new THREE.Vector3(pos.x, (pos.y + w * 0.5) * -1, pos.z);
-  }
-  if (origin === 'left') {
-    offset = new THREE.Vector3(w * 0.5, 0, 0);
-    position = new THREE.Vector3(pos.x - w * 0.5, pos.y, pos.z);
-  }
-  if (origin === 'right') {
-    offset = new THREE.Vector3(-w * 0.5, 0, 0);
-    position = new THREE.Vector3(pos.x + w * 0.5, pos.y, pos.z);
-  }
-  if (origin === '') {
-    offset = new THREE.Vector3(0, 0, 0);
-    position = new THREE.Vector3(pos.x, pos.y, pos.z);
-  }
-
-  const geometry = new THREE.PlaneGeometry(w, h);
-  geometry.translate(...offset);
-  const material = new THREE.MeshBasicMaterial({
-    color: new THREE.Color(c),
-    transparent: true,
-  });
-  const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.set(...position);
-  mesh.rotation.set(0, 0, ang);
-  return mesh;
-};
 
 const updateCircle = (c, p) => {
   c.geometry.dispose();
@@ -70,19 +22,88 @@ const updateCircle = (c, p) => {
 
 class AnimatableCircle {
   constructor(r, w, pos, c) {
-    this.circle = createCircle(r, w, pos, c);
+    this.circle = this.createCircle(r, w, pos, c);
     this.obj = {
       progress: 0,
     };
   }
+
+  createCircle(r, width, pos, c = 'rgb(40,40,40)') {
+    const geometry = new THREE.RingGeometry(r, r + width, 100, null, 0, 0);
+    const material = circleMaterial.clone();
+    material.color = new THREE.Color(c);
+    material.needsUpdate = true;
+    const mesh = new THREE.Mesh(geometry, material);
+  
+    mesh.userData = {
+      radius: r,
+      width: r + width,
+    };
+    mesh.position.set(pos.x, pos.y, pos.z);
+    return mesh;
+  };
 }
 
 class AnimatableLine {
-  constructor(w, h, pos, ang, org) {
-    this.line = createLine(w, h, pos, ang, org);
-    this.obj = {
-      progress: 0,
-    };
+  constructor(w, h, pos, ang, org, c = 'rgb(40,40,40)') {
+    this.w = w;
+    this.h = h;
+    this.pos = pos;
+    this.ang = ang;
+    this.org = org;
+    this.c = c;
+    this.line = this.createLine();
+  }
+
+  createLine() {
+    let offset, position;
+    if (this.org === 'top') {
+      offset = new THREE.Vector3(-this.w * 0.5, 0, 0);
+      position = new THREE.Vector3(
+        this.pos.x,
+        this.pos.y + this.w * 0.5,
+        this.pos.z
+      );
+    }
+    if (this.org === 'btm') {
+      offset = new THREE.Vector3(this.w * 0.5, 0, 0);
+      position = new THREE.Vector3(
+        this.pos.x,
+        (this.pos.y + this.w * 0.5) * -1,
+        this.pos.z
+      );
+    }
+    if (this.org === 'left') {
+      offset = new THREE.Vector3(this.w * 0.5, 0, 0);
+      position = new THREE.Vector3(
+        this.pos.x - this.w * 0.5,
+        this.pos.y,
+        this.pos.z
+      );
+    }
+    if (this.org === 'right') {
+      offset = new THREE.Vector3(-this.w * 0.5, 0, 0);
+      position = new THREE.Vector3(
+        this.pos.x + this.w * 0.5,
+        this.pos.y,
+        this.pos.z
+      );
+    }
+    if (this.org === '') {
+      offset = new THREE.Vector3(0, 0, 0);
+      position = new THREE.Vector3(this.pos.x, this.pos.y, this.pos.z);
+    }
+
+    const geometry = new THREE.PlaneGeometry(this.w, this.h);
+    geometry.translate(...offset);
+    const material = new THREE.MeshBasicMaterial({
+      color: new THREE.Color(this.c),
+      transparent: true,
+    });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(...position);
+    mesh.rotation.set(0, 0, this.ang);
+    return mesh;
   }
 }
 
@@ -145,7 +166,7 @@ export default class LinesAnimation {
     this.lineLeft = new AnimatableLine(
       12,
       this.w,
-      new THREE.Vector3((this.r + this.w * 0.5) * -1, 0, -0.0030),
+      new THREE.Vector3((this.r + this.w * 0.5) * -1, 0, -0.003),
       halfPI,
       'btm'
     );
@@ -355,7 +376,7 @@ export default class LinesAnimation {
       );
     });
 
-    steps.forEach((step, i) => {
+    steps.forEach(step => {
       this.circlesTimeline.to(
         step[0].circle.material,
         { opacity: 0.3, duration: dur / 2 },
