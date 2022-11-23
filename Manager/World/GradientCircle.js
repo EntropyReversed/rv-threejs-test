@@ -27,13 +27,13 @@ export default class GradientCircle {
       { u_texture: { value: null } },
       { progress: { value: -0.1 } },
 
-      THREE.UniformsLib.lights,
+      // THREE.UniformsLib.lights,
     ]);
 
     this.materialGrad = new THREE.ShaderMaterial({
       uniforms: this.uniforms,
       ...Shader,
-      lights: true,
+      // lights: true,
       transparent: true,
     });
     this.materialGrad.depthWrite = false;
@@ -42,8 +42,8 @@ export default class GradientCircle {
     // Texture needs to be assigned here so it's not cloned
     this.materialGrad.uniforms.u_texture.value = this.texture;
 
-    this.circle.castShadow = false;
-    this.circle.receiveShadow = true;
+    // this.circle.castShadow = false;
+    // this.circle.receiveShadow = true;
     this.circle.geometry = this.geometry;
     this.circle.material = this.materialGrad;
     // this.circle.depthWrite = true;
@@ -95,9 +95,6 @@ export default class GradientCircle {
         {
           ...[0, 1],
           duration: 0.05,
-          onUpdate: () => {
-            this.model.circle.material.needUpdate = true;
-          },
         },
         '<+=0.1'
       )
@@ -106,9 +103,6 @@ export default class GradientCircle {
         {
           ...[0, 1],
           duration: 0.05,
-          onUpdate: () => {
-            this.model.letters.material.needUpdate = true;
-          },
         },
         '<'
       )
@@ -117,9 +111,6 @@ export default class GradientCircle {
         {
           ...[0, 1],
           duration: 0.05,
-          onUpdate: () => {
-            this.model.lettersTop.material.needUpdate = true;
-          },
         },
         '<'
       )
@@ -127,21 +118,15 @@ export default class GradientCircle {
         this.model.circle.morphTargetInfluences,
         {
           ...[1, 1],
-          duration: 0.1,
-          onUpdate: () => {
-            this.model.circle.material.needUpdate = true;
-          },
+          duration: 0.08,
         },
-        '<+0.05'
+        '<+0.1'
       )
       .to(
         this.model.letters.morphTargetInfluences,
         {
           ...[1, 1],
-          duration: 0.1,
-          onUpdate: () => {
-            this.model.letters.material.needUpdate = true;
-          },
+          duration: 0.08,
         },
         '<'
       )
@@ -149,10 +134,7 @@ export default class GradientCircle {
         this.model.lettersTop.morphTargetInfluences,
         {
           ...[1, 1],
-          duration: 0.1,
-          onUpdate: () => {
-            this.model.lettersTop.material.needUpdate = true;
-          },
+          duration: 0.08,
         },
         '<'
       );

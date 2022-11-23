@@ -11,24 +11,24 @@ export default {
 
   void main() {
       vUv = uv; 
-      vec3 objectNormal = vec3( normal );
-      vec3 transformedNormal = normalMatrix * objectNormal;
+      // vec3 objectNormal = vec3( normal );
+      // vec3 transformedNormal = normalMatrix * objectNormal;
       gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 
-      #include <begin_vertex>
-      #include <project_vertex>
-      #include <worldpos_vertex>
-      #include <shadowmap_vertex>
+      // #include <begin_vertex>
+      // #include <project_vertex>
+      // #include <worldpos_vertex>
+      // #include <shadowmap_vertex>
     }
   `,
 
   fragmentShader: `
-    #include <common>
-    #include <packing>
-    #include <bsdfs>
-    #include <lights_pars_begin>
-    #include <shadowmap_pars_fragment>
-    #include <shadowmask_pars_fragment>
+    // #include <common>
+    // #include <packing>
+    // #include <bsdfs>
+    // #include <lights_pars_begin>
+    // #include <shadowmap_pars_fragment>
+    // #include <shadowmask_pars_fragment>
 
     varying vec2 vUv;
     uniform sampler2D u_texture;
@@ -48,8 +48,8 @@ export default {
       vec4 color = texture2D(u_texture, uv);
 
       
-      vec3 shadowColor = vec3(0, 0, 0);
-      float shadowPower = 0.4;
+      // vec3 shadowColor = vec3(0, 0, 0);
+      // float shadowPower = 0.4;
 
       // uv.y = 1.0 - uv.y;
       
@@ -61,8 +61,8 @@ export default {
 
       // ------------------------------
 
-
-      gl_FragColor = vec4( mix(color.rgb, shadowColor, (1.0 - getShadowMask() ) * shadowPower), alphaMask);
+      gl_FragColor = vec4( color.rgb, alphaMask);
+      // gl_FragColor = vec4( mix(color.rgb, shadowColor, (1.0 - getShadowMask() ) * shadowPower), alphaMask);
 
     }
   `,
