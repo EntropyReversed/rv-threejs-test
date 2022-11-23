@@ -72,10 +72,14 @@ export default class Model {
     this.lettersTop.receiveShadow = true;
     this.letters.receiveShadow = true;
 
+    this.circle.material.flatShading = true;
+    this.lettersTop.material.flatShading = true;
+    this.letters.material.flatShading = true;
+
 
     this.circle.castShadow = true;
     this.lettersTop.castShadow = true;
-    this.letters.castShadow = true;
+    // this.letters.castShadow = true;
 
     this.scene.add(this.group);
   }
