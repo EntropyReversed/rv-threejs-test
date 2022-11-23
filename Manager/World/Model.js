@@ -53,6 +53,7 @@ export default class Model {
     this.lettersTop.material.color = new THREE.Color('rgb(255,255,255)');
     this.lettersTop.material.morphTargets = true;
     this.lettersTop.material.depthWrite = true;
+    this.lettersTop.material.metalness = 0;
     this.lettersTop.material.roughness = 0.1;
 
     this.letters = this.group.children[2];
@@ -62,6 +63,7 @@ export default class Model {
     this.letters.material.morphTargets = true;
     this.letters.material.depthWrite = true;
     this.letters.material.side = THREE.DoubleSide;
+    this.letters.material.metalness = 0;
     this.letters.material.roughness = 0.1;
 
     // this.circle.frustumCulled = false;
@@ -75,7 +77,6 @@ export default class Model {
     this.circle.material.flatShading = true;
     this.lettersTop.material.flatShading = true;
     this.letters.material.flatShading = true;
-
 
     this.circle.castShadow = true;
     this.lettersTop.castShadow = true;
