@@ -91,7 +91,7 @@ export default class GradientCircle {
         this.circle.material.uniforms.progress,
         {
           value: 1.1,
-          duration: 0.3,
+          duration: 0.5,
           ease: 'power3.out',
         },
         '<+0.1'

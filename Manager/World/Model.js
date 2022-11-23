@@ -117,7 +117,7 @@ export default class Model {
       .to(
         this.group.position,
         { x: 0, z: 0.5, duration: 0.4, ease: 'power3.out' },
-        '<'
+        '<+0.2'
       )
       .to(this.lettersTop.material, { opacity: 0.4 }, '<')
       .to(this.lettersTop.material, { opacity: 1 }, '<+0.5');
