@@ -59,6 +59,9 @@ export default class GradientCircle {
 
   setUpTimeline() {
     this.timeline
+      .set(this.model.circle.morphTargetInfluences, [0.01, 0])
+      .set(this.model.letters.morphTargetInfluences, [0.01, 0])
+      .set(this.model.lettersTop.morphTargetInfluences, [0.01, 0])
       .fromTo(
         this.circle.scale,
         { x: 0, y: 0 },
@@ -68,19 +71,22 @@ export default class GradientCircle {
       .to(this.model.group.rotation, { x: -1, z: -0.5, duration: 1 })
       .to(this.model.group.position, { z: 4, duration: 0.8 }, '<')
       .to(this.circle.scale, { x: 0.463, y: 0.463 }, '<+0.3')
-      // .to(this.circle.scale, { x: 0.462, y: 0.462 }, '<+0.3')
       .set(this.model.circle.material, { metalness: 0.98 })
       .set(this.model.letters.material, { metalness: 0.98 })
       .set(this.model.circle.material, { opacity: 1 })
       .set(this.model.letters.material, { opacity: 1 })
-      .to(
-        this.model.lettersTop.material,
-        { metalness: 0.98, duration: 0.1 },
-        '<'
-      )
+      .to(this.model.lettersTop.material, { opacity: 0, duration: 0.4 })
+
+      .set(this.model.lettersTop.material, { metalness: 0.98 })
+      .set(this.model.lettersTop.material, { opacity: 1 })
+
       .set(this.model.circle.material, { depthWrite: true })
       .set(this.model.letters.material, { depthWrite: true })
       .set(this.model.lettersTop.material, { depthWrite: true })
+
+      .set(this.model.circle.morphTargetInfluences, [0, 0])
+      .set(this.model.letters.morphTargetInfluences, [0, 0])
+      .set(this.model.lettersTop.morphTargetInfluences, [0, 0])
       .to(
         this.circle.material.uniforms.progress,
         {
@@ -88,21 +94,21 @@ export default class GradientCircle {
           duration: 0.3,
           ease: 'power3.out',
         },
-        '<'
+        '<+0.1'
       )
       .to(
         this.model.circle.morphTargetInfluences,
         {
           ...[0, 1],
-          duration: 0.05,
+          duration:0.1,
         },
-        '<+=0.1'
+        '<+=0.2'
       )
       .to(
         this.model.letters.morphTargetInfluences,
         {
           ...[0, 1],
-          duration: 0.05,
+          duration:0.1,
         },
         '<'
       )
@@ -110,7 +116,7 @@ export default class GradientCircle {
         this.model.lettersTop.morphTargetInfluences,
         {
           ...[0, 1],
-          duration: 0.05,
+          duration:0.1,
         },
         '<'
       )
@@ -118,7 +124,7 @@ export default class GradientCircle {
         this.model.circle.morphTargetInfluences,
         {
           ...[1, 1],
-          duration: 0.08,
+          duration: 0.2,
         },
         '<+0.1'
       )
@@ -126,7 +132,7 @@ export default class GradientCircle {
         this.model.letters.morphTargetInfluences,
         {
           ...[1, 1],
-          duration: 0.08,
+          duration: 0.2,
         },
         '<'
       )
@@ -134,7 +140,7 @@ export default class GradientCircle {
         this.model.lettersTop.morphTargetInfluences,
         {
           ...[1, 1],
-          duration: 0.08,
+          duration: 0.2,
         },
         '<'
       );
@@ -147,6 +153,7 @@ export default class GradientCircle {
     canvas.width = size;
     canvas.height = size;
     ctx.rect(0, 0, size, size);
+
     const gradient = ctx.createLinearGradient(size / 2, 0, size / 2, size);
     gradient.addColorStop(0, '#a59bf4');
     gradient.addColorStop(1, '#f2a0ac');
