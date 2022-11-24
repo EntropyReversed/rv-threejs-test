@@ -50,8 +50,12 @@ export default class GradientCircle {
     this.materialGrad.uniforms.u_texture.value = this.texture;
 
     // this.manager.resources.items.lettersTexture.generateMipmaps = false;
-    // this.manager.resources.items.lettersTexture.magFilter = THREE.LinearFilter;
-    // this.manager.resources.items.lettersTexture.minFilter = THREE.LinearFilter;
+    // this.manager.resources.items.lettersTexture.magFilter = 1;
+    // this.manager.resources.items.lettersTexture.minFilter = 1;
+    this.manager.resources.items.lettersTexture.anisotropy =
+      this.manager.renderer.renderer.capabilities.getMaxAnisotropy();
+    this.manager.resources.items.lettersTexture.needsUpdate = true;
+
     this.materialGrad.uniforms.u_letters_texture.value =
       this.manager.resources.items.lettersTexture;
     // this.circle.castShadow = false;
@@ -76,7 +80,7 @@ export default class GradientCircle {
     // this.model.letters.morphTargetInfluences = [0.1, 0]
     // this.model.lettersTop.morphTargetInfluences = [0.1, 0]
 
-    console.log(this.circle.material)
+    console.log(this.circle.material);
 
     this.model.circle.updateMorphTargets();
     this.model.letters.updateMorphTargets();
@@ -103,7 +107,8 @@ export default class GradientCircle {
       .to(this.circle.scale, { x: 0.463, y: 0.463 }, '<+0.3')
 
       .to(this.circle.material.uniforms.lettersV, {
-        value: 1, duration: 0.05
+        value: 1,
+        duration: 0.05,
       })
       .set(this.model.circle.material, { metalness: 0.98 })
       .set(this.model.letters.material, { metalness: 0.98 })
