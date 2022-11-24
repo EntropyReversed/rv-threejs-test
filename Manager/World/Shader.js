@@ -59,7 +59,8 @@ export default {
       uv2.y = uv2.y + lUvposY;
       uv2.x = uv2.x + lUvposX;
       vec4 colorLetters = texture2D(u_letters_texture, uv2);
-      vec3 lettersColor = vec3(0.9, 0, 0);
+      vec3 lettersColor = vec3(0.9, 0.9, 0.9);
+      // vec3 lettersColor = vec3(1., 0, 0);
       
       // vec3 shadowColor = vec3(0, 0, 0);
       // float shadowPower = 0.4;

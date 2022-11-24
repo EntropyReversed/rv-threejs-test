@@ -30,7 +30,7 @@ export default class World {
       .add(linesTimeline, '-=0.35')
       .add(modelTimeline2, '-=1')
       .add(linesReverse, '-=0.3')
-      .add(gradientTimeline, "-=0.2");
+      .add(gradientTimeline, "-=0.1");
 
     this.scrollTrigger = new TriggerScroll();
   }

@@ -28,9 +28,13 @@ export default class GradientCircle {
       { u_texture: { value: null } },
       { u_letters_texture: { value: null } },
       { lettersV: { value: 0 } },
-      { lUvScale: { value: 1.18 } },
-      { lUvposY: { value: 0.032 } },
-      { lUvposX: { value: -0.011 } },
+      { lUvScale: { value: 1 } },
+      { lUvposY: { value: 0 } },
+      { lUvposX: { value: 0 } },
+
+      // { lUvScale: { value: 1.185 } },
+      // { lUvposY: { value: 0.033 } },
+      // { lUvposX: { value: -0.011 } },
 
       { progress: { value: -0.1 } },
 
@@ -52,16 +56,21 @@ export default class GradientCircle {
     // this.manager.resources.items.lettersTexture.generateMipmaps = false;
     // this.manager.resources.items.lettersTexture.magFilter = 1;
     // this.manager.resources.items.lettersTexture.minFilter = 1;
+
+    this.lettersTex = new THREE.CanvasTexture(this.generateTextureLetters());
+    this.lettersTex.anisotropy =
+      this.manager.renderer.renderer.capabilities.getMaxAnisotropy();
+
     this.manager.resources.items.lettersTexture.anisotropy =
       this.manager.renderer.renderer.capabilities.getMaxAnisotropy();
 
-      this.manager.resources.items.lettersTexture.magFilter = THREE.NearestFilter;
+    // this.manager.resources.items.lettersTexture.magFilter = THREE.NearestFilter;
     this.manager.resources.items.lettersTexture.needsUpdate = true;
 
-    this.materialGrad.uniforms.u_letters_texture.value =
-      this.manager.resources.items.lettersTexture;
-    // this.circle.castShadow = false;
-    // this.circle.receiveShadow = true;
+    // this.materialGrad.uniforms.u_letters_texture.value =
+    //   this.manager.resources.items.lettersTexture;
+
+    this.materialGrad.uniforms.u_letters_texture.value = this.lettersTex;
     this.circle.geometry = this.geometry;
     this.circle.material = this.materialGrad;
     // this.circle.depthWrite = true;
@@ -92,9 +101,9 @@ export default class GradientCircle {
 
   setUpTimeline() {
     this.timeline
-      .set(this.model.circle.morphTargetInfluences, [0.005, 0])
-      .set(this.model.letters.morphTargetInfluences, [0.005, 0])
-      .set(this.model.lettersTop.morphTargetInfluences, [0.005, 0])
+      .set(this.model.circle.morphTargetInfluences, [0.0015, 0])
+      .set(this.model.letters.morphTargetInfluences, [0.0015, 0])
+      .set(this.model.lettersTop.morphTargetInfluences, [0.0015, 0])
       .fromTo(
         this.circle.scale,
         // { x: 0.463, y: 0.463 },
@@ -106,15 +115,15 @@ export default class GradientCircle {
       .set(this.lines.circleMain.circle.material, { opacity: 0 })
       .to(this.model.group.rotation, { x: -1, z: -0.5, duration: 1 })
       .to(this.model.group.position, { z: 4, duration: 0.8 }, '<')
-      .to(this.circle.scale, { x: 0.463, y: 0.463 }, '<+0.3')
+      .to(this.circle.scale, { x: 0.464, y: 0.464 }, '<+0.3')
 
       .to(this.circle.material.uniforms.lettersV, {
         value: 1,
         duration: 0.05,
       })
-      // .set(this.model.circle.material, { metalness: 0.98 })
-      // .set(this.model.letters.material, { metalness: 0.98 })
-      // .set(this.model.lettersTop.material, { metalness: 0.98 })
+      .set(this.model.circle.material, { metalness: 0.97 })
+      .set(this.model.letters.material, { metalness: 0.97 })
+      .set(this.model.lettersTop.material, { metalness: 0.97 })
 
       .set(this.model.circle.material, { opacity: 1 })
       .set(this.model.letters.material, { opacity: 1 })
@@ -124,9 +133,9 @@ export default class GradientCircle {
       .set(this.model.letters.material, { depthWrite: true })
       .set(this.model.lettersTop.material, { depthWrite: true })
 
-      // .set(this.model.circle.morphTargetInfluences, [0, 0])
-      // .set(this.model.letters.morphTargetInfluences, [0, 0])
-      // .set(this.model.lettersTop.morphTargetInfluences, [0, 0])
+      .set(this.model.circle.morphTargetInfluences, [0, 0])
+      .set(this.model.letters.morphTargetInfluences, [0, 0])
+      .set(this.model.lettersTop.morphTargetInfluences, [0, 0])
 
       .to(
         this.circle.material.uniforms.progress,
@@ -135,7 +144,7 @@ export default class GradientCircle {
           duration: 0.5,
           ease: 'power3.out',
         },
-        '<+0.1'
+        '<'
       )
       .to(
         this.model.circle.morphTargetInfluences,
@@ -161,14 +170,10 @@ export default class GradientCircle {
         },
         '<'
       )
-      .to(
-        this.model.circle.morphTargetInfluences,
-        {
-          ...[1, 1],
-          duration: 0.2,
-        },
-        '<+0.1'
-      )
+      .to(this.model.circle.morphTargetInfluences, {
+        ...[1, 1],
+        duration: 0.2,
+      })
       .to(
         this.model.letters.morphTargetInfluences,
         {
@@ -208,6 +213,9 @@ export default class GradientCircle {
     const size = 1024;
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
+
+    const scaleR = 1.686;
+    const scaleV = 1.687;
     canvas.width = size;
     canvas.height = size;
 
@@ -215,12 +223,29 @@ export default class GradientCircle {
     ctx.rect(0, 0, size, size);
     ctx.fill();
 
+    ctx.save();
     ctx.beginPath();
-    ctx.fillStyle = 'white';
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 5;
     var path = new Path2D(
-      'M347.431,174.348L345.944,169.02L341.477,168.692C325.277,167.73 246.563,163.631 221.833,248.398L221.832,248.404C220.47,253.104 219.837,257.98 219.953,262.867C219.892,292.718 219.844,416.458 219.844,416.458L219.842,422.7L276.74,422.771L277.007,272.151C277.007,272.139 277.059,252.935 292.732,238.911C303.751,229.051 322.23,222.041 352.9,224.725L361.928,225.515L359.455,216.797C359.455,216.797 349.46,181.551 347.464,174.466L347.431,174.348ZM353.445,218.501C353.445,218.501 341.102,174.977 341.106,174.929C325.784,174.018 251.221,169.973 227.831,250.148C226.642,254.249 226.093,258.51 226.2,262.779C226.139,292.503 226.092,416.46 226.092,416.46L270.503,416.515L270.759,272.152C270.759,272.152 270.635,211.254 353.445,218.501Z'
+      'M141.869,55.953C141.869,55.953 128.131,7.141 128.135,7.092C127.644,7.01 33.151,-7.164 7.778,84.888C6.68,88.854 6.175,92.961 6.281,97.074C6.306,126.76 6.442,253.022 6.442,253.022L56.985,253.114C56.985,253.114 57.034,106.642 57.034,106.6C57.034,106.6 57.034,106.6 57.034,106.6C57.033,106.475 56.68,46.314 141.869,55.953Z'
     );
-    ctx.fill(path);
+    ctx.translate(238, 310);
+    ctx.scale(scaleR, scaleR);
+    ctx.stroke(path);
+    ctx.restore();
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 5;
+    var path2 = new Path2D(
+      'M6.261,6.374L58.787,6.37L108.943,182.21L157.887,6.261L209.294,6.371L141.601,235.429C141.601,235.429 133.913,255.488 108.65,255.272C80.912,255.035 74.056,231.984 74.057,231.984C74.058,231.985 6.261,6.374 6.261,6.374Z'
+    );
+    ctx.translate(468, 307.8);
+    ctx.scale(scaleV, scaleV);
+    ctx.stroke(path2);
+    ctx.restore();
 
     return canvas;
   }
