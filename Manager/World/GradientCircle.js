@@ -30,7 +30,7 @@ export default class GradientCircle {
       { lettersV: { value: 0 } },
       { lUvScale: { value: 1.18 } },
       { lUvposY: { value: 0.032 } },
-      { lUvposX: { value: -0.01 } },
+      { lUvposX: { value: -0.011 } },
 
       { progress: { value: -0.1 } },
 
@@ -102,10 +102,9 @@ export default class GradientCircle {
       .to(this.model.group.position, { z: 4, duration: 0.8 }, '<')
       .to(this.circle.scale, { x: 0.463, y: 0.463 }, '<+0.3')
 
-      .set(this.circle.material.uniforms.lettersV, {
-        value: 1,
+      .to(this.circle.material.uniforms.lettersV, {
+        value: 1, duration: 0.05
       })
-
       .set(this.model.circle.material, { metalness: 0.98 })
       .set(this.model.letters.material, { metalness: 0.98 })
       .set(this.model.lettersTop.material, { metalness: 0.98 })
@@ -121,6 +120,7 @@ export default class GradientCircle {
       .set(this.model.circle.morphTargetInfluences, [0, 0])
       .set(this.model.letters.morphTargetInfluences, [0, 0])
       .set(this.model.lettersTop.morphTargetInfluences, [0, 0])
+
       .to(
         this.circle.material.uniforms.progress,
         {

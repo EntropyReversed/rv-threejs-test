@@ -7,6 +7,6 @@ export default [
   {
     name: 'lettersTexture',
     type: 'image',
-    path: '/texture.png',
+    path: '/texture3.png',
   },
 ];
