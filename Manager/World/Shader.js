@@ -29,9 +29,15 @@ export default {
     // #include <lights_pars_begin>
     // #include <shadowmap_pars_fragment>
     // #include <shadowmask_pars_fragment>
+    precision highp float;
 
     varying vec2 vUv;
     uniform sampler2D u_texture;
+    uniform sampler2D u_letters_texture;
+    uniform float lettersV;
+    uniform float lUvScale;
+    uniform float lUvposY;
+    uniform float lUvposX;
     uniform float progress;
 
     float circle(in vec2 _st, in float _radius){
@@ -44,9 +50,16 @@ export default {
     void main() {
       // ------------------------------
       vec2 uv = vUv;
+      vec2 uv2 = uv;
 
       vec4 color = texture2D(u_texture, uv);
 
+      float scale = lUvScale;
+      uv2 = (uv2 - 0.5) * scale + 0.5;
+      uv2.y = uv2.y + lUvposY;
+      uv2.x = uv2.x + lUvposX;
+      vec4 colorLetters = texture2D(u_letters_texture, uv2);
+      vec3 lettersColor = vec3(0.91, 0.91, 0.91);
       
       // vec3 shadowColor = vec3(0, 0, 0);
       // float shadowPower = 0.4;
@@ -61,8 +74,8 @@ export default {
 
       // ------------------------------
 
-      gl_FragColor = vec4( color.rgb, alphaMask);
-      // gl_FragColor = vec4( mix(color.rgb, shadowColor, (1.0 - getShadowMask() ) * shadowPower), alphaMask);
+      // gl_FragColor = vec4( color.rgb, alphaMask);
+      gl_FragColor = vec4( mix(color.rgb, lettersColor, colorLetters.rgb * lettersV), alphaMask);
 
     }
   `,

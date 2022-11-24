@@ -4,4 +4,9 @@ export default [
     type: 'glbModel',
     path: '/rvModel2.glb',
   },
+  {
+    name: 'lettersTexture',
+    type: 'image',
+    path: '/texture.png',
+  },
 ];
