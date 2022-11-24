@@ -56,9 +56,9 @@ export default {
       
       vec3 circleMask = vec3(circle(uv,1.0));
 
-      uv.x += (sin(uv.y*5.+u_time)/(25.0 + sin(u_time) * 4.0));
+      uv.x += (sin(uv.y*5.+u_time)/(25.0 + sin(u_time) * 6.0));
 
-      vec3 alphaMask = circleMask * smoothstep(progress,progress+0.05,uv.x);
+      vec3 alphaMask = circleMask * smoothstep(progress,progress+0.07,uv.x);
 
       gl_FragColor = vec4( mix(color.rgb, lettersColor, colorLetters.rgb * lettersV), alphaMask);
 
