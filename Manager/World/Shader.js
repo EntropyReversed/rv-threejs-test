@@ -34,10 +34,9 @@ export default {
     varying vec2 vUv;
     uniform sampler2D u_texture;
     uniform sampler2D u_letters_texture;
+    uniform float u_time;
     uniform float lettersV;
-    uniform float lUvScale;
-    uniform float lUvposY;
-    uniform float lUvposX;
+
     uniform float progress;
 
     float circle(in vec2 _st, in float _radius){
@@ -54,10 +53,7 @@ export default {
 
       vec4 color = texture2D(u_texture, uv);
 
-      float scale = lUvScale;
-      uv2 = (uv2 - 0.5) * scale + 0.5;
-      uv2.y = uv2.y + lUvposY;
-      uv2.x = uv2.x + lUvposX;
+
       vec4 colorLetters = texture2D(u_letters_texture, uv2);
       vec3 lettersColor = vec3(0.9, 0.9, 0.9);
       // vec3 lettersColor = vec3(1., 0, 0);
@@ -69,7 +65,7 @@ export default {
       
       vec3 circleMask = vec3(circle(uv,1.0));
 
-      uv.x += (sin(uv.y*10.)/20.0);
+      uv.x += (sin(uv.y*10.+u_time)/(20.0 + sin(u_time) * 4.0));
 
       vec3 alphaMask = circleMask * smoothstep(progress,progress+0.05,uv.x);
 

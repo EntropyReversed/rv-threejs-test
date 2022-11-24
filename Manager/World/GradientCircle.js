@@ -24,21 +24,15 @@ export default class GradientCircle {
     this.texture = new THREE.CanvasTexture(this.generateTexture());
     this.geometry = new THREE.PlaneGeometry(4.3, 4.3);
 
+    this.clock = new THREE.Clock();
+
     this.uniforms = THREE.UniformsUtils.merge([
       { u_texture: { value: null } },
       { u_letters_texture: { value: null } },
+      { u_time: { value: this.clock.getElapsedTime() } },
       { lettersV: { value: 0 } },
-      { lUvScale: { value: 1 } },
-      { lUvposY: { value: 0 } },
-      { lUvposX: { value: 0 } },
-
-      // { lUvScale: { value: 1.185 } },
-      // { lUvposY: { value: 0.033 } },
-      // { lUvposX: { value: -0.011 } },
 
       { progress: { value: -0.1 } },
-
-      // THREE.UniformsLib.lights,
     ]);
 
     this.materialGrad = new THREE.ShaderMaterial({
@@ -52,8 +46,6 @@ export default class GradientCircle {
     // THREE.UniformsUtils.merge() calls THREE.clone() on each uniform.
     // Texture needs to be assigned here so it's not cloned
     this.materialGrad.uniforms.u_texture.value = this.texture;
-
-
 
     this.lettersTex = new THREE.CanvasTexture(this.generateTextureLetters());
     this.lettersTex.anisotropy =
@@ -92,6 +84,8 @@ export default class GradientCircle {
     this.model.letters.updateMorphTargets();
     this.model.lettersTop.updateMorphTargets();
     this.model.group.add(this.circle);
+
+    this.updateTime();
   }
 
   setUpTimeline() {
@@ -243,5 +237,10 @@ export default class GradientCircle {
     ctx.restore();
 
     return canvas;
+  }
+
+  updateTime() {
+    this.materialGrad.uniforms.u_time.value = this.clock.getElapsedTime();
+    window.requestAnimationFrame(() => this.updateTime());
   }
 }
