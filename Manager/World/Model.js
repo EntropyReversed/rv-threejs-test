@@ -40,6 +40,8 @@ export default class Model {
     part.material.color = new THREE.Color('rgb(200,200,200)');
     part.material.morphTargets = true;
 
+    // part.material.roughnessMap = 0;
+
     part.material.opacity = startOp;
     part.material.metalness = 0;
     part.material.roughness = 0.1;
