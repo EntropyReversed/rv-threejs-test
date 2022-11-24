@@ -53,19 +53,17 @@ export default class GradientCircle {
     // Texture needs to be assigned here so it's not cloned
     this.materialGrad.uniforms.u_texture.value = this.texture;
 
-    // this.manager.resources.items.lettersTexture.generateMipmaps = false;
-    // this.manager.resources.items.lettersTexture.magFilter = 1;
-    // this.manager.resources.items.lettersTexture.minFilter = 1;
+
 
     this.lettersTex = new THREE.CanvasTexture(this.generateTextureLetters());
     this.lettersTex.anisotropy =
       this.manager.renderer.renderer.capabilities.getMaxAnisotropy();
 
-    this.manager.resources.items.lettersTexture.anisotropy =
-      this.manager.renderer.renderer.capabilities.getMaxAnisotropy();
+    // this.manager.resources.items.lettersTexture.anisotropy =
+    //   this.manager.renderer.renderer.capabilities.getMaxAnisotropy();
 
-    // this.manager.resources.items.lettersTexture.magFilter = THREE.NearestFilter;
-    this.manager.resources.items.lettersTexture.needsUpdate = true;
+    // // this.manager.resources.items.lettersTexture.magFilter = THREE.NearestFilter;
+    // this.manager.resources.items.lettersTexture.needsUpdate = true;
 
     // this.materialGrad.uniforms.u_letters_texture.value =
     //   this.manager.resources.items.lettersTexture;
@@ -73,10 +71,7 @@ export default class GradientCircle {
     this.materialGrad.uniforms.u_letters_texture.value = this.lettersTex;
     this.circle.geometry = this.geometry;
     this.circle.material = this.materialGrad;
-    // this.circle.depthWrite = true;
-    // this.circle.depthTest = true;
     this.circle.position.z = 0.0001;
-    // this.circle.renderOrder = 1;
 
     // const gui = new GUI();
     // const folder = gui.addFolder('Shader');

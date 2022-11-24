@@ -14,4 +14,9 @@ export default [
     type: 'image',
     path: '/Plastic_Rough_001_normal.jpg',
   },
+  {
+    name: 'roughTex',
+    type: 'image',
+    path: '/Plastic_Rough_001_roughness.jpg',
+  },
 ];
