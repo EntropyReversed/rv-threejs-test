@@ -50,6 +50,10 @@ export default class Manager {
     this.renderer.update();
     this.stats.update();
 
+    if (this.world.model?.gradientCircle) {
+      this.world.model.gradientCircle.updateTime();
+    }
+
     window.requestAnimationFrame(() => this.update());
   }
 }
