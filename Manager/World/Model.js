@@ -40,13 +40,14 @@ export default class Model {
     part.material.color = new THREE.Color('rgb(200,200,200)');
     part.material.morphTargets = true;
 
-    // part.material.roughnessMap = 0;
+    // part.material.normalMap = this.manager.resources.items.normalTex;
+    // console.log(this.manager.resources.items.normalTex)
 
     part.material.opacity = startOp;
     part.material.metalness = 0;
     part.material.roughness = 0.1;
     part.material.flatShading = true;
-    part.material.needsUpdate = true
+    part.material.needsUpdate = true;
 
     part.receiveShadow = true;
     part.castShadow = true;
