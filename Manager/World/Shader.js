@@ -65,7 +65,7 @@ export default {
       
       vec3 circleMask = vec3(circle(uv,1.0));
 
-      uv.x += (sin(uv.y*10.+u_time)/(20.0 + sin(u_time) * 4.0));
+      uv.x += (sin(uv.y*5.+u_time)/(25.0 + sin(u_time) * 4.0));
 
       vec3 alphaMask = circleMask * smoothstep(progress,progress+0.05,uv.x);
 
