@@ -112,15 +112,15 @@ export default class Model {
       .set(this.circle.material, { opacity: 0 })
       .set(this.group.rotation, { z: 0 })
       .set(this.group.position, { x: 0.3, y: 0.08 })
-      .set(this.lettersTop.material, { opacity: 1 })
+      // .set(this.lettersTop.material, { opacity: 1 })
       .to(this.group.scale, { x: 2.6, y: 2.6, duration: 0.2 })
       .to(
         this.group.position,
         { x: 0, z: 0.5, duration: 0.4, ease: 'power3.out' },
         '<+0.2'
       )
-      .to(this.lettersTop.material, { opacity: 0.4 }, '<')
-      .to(this.lettersTop.material, { opacity: 1 }, '<+0.5');
+      // .to(this.lettersTop.material, { opacity: 0.4 }, '<')
+      // .to(this.lettersTop.material, { opacity: 1 }, '<+0.5');
     // .to(this.overlay.material, { opacity: 0.4 }, '<');
   }
 

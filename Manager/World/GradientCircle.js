@@ -54,6 +54,8 @@ export default class GradientCircle {
     // this.manager.resources.items.lettersTexture.minFilter = 1;
     this.manager.resources.items.lettersTexture.anisotropy =
       this.manager.renderer.renderer.capabilities.getMaxAnisotropy();
+
+      this.manager.resources.items.lettersTexture.magFilter = THREE.NearestFilter;
     this.manager.resources.items.lettersTexture.needsUpdate = true;
 
     this.materialGrad.uniforms.u_letters_texture.value =
@@ -110,9 +112,9 @@ export default class GradientCircle {
         value: 1,
         duration: 0.05,
       })
-      .set(this.model.circle.material, { metalness: 0.98 })
-      .set(this.model.letters.material, { metalness: 0.98 })
-      .set(this.model.lettersTop.material, { metalness: 0.98 })
+      // .set(this.model.circle.material, { metalness: 0.98 })
+      // .set(this.model.letters.material, { metalness: 0.98 })
+      // .set(this.model.lettersTop.material, { metalness: 0.98 })
 
       .set(this.model.circle.material, { opacity: 1 })
       .set(this.model.letters.material, { opacity: 1 })
@@ -122,9 +124,9 @@ export default class GradientCircle {
       .set(this.model.letters.material, { depthWrite: true })
       .set(this.model.lettersTop.material, { depthWrite: true })
 
-      .set(this.model.circle.morphTargetInfluences, [0, 0])
-      .set(this.model.letters.morphTargetInfluences, [0, 0])
-      .set(this.model.lettersTop.morphTargetInfluences, [0, 0])
+      // .set(this.model.circle.morphTargetInfluences, [0, 0])
+      // .set(this.model.letters.morphTargetInfluences, [0, 0])
+      // .set(this.model.lettersTop.morphTargetInfluences, [0, 0])
 
       .to(
         this.circle.material.uniforms.progress,
