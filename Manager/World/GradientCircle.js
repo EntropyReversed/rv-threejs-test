@@ -85,6 +85,7 @@ export default class GradientCircle {
   }
 
   setUpTimeline() {
+    const c = new THREE.Color('rgb(0,0,0)');
     this.timeline
       .set(this.model.circle.morphTargetInfluences, [0.0015, 0])
       .set(this.model.letters.morphTargetInfluences, [0.0015, 0])
@@ -108,7 +109,10 @@ export default class GradientCircle {
       })
       .set(this.model.circle.material, { metalness: 0.97 })
       .set(this.model.letters.material, { metalness: 0.97 })
-      .set(this.model.lettersTop.material, { metalness: 0.97 })
+      .set(this.model.lettersTop.material, {
+        color: new THREE.Color('rgb(0,0,0)'),
+      })
+      // .set(this.model.lettersTop.material, { metalness: 0.97 })
 
       .set(this.model.circle.material, { opacity: 1 })
       .set(this.model.letters.material, { opacity: 1 })
@@ -118,9 +122,9 @@ export default class GradientCircle {
       .set(this.model.letters.material, { depthWrite: true })
       .set(this.model.lettersTop.material, { depthWrite: true })
 
-      .set(this.model.circle.morphTargetInfluences, [0, 0.5])
-      .set(this.model.letters.morphTargetInfluences, [0, 0.5])
-      .set(this.model.lettersTop.morphTargetInfluences, [0, 0.5])
+      .set(this.model.circle.morphTargetInfluences, [0, 0])
+      .set(this.model.letters.morphTargetInfluences, [0, 0])
+      .set(this.model.lettersTop.morphTargetInfluences, [0, 0])
 
       .to(
         this.circle.material.uniforms.progress,
@@ -132,10 +136,29 @@ export default class GradientCircle {
         '<'
       )
       .to(
+        this.model.lettersTop.material,
+        { metalness: 0.97, duration: 0.15 },
+        '<'
+      )
+      .to(
+        c,
+        {
+          r: 200 / 255,
+          g: 200 / 255,
+          b: 200 / 255,
+          duration: 0.15,
+          onUpdate: () => {
+            this.model.lettersTop.material.color = c;
+          },
+        },
+        '<+=0.1'
+      )
+
+      .to(
         this.model.circle.morphTargetInfluences,
         {
           ...[0, 1],
-          duration: 0.1,
+          duration: 0.05,
         },
         '<+=0.2'
       )
@@ -143,7 +166,7 @@ export default class GradientCircle {
         this.model.letters.morphTargetInfluences,
         {
           ...[0, 1],
-          duration: 0.1,
+          duration: 0.05,
         },
         '<'
       )
@@ -151,7 +174,7 @@ export default class GradientCircle {
         this.model.lettersTop.morphTargetInfluences,
         {
           ...[0, 1],
-          duration: 0.1,
+          duration: 0.05,
         },
         '<'
       )
@@ -234,6 +257,5 @@ export default class GradientCircle {
 
   updateTime() {
     this.materialGrad.uniforms.u_time.value = this.clock.getElapsedTime();
-    window.requestAnimationFrame(() => this.updateTime());
   }
 }

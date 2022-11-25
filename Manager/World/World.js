@@ -9,9 +9,8 @@ export default class World {
     this.manager = new Manager();
     this.masterTimeline = this.manager.masterTimeline;
     this.resources = this.manager.resources;
-    this.firstText = new Text('.secondTitle', true);
+    this.text = new Text();
     this.enviroment = new Enviroment();
-
     this.resources.on('ready', () => {
       this.model = new Model();
       this.setUpTimeline();
@@ -27,7 +26,8 @@ export default class World {
 
     this.masterTimeline
       .add(modelTimeline1)
-      .add(linesTimeline, '-=0.35')
+      .add(this.text.timeline, '<+0.1')
+      .add(linesTimeline, '-=0.4')
       .add(modelTimeline2, '-=1')
       .add(linesReverse, '-=0.3')
       .add(gradientTimeline, '-=0.1');
