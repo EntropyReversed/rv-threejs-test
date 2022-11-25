@@ -26,7 +26,7 @@ export default class World {
 
     this.masterTimeline
       .add(modelTimeline1)
-      .add(this.text.timeline, '<+0.1')
+      .add(this.text.timeline, '<+0.2')
       .add(linesTimeline, '-=0.4')
       .add(modelTimeline2, '-=1')
       .add(linesReverse, '-=0.3')

@@ -16,12 +16,12 @@ export default class Text {
       .fromTo('.firstTitle .top .letter', {opacity: 0}, {
         duration: 1.5,
         opacity: 1,
-        stagger: 0.015,
+        stagger: 0.012,
       })
       .fromTo('.firstTitle .btm .letter', {opacity: 0}, {
         duration: 1.5,
         opacity: 1,
-        stagger: 0.015,
+        stagger: 0.012,
       }, "<+0.4")
       // .to('.firstTitle .btm', {
       //   duration: 2,
@@ -36,8 +36,8 @@ export default class Text {
         '.firstTitle',
         {
           opacity: 0,
-          duration: 0.1,
-        }, "-=0.65"
+          duration: 0.15,
+        }, "-=0.15"
       );
 
   }
