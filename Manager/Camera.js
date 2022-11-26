@@ -1,6 +1,7 @@
 import Manager from './Manager';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { GUI } from 'dat.gui';
 
 export default class Camera {
   constructor() {
@@ -24,9 +25,41 @@ export default class Camera {
     );
     this.perspectiveCamera.position.z = 12;
     this.perspectiveCamera.lookAt(0, 0, 0);
+    this.perspectiveCamera.rotation.order = 'YXZ';
     this.scene.add(this.perspectiveCamera);
     // this.helper = new THREE.CameraHelper(this.perspectiveCamera);
     // this.scene.add(this.helper);
+
+    const lookAtVector = new THREE.Vector3(0,0,0)
+    const rotAtVector = new THREE.Vector3(0,0,0)
+    const target = new THREE.Vector3(0,0,0)
+    console.log(target)
+    // target.copy( lookAtVector ).add( rotAtVector );
+    // object.lookAt( target );
+
+    const gui = new GUI();
+    const folder = gui.addFolder('Camera');
+
+    folder.add(this.perspectiveCamera.rotation, 'x', -30, 30, 0.01).onChange((val) => {
+
+    });
+    folder.add(this.perspectiveCamera.rotation, 'y', -30, 30, 0.01).onChange((val) => {
+
+    });
+    folder.add(this.perspectiveCamera.rotation, 'z', -30, 30, 0.01).onChange((val) => {
+
+    });
+
+    folder.add(this.perspectiveCamera.position, 'x', -30, 30, 0.01).onChange((val) => {
+      this.perspectiveCamera.lookAt(0,0,0)
+    });
+    folder.add(this.perspectiveCamera.position, 'y', -30, 30, 0.01).onChange((val) => {
+      this.perspectiveCamera.lookAt(0,0,0)
+    });
+    folder.add(this.perspectiveCamera.position, 'z', -30, 30, 0.01).onChange((val) => {
+      this.perspectiveCamera.lookAt(0,0,0)
+    });
+    folder.open();
   }
 
   createPerspectiveCameraMain() {
@@ -41,16 +74,18 @@ export default class Camera {
     this.perspectiveCameraMain.position.y = 55;
     this.perspectiveCameraMain.position.z = 60;
 
-    // const size = 20;
-    // const divisions = 20;
+    const size = 20;
+    const divisions = 20;
 
-    // const gridHelper = new THREE.GridHelper(size, divisions);
-    // gridHelper.position.y = -0.005;
-    // this.scene.add(gridHelper);
+    const gridHelper = new THREE.GridHelper(size, divisions);
+    gridHelper.position.y = -0.005;
+    this.scene.add(gridHelper);
 
-    // const axesHelper = new THREE.AxesHelper(3);
-    // axesHelper.position.y = -0.01;
-    // this.scene.add(axesHelper);
+    const axesHelper = new THREE.AxesHelper(3);
+    axesHelper.position.y = -0.01;
+    this.scene.add(axesHelper);
+
+
   }
 
   setOrbitControls() {
