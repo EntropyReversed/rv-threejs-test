@@ -45,7 +45,7 @@ export default class Model {
     part.material.opacity = startOp;
     part.material.metalness = 0;
     part.material.roughness = 0.1;
-    // part.material.flatShading = true;
+    part.material.flatShading = true;
     part.material.needsUpdate = true;
 
     part.receiveShadow = true;
