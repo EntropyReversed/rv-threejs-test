@@ -96,7 +96,7 @@ class AnimatableLine {
 
     const geometry = new THREE.PlaneGeometry(this.w, this.h);
     geometry.translate(...offset);
-    const material = new THREE.MeshBasicMaterial({
+    const material = new THREE.LineBasicMaterial({
       color: new THREE.Color(this.c),
       transparent: true,
     });
