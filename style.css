@@ -94,7 +94,7 @@ footer {
 }
 
 .scene h2.firstTitle > span span {
-opacity: 0;
+  opacity: 0;
 }
 
 .scene-canvas {

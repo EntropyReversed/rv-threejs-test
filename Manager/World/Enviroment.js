@@ -29,7 +29,13 @@ export default class Enviroment {
     this.scene.add(this.sunLight);
 
     this.spotLight = new THREE.SpotLight('#ffffff', 4);
-    this.spotLight.position.set(0, 5, 10);
+    this.spotLight.position.set(-3, 3, 8);
+    this.spotLight.castShadow = true;
+    this.spotLight.shadow.camera.far = 30;
+    this.spotLight.shadow.mapSize.set(8192, 8192);
+    this.spotLight.shadow.normalBias = 0.02;
+    // const helper = new THREE.CameraHelper(this.spotLight.shadow.camera);
+    // this.scene.add(helper);
     this.scene.add(this.spotLight);
 
     this.ambientlight = new THREE.AmbientLight('#ffffff', 1.5);

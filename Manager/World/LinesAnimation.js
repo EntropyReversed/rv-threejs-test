@@ -1,11 +1,10 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
 
-const circleMaterial = new THREE.MeshBasicMaterial({
+const circleMaterial = new THREE.LineBasicMaterial({
   transparent: true,
   depthWrite: true,
 });
-
 
 const updateCircle = (c, p) => {
   c.geometry.dispose();
@@ -34,14 +33,14 @@ class AnimatableCircle {
     material.color = new THREE.Color(c);
     material.needsUpdate = true;
     const mesh = new THREE.Mesh(geometry, material);
-  
+
     mesh.userData = {
       radius: r,
       width: r + width,
     };
     mesh.position.set(pos.x, pos.y, pos.z);
     return mesh;
-  };
+  }
 }
 
 class AnimatableLine {
@@ -376,7 +375,7 @@ export default class LinesAnimation {
       );
     });
 
-    steps.forEach(step => {
+    steps.forEach((step) => {
       this.circlesTimeline.to(
         step[0].circle.material,
         { opacity: 0.3, duration: dur / 2 },

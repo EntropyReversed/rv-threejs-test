@@ -16,6 +16,8 @@ export default class TriggerScroll {
           trigger: '.scene-wrap',
           start: 'top top',
           scrub: 2,
+          // end: "+=1200%",
+          // pin: true,
           end: 'bottom bottom',
         },
       })

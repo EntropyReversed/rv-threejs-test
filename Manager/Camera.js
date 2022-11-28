@@ -2,6 +2,7 @@ import Manager from './Manager';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GUI } from 'dat.gui';
+import gsap from 'gsap';
 
 export default class Camera {
   constructor() {
@@ -9,11 +10,11 @@ export default class Camera {
     this.sizes = this.manager.sizes;
     this.scene = this.manager.scene;
     this.canvas = this.manager.canvas;
-
     this.createPerspectiveCamera();
     this.createPerspectiveCameraMain();
 
     this.setOrbitControls();
+
   }
 
   createPerspectiveCamera() {
@@ -57,7 +58,7 @@ export default class Camera {
       });
     folder.open();
 
-    this.setPath()
+    this.setPath();
   }
 
   setPath() {
@@ -69,15 +70,14 @@ export default class Camera {
       new THREE.Vector3(1, 0, 2),
     ]);
 
-    const points = this.curve.getPoints(10);
+    const points = this.curve.getPoints(40);
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
-    console.log(geometry)
+    console.log(geometry);
 
     const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
 
     const curveObject = new THREE.Line(geometry, material);
     this.scene.add(curveObject);
-
   }
 
   createPerspectiveCameraMain() {
