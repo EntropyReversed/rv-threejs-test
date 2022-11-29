@@ -11,52 +11,45 @@ export default class Text {
     this.timeline = gsap.timeline();
     this.splitText('.firstTitle .top');
     this.splitText('.firstTitle .btm');
+  }
 
-    this.timeline
-      .fromTo('.firstTitle .top .letter', {opacity: 0}, {
-        duration: 1.5,
-        opacity: 1,
-        stagger: 0.012,
-      })
-      .fromTo('.firstTitle .btm .letter', {opacity: 0}, {
-        duration: 1.5,
-        opacity: 1,
-        stagger: 0.012,
-      }, "<+0.4")
-      // .to('.firstTitle .btm', {
-      //   duration: 2,
-      //   text: {
-      //     value:
-      //       this.manager.parent.querySelector('.firstTitle .btm').dataset.text,
-      //     speed: 4,
-      //   },
-      //   ease: 'none',
-      // }, "<+0.3")
+  getTimeline() {
+    return this.timeline
+      .fromTo(
+        '.firstTitle .letter',
+        { opacity: 0 },
+        {
+          duration: 0.1,
+          opacity: 1,
+          stagger: 0.012,
+        }
+      )
       .to(
         '.firstTitle',
         {
           opacity: 0,
-          duration: 0.15,
-        }, "-=0.15"
+          duration: 0.1,
+        },
+        '+=0.1'
       );
-
   }
 
   splitText(selector) {
     const node = this.manager.parent.querySelector(selector);
-    const word = [...node.dataset.text];
-    node.innerHTML = '';
-    word.forEach((letter, letterIndex) => {
-      const spannedLetter = document.createElement('span');
-      if (letter == ' ') {
-        spannedLetter.textContent = '\xa0';
-      } else {
-        spannedLetter.textContent = letter;
-        spannedLetter.style.opacity = 0;
-        spannedLetter.classList.add('letter');
-      }
+    node.innerHTML = node.innerText
+      .split(/\s/)
+      .map((word) => {
+        return `<span class="word">${word}</span>`;
+      })
+      .join('\xa0');
 
-      node.appendChild(spannedLetter);
+    node.querySelectorAll('.word').forEach((word) => {
+      word.innerHTML = word.innerText
+        .split('')
+        .map((letter) => {
+          return `<span class="letter">${letter}</span>`;
+        })
+        .join(' ');
     });
   }
 }

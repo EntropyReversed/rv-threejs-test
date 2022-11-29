@@ -18,16 +18,17 @@ export default class World {
   }
 
   setUpTimeline() {
-    const linesTimeline = this.model.lines.timeline;
-    const linesReverse = this.model.lines.reversedTimeline;
+    const linesTimeline = this.model.lines.getTimeline();
+    const linesReverse = this.model.lines.getTimelineReverse();
+    const title1 = this.text.getTimeline();
     const modelTimeline1 = this.model.timeline;
     const modelTimeline2 = this.model.timeline2;
     const gradientTimeline = this.model.gradientCircle.timeline;
 
     this.masterTimeline
       .add(modelTimeline1)
-      .add(this.text.timeline, '<+0.2')
-      .add(linesTimeline, '-=0.4')
+      .add(title1, '<+0.1')
+      .add(linesTimeline, '-=0.35')
       .add(modelTimeline2, '-=1')
       .add(linesReverse, '-=0.3')
       .add(gradientTimeline, '-=0.1');

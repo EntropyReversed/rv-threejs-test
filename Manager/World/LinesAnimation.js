@@ -6,9 +6,13 @@ const circleMaterial = new THREE.LineBasicMaterial({
   depthWrite: true,
 });
 
+const lineMaterial = new THREE.LineBasicMaterial({
+  transparent: true,
+});
+
 const updateCircle = (c, p) => {
   c.geometry.dispose();
-  const newGeo = new THREE.RingGeometry(
+  c.geometry = new THREE.RingGeometry(
     c.userData.radius,
     c.userData.width,
     64,
@@ -16,7 +20,6 @@ const updateCircle = (c, p) => {
     0,
     p
   );
-  c.geometry = newGeo;
 };
 
 class AnimatableCircle {
@@ -31,7 +34,7 @@ class AnimatableCircle {
     const geometry = new THREE.RingGeometry(r, r + width, 100, null, 0, 0);
     const material = circleMaterial.clone();
     material.color = new THREE.Color(c);
-    material.needsUpdate = true;
+
     const mesh = new THREE.Mesh(geometry, material);
 
     mesh.userData = {
@@ -95,10 +98,8 @@ class AnimatableLine {
 
     const geometry = new THREE.PlaneGeometry(this.w, this.h);
     geometry.translate(...offset);
-    const material = new THREE.LineBasicMaterial({
-      color: new THREE.Color(this.c),
-      transparent: true,
-    });
+    const material = lineMaterial.clone();
+    material.color = new THREE.Color(this.c);
     const mesh = new THREE.Mesh(geometry, material);
     mesh.position.set(...position);
     mesh.rotation.set(0, 0, this.ang);
@@ -113,7 +114,6 @@ export default class LinesAnimation {
     this.group.name = 'Lines';
     this.r = 2.8;
     this.w = 0.02;
-
     this.g = 0.2;
 
     this.timeline = gsap.timeline();
@@ -125,25 +125,32 @@ export default class LinesAnimation {
     this.circlesTimelineReverse = gsap.timeline();
     this.linesTimelineReverse = gsap.timeline();
 
-    this.reversedTimeline
-      .add(this.linesTimelineReverse)
-      .add(this.circlesTimelineReverse, '<+0.2');
-
-    this.timeline
-      .add(this.groupTimeline)
-      .add(this.circlesTimeline, '<')
-      .add(this.linesTimeline);
-
     this.generateCircles();
     this.generateLines();
 
     this.scene.add(this.group);
-    this.createCirclesReverseTimeline();
-    this.createLinesReverseTimeline();
 
     this.createGroupTimeline();
     this.createCirclesTimeline();
     this.createLinesTimeline();
+
+    this.createCirclesReverseTimeline();
+    this.createLinesReverseTimeline();
+  }
+
+  getTimeline() {
+    this.timeline
+      .add(this.groupTimeline)
+      .add(this.circlesTimeline, '<')
+      .add(this.linesTimeline, '<');
+    return this.timeline;
+  }
+
+  getTimelineReverse() {
+    this.reversedTimeline
+      .add(this.linesTimelineReverse)
+      .add(this.circlesTimelineReverse, '<+0.2');
+    return this.reversedTimeline;
   }
 
   generateLines() {
@@ -359,9 +366,9 @@ export default class LinesAnimation {
       [this.circleMain, '<+1.2'],
     ];
     const dur = 0.8;
+    const twoPI = Math.PI * 2;
 
     steps.forEach((step) => {
-      const twoPI = Math.PI * 2;
       this.circlesTimeline.to(
         step[0].obj,
         {

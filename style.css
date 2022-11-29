@@ -83,7 +83,7 @@ footer {
   display: inline-block;
 }
 
-.scene h2.firstTitle > span:first-child {
+/* .scene h2.firstTitle > span:first-child {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -91,11 +91,15 @@ footer {
   word-break: keep-all;
   white-space: nowrap;
   width: 100%;
+} */
+
+.scene h2 .word {
+  display: inline-flex;
 }
 
-.scene h2.firstTitle > span span {
+/* .scene h2.firstTitle > span span {
   opacity: 0;
-}
+} */
 
 .scene-canvas {
   width: 100%;
@@ -103,5 +107,5 @@ footer {
 }
 
 .scene-wrap {
-  height: 1200vh;
+  height: 1100vh;
 }

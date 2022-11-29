@@ -14,7 +14,6 @@ export default class Camera {
     this.createPerspectiveCameraMain();
 
     this.setOrbitControls();
-
   }
 
   createPerspectiveCamera() {
@@ -31,32 +30,32 @@ export default class Camera {
     // this.helper = new THREE.CameraHelper(this.perspectiveCamera);
     // this.scene.add(this.helper);
 
-    const lookAtVector = new THREE.Vector3(0, 0, 0);
-    const rotAtVector = new THREE.Vector3(0, 0, 0);
-    const target = new THREE.Vector3(0, 0, 0);
-    console.log(target);
-    // target.copy( lookAtVector ).add( rotAtVector );
-    // object.lookAt( target );
+    // const lookAtVector = new THREE.Vector3(0, 0, 0);
+    // const rotAtVector = new THREE.Vector3(0, 0, 0);
+    // const target = new THREE.Vector3(0, 0, 0);
+    // console.log(target);
+    // // target.copy( lookAtVector ).add( rotAtVector );
+    // // object.lookAt( target );
 
-    const gui = new GUI();
-    const folder = gui.addFolder('Camera');
+    // const gui = new GUI();
+    // const folder = gui.addFolder('Camera');
 
-    folder
-      .add(this.perspectiveCamera.position, 'x', -30, 30, 0.01)
-      .onChange((val) => {
-        this.perspectiveCamera.lookAt(0, 0, 0);
-      });
-    folder
-      .add(this.perspectiveCamera.position, 'y', -30, 30, 0.01)
-      .onChange((val) => {
-        this.perspectiveCamera.lookAt(0, 0, 0);
-      });
-    folder
-      .add(this.perspectiveCamera.position, 'z', -30, 30, 0.01)
-      .onChange((val) => {
-        this.perspectiveCamera.lookAt(0, 0, 0);
-      });
-    folder.open();
+    // folder
+    //   .add(this.perspectiveCamera.position, 'x', -30, 30, 0.01)
+    //   .onChange((val) => {
+    //     this.perspectiveCamera.lookAt(0, 0, 0);
+    //   });
+    // folder
+    //   .add(this.perspectiveCamera.position, 'y', -30, 30, 0.01)
+    //   .onChange((val) => {
+    //     this.perspectiveCamera.lookAt(0, 0, 0);
+    //   });
+    // folder
+    //   .add(this.perspectiveCamera.position, 'z', -30, 30, 0.01)
+    //   .onChange((val) => {
+    //     this.perspectiveCamera.lookAt(0, 0, 0);
+    //   });
+    // folder.open();
 
     this.setPath();
   }
@@ -70,14 +69,14 @@ export default class Camera {
       new THREE.Vector3(1, 0, 2),
     ]);
 
-    const points = this.curve.getPoints(40);
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
-    console.log(geometry);
+    // const points = this.curve.getPoints(40);
+    // const geometry = new THREE.BufferGeometry().setFromPoints(points);
+    // console.log(geometry);
 
-    const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
+    // const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
 
-    const curveObject = new THREE.Line(geometry, material);
-    this.scene.add(curveObject);
+    // const curveObject = new THREE.Line(geometry, material);
+    // this.scene.add(curveObject);
   }
 
   createPerspectiveCameraMain() {
@@ -92,16 +91,16 @@ export default class Camera {
     this.perspectiveCameraMain.position.y = 55;
     this.perspectiveCameraMain.position.z = 60;
 
-    const size = 20;
-    const divisions = 20;
+    // const size = 20;
+    // const divisions = 20;
 
-    const gridHelper = new THREE.GridHelper(size, divisions);
-    gridHelper.position.y = -0.005;
-    this.scene.add(gridHelper);
+    // const gridHelper = new THREE.GridHelper(size, divisions);
+    // gridHelper.position.y = -0.005;
+    // this.scene.add(gridHelper);
 
-    const axesHelper = new THREE.AxesHelper(3);
-    axesHelper.position.y = -0.01;
-    this.scene.add(axesHelper);
+    // const axesHelper = new THREE.AxesHelper(3);
+    // axesHelper.position.y = -0.01;
+    // this.scene.add(axesHelper);
   }
 
   setOrbitControls() {

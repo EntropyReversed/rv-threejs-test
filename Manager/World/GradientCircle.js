@@ -100,8 +100,8 @@ export default class GradientCircle {
       )
       .set(this.lines.circleMain.circle.material, { opacity: 0 })
 
-      // .to(this.model.group.rotation, { x: -1, z: -0.5, duration: 1 })
-      // .to(this.model.group.position, { z: 4, duration: 0.8 }, '<')
+      .to(this.model.group.rotation, { x: -1, z: -0.5, duration: 1 })
+      .to(this.model.group.position, { z: 4, duration: 0.8 }, '<')
       // .to(this.camera.rotation, { x: 0.97, y: 0.82, z: 0.47, duration: 1 })
       // .to(
       //   this.camera.position,

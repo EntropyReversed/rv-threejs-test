@@ -45,7 +45,7 @@ export default class Model {
     part.material.opacity = startOp;
     part.material.metalness = 0;
     part.material.roughness = 0.1;
-    part.material.flatShading = false;
+    // part.material.flatShading = false;
     part.material.needsUpdate = true;
 
     part.receiveShadow = true;
@@ -57,7 +57,7 @@ export default class Model {
     this.timeline = gsap
       .timeline()
       .to(this.circle.material, { opacity: 0.3 })
-      .to(this.group.scale, { x: 2, y: 2, duration: 2 }, '<+0.3')
+      .to(this.group.scale, { x: 2, y: 2, duration: 0.8 }, '<')
       .to(this.group.scale, { x: 2.6, y: 2.6, duration: 0.2 })
       .to(this.circle.material, { opacity: 1 }, '<')
       .to(this.group.rotation, { z: 0.6, duration: 0.4 }, '<')
