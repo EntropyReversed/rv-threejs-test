@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import * as THREE from 'three';
 import Manager from '../Manager';
 
@@ -28,7 +28,7 @@ export default class Resources extends EventEmitter {
 
     //TODO: this needs to be fixed to point to examples draco
     this.loaders.dracoLoader.setDecoderPath(
-      'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/'
+      'https://www.gstatic.com/draco/v1/decoders/'
     );
     this.loaders.dracoLoader.setDecoderConfig({ type: 'js' });
     this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader);
