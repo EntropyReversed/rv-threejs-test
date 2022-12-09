@@ -8,12 +8,6 @@ export default class Enviroment {
     this.manager = new Manager();
     this.scene = this.manager.scene;
 
-    this.lerp = {
-      current: 0,
-      target: 0,
-      ease: 0.05,
-    };
-
     this.setSunlight();
   }
 
