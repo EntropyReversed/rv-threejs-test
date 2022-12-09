@@ -10,6 +10,7 @@ export default class Model {
     this.scene = this.manager.scene;
     this.resources = this.manager.resources;
     this.model = this.resources.items.model;
+
     this.setModel();
 
     this.lines = new LinesAnimation(this.scene);
@@ -50,6 +51,7 @@ export default class Model {
 
     part.receiveShadow = true;
     part.castShadow = true;
+    
     part.geometry.computeVertexNormals();
   }
 
