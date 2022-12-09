@@ -32,17 +32,18 @@ export default class Renderer {
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.setSize(this.sizes.width, this.sizes.height);
     this.renderer.setPixelRatio(this.sizes.pixelRatio);
+    this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height);
 
     console.log('renderer info', this.renderer.info);
   }
 
   resize() {
     this.renderer.setSize(this.sizes.width, this.sizes.height);
+    this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height);
     this.renderer.setPixelRatio(this.sizes.pixelRatio);
   }
 
   update() {
-    this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height);
     this.renderer.render(this.scene, this.camera.perspectiveCamera);
 
     // second screen
