@@ -40,19 +40,28 @@ export default class Model {
     part.material.transparent = true;
     part.material.color = new THREE.Color('rgb(200,200,200)');
     part.material.morphTargets = true;
+    part.material.morphNormals = true;
 
     // part.material.roughnessMap = this.manager.resources.items.roughTex;
 
     part.material.opacity = startOp;
     part.material.metalness = 0;
     part.material.roughness = 0.1;
+    // part.material.wireframe = true;
     // part.material.flatShading = false;
+    // part.material.vertexColors = true;
     part.material.needsUpdate = true;
 
     part.receiveShadow = true;
     part.castShadow = true;
-    
+
+    console.log(part.geometry);
+
+    // part.geometry = part.geometry.toNonIndexed();
+
     part.geometry.computeVertexNormals();
+    // part.geometry.computeVertexNormals();
+    // part.geometry.computeTangents()
   }
 
   createTimeline() {
