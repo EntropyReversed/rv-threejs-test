@@ -2,8 +2,13 @@ export default [
   {
     name: 'model',
     type: 'glbModel',
-    path: '/rvModel2.glb',
+    path: '/ModelNew.glb',
   },
+  // {
+  //   name: 'model',
+  //   type: 'glbModel',
+  //   path: '/rvModel2.glb',
+  // },
   {
     name: 'lettersTexture',
     type: 'image',

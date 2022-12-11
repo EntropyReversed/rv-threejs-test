@@ -22,46 +22,47 @@ export default class Model {
   }
 
   setModel() {
-    this.group = this.model.scene.children[0];
+    this.model.scene.traverse((child) => {
+      if (child.name === 'Model') {
+        this.group = child;
+      }
+    });
 
     this.circle = this.group.children[0];
     this.setModelPart(this.circle, 1);
 
-    this.lettersTop = this.group.children[1];
+    this.lettersTop = this.group.children[2];
     this.setModelPart(this.lettersTop);
 
-    this.letters = this.group.children[2];
+    this.letters = this.group.children[1];
     this.setModelPart(this.letters);
 
     this.scene.add(this.group);
   }
 
   setModelPart(part, startOp = 0) {
+    // part.material = new THREE.MeshNormalMaterial();
+
     part.material.transparent = true;
     part.material.color = new THREE.Color('rgb(200,200,200)');
     part.material.morphTargets = true;
     part.material.morphNormals = true;
-
+    // part.material.skinning = true;
     // part.material.roughnessMap = this.manager.resources.items.roughTex;
 
     part.material.opacity = startOp;
     part.material.metalness = 0;
     part.material.roughness = 0.1;
     // part.material.wireframe = true;
-    // part.material.flatShading = false;
+    // part.material.flatShading = true;
     // part.material.vertexColors = true;
     part.material.needsUpdate = true;
 
     part.receiveShadow = true;
     part.castShadow = true;
 
-    console.log(part.geometry);
-
-    // part.geometry = part.geometry.toNonIndexed();
-
+    part.geometry.computeTangents();
     part.geometry.computeVertexNormals();
-    // part.geometry.computeVertexNormals();
-    // part.geometry.computeTangents()
   }
 
   createTimeline() {
