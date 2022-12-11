@@ -31,17 +31,17 @@ export default class Model {
     this.circle = this.group.children[0];
     this.setModelPart(this.circle, 1);
 
-    this.lettersTop = this.group.children[2];
-    this.setModelPart(this.lettersTop);
-
     this.letters = this.group.children[1];
     this.setModelPart(this.letters);
+
+    this.lettersTop = this.group.children[2];
+    this.setModelPart(this.lettersTop);
 
     this.scene.add(this.group);
   }
 
   setModelPart(part, startOp = 0) {
-    // part.material = new THREE.MeshNormalMaterial();
+    part.material = new THREE.MeshNormalMaterial();
 
     part.material.transparent = true;
     part.material.color = new THREE.Color('rgb(200,200,200)');
