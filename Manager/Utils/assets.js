@@ -14,5 +14,4 @@ export default [
     type: 'image',
     path: '/texture3.png',
   },
-
 ];
