@@ -22,11 +22,23 @@ export default class Model {
   }
 
   setModel() {
+    this.rimRingGroup = new THREE.Group();
     this.model.scene.traverse((child) => {
       if (child.name === 'Model') {
         this.group = child;
       }
     });
+
+    this.ring = this.model.scene.children[0];
+    this.rimRingGroup.add(this.ring);
+    this.setModelPart(this.ring, 0, false);
+
+    this.rim = this.model.scene.children[1];
+    this.rimRingGroup.add(this.rim);
+    this.setModelPart(this.rim, 0, false);
+
+    this.rimRingGroup.scale.set(0.47, 0.47, 0.47);
+    this.group.add(this.rimRingGroup);
 
     this.circle = this.group.children[0];
     this.setModelPart(this.circle, 1);
@@ -40,12 +52,12 @@ export default class Model {
     this.scene.add(this.group);
   }
 
-  setModelPart(part, startOp = 0) {
-    part.material = new THREE.MeshNormalMaterial();
+  setModelPart(part, startOp = 0, shade = true) {
+    // part.material = new THREE.MeshNormalMaterial();
 
     // part.geometry.computeTangents();
     // part.geometry.computeVertexNormals();
-    console.log(part.geometry);
+    console.log(part);
     part.geometry.verticesNeedUpdate = true;
     part.geometry.normalsNeedUpdate = true;
 
@@ -54,14 +66,14 @@ export default class Model {
     part.material.morphTargets = true;
     // part.material.morphNormals = true;
     // part.material.side = THREE.DoubleSide;
-    part.material.depthWrite = true;
+    // part.material.depthWrite = false;
     // part.material.skinning = true;
     // part.material.roughnessMap = this.manager.resources.items.roughTex;
     part.material.opacity = startOp;
     part.material.metalness = 0;
     part.material.roughness = 0.1;
     // part.material.wireframe = true;
-    // part.material.flatShading = true;
+    part.material.flatShading = shade;
     // part.material.vertexColors = true;
     part.material.needsUpdate = true;
 
