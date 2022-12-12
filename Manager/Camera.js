@@ -63,20 +63,46 @@ export default class Camera {
   getTimeline() {
     this.timeline = gsap
       .timeline()
-      .set(this.manager.world.model.ring, { visible: true })
-      .to(this.perspectiveCamera.position, {
-        x: -2,
-        y: -0.3,
-        z: 7,
-        duration: 2,
-      })
-      .to(this.perspectiveCamera.position, { x: 0, y: -1, z: 6, duration: 2 })
       .to(
         this.perspectiveCamera.rotation,
 
-        { x: -1, y: 1.5, z: 0, duration: 2 },
+        { x: 0, y: 0, z: -0.8, duration: 1 }
+      )
+      .to(
+        this.perspectiveCamera.position,
+        {
+          x: -1,
+          y: 0.5,
+          z: 9,
+          duration: 1,
+        },
+        '<'
+      )
+      .to(this.perspectiveCamera.position, {
+        x: -2,
+        y: 1,
+        z: 3.5,
+        duration: 2,
+      })
+      .to(
+        this.perspectiveCamera,
+
+        { zoom: 2, duration: 2 },
+        '<'
+      )
+      .to(
+        this.perspectiveCamera.rotation,
+
+        { x: 0, y: 0, z: -1.15, duration: 2 },
         '<'
       );
+    // .to(this.perspectiveCamera.position, { x: -1, y: 1, z: 6, duration: 2 })
+    // .to(
+    //   this.perspectiveCamera.rotation,
+
+    //   { x: 0, y: 0.5, z: -0.2, duration: 2 },
+    //   '<'
+    // );
 
     // .to(
     //   this.perspectiveCamera.rotation,

@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import Manager from '../Manager';
 import GradientCircle from './GradientCircle';
 import LinesAnimation from './LinesAnimation';
+import ModelLines from '../../Manager/World/ModelLines';
 
 export default class Model {
   constructor() {
@@ -23,22 +24,27 @@ export default class Model {
 
   setModel() {
     this.rimRingGroup = new THREE.Group();
+
     this.model.scene.traverse((child) => {
       if (child.name === 'Model') {
         this.group = child;
       }
+      if (child.name === 'ring') {
+        this.mLines = child
+      }
     });
 
-    this.ring = this.model.scene.children[0];
+    this.modelLines = new ModelLines(this.mLines, this.rimRingGroup)
+
 
     // this.ring.visible = false;
-    this.setModelPart(this.ring, 0, false, false);
-    this.rimRingGroup.add(this.ring);
+    // this.setModelPart(this.ring, 0, false, false);
+    // this.rimRingGroup.add(this.ring);
 
-    this.rim = this.model.scene.children[1];
-    // this.rim.visible = false;
-    this.setModelPart(this.rim, 0, false);
-    this.rimRingGroup.add(this.rim);
+    // this.rim = this.model.scene.children[1];
+    // // this.rim.visible = false;
+    // this.setModelPart(this.rim, 0, false);
+    // this.rimRingGroup.add(this.rim);
 
     this.rimRingGroup.scale.set(0.47, 0.47, 0.47);
     this.group.add(this.rimRingGroup);

@@ -100,7 +100,7 @@ export default class GradientCircle {
       )
       .set(this.lines.circleMain.circle.material, { opacity: 0 })
 
-      .to(this.model.group.rotation, { x: -1, z: -0.5, duration: 1 })
+      .to(this.model.group.rotation, { x: -1, z: -0.7, duration: 1 })
       .to(this.model.group.position, { z: 4, duration: 0.8 }, '<')
       // .to(this.camera.rotation, { x: 0.97, y: 0.82, z: 0.47, duration: 1 })
       // .to(
@@ -128,7 +128,6 @@ export default class GradientCircle {
         color: new THREE.Color('rgb(0,0,0)'),
       })
       // .set(this.model.lettersTop.material, { metalness: 0.97 })
-      .set(this.model.rim.material, { opacity: 0 })
       .set(this.model.circle.material, { opacity: 1 })
       .set(this.model.letters.material, { opacity: 1 })
       .set(this.model.lettersTop.material, { opacity: 1 })
