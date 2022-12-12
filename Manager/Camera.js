@@ -87,28 +87,16 @@ export default class Camera {
       .to(
         this.perspectiveCamera,
 
-        { zoom: 2, duration: 1 },
+        { zoom: 1.5, duration: 1 },
         '<'
       )
       .to(
         this.perspectiveCamera.rotation,
 
-        { x: 0, y: 0, z: -1.15, duration: 1 },
+        { x: 0, y: 0, z: -1.1, duration: 1 },
         '<'
       );
-    // .to(this.perspectiveCamera.position, { x: -1, y: 1, z: 6, duration: 2 })
-    // .to(
-    //   this.perspectiveCamera.rotation,
 
-    //   { x: 0, y: 0.5, z: -0.2, duration: 2 },
-    //   '<'
-    // );
-
-    // .to(
-    //   this.perspectiveCamera.rotation,
-    //   { x: -0.6, y: 0.4, z: Math.PI * 0.25 },
-
-    // );
 
     return this.timeline;
   }

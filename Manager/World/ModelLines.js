@@ -37,7 +37,7 @@ export default class ModelLines {
       mesh.material = new THREE.MeshStandardMaterial();
       mesh.material.color = new THREE.Color(linesData[i][0]);
       mesh.visible = false;
-      mesh.material.wireframe = true
+      // mesh.material.wireframe = true
       mesh.material.flatShading = false;
 
       mesh.position.z = i * -this.posOffsetZ;
