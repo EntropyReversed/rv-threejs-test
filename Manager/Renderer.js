@@ -6,7 +6,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 
 const params = {
   exposure: 1,
-  bloomStrength: 5,
+  bloomStrength: 2,
   bloomThreshold: 0,
   bloomRadius: 0,
 };
@@ -40,7 +40,7 @@ export default class Renderer {
     this.renderer.gammaOutput = true;
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    this.renderer.setClearColor(new THREE.Color('rgb(13,13,13)'));
+    this.renderer.setClearColor(new THREE.Color('rgb(0,0,0)'));
     this.renderer.setSize(this.sizes.width, this.sizes.height);
     this.renderer.setPixelRatio(this.sizes.pixelRatio);
     this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height);
@@ -66,6 +66,7 @@ export default class Renderer {
     this.composer.renderToScreen = true;
     this.composer.addPass(this.renderScene);
     this.composer.addPass(bloomPass);
+    console.log(this.camera.perspectiveCamera)
   }
 
   resize() {
@@ -83,6 +84,7 @@ export default class Renderer {
     // this.renderer.clearDepth();
     // this.camera.perspectiveCamera.layers.set(0);
     this.renderer.render(this.scene, this.camera.perspectiveCamera);
+
 
     // second screen
     // this.renderer.setScissorTest(true);

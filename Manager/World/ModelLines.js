@@ -37,7 +37,7 @@ export default class ModelLines {
       const mesh = this.line.clone();
       mesh.material = modelLineMaterial.clone();
       mesh.material.color = new THREE.Color(linesData[i][0]);
-      // mesh.visible = false;
+      mesh.visible = false;
       // mesh.material.wireframe = true;
 
       console.log(mesh.geometry);
@@ -65,7 +65,7 @@ export default class ModelLines {
     this.lines.forEach((line, index) => {
       this.timeline.to(
         line.rotation,
-        { z: -0.5 - 0.049 * linesData[index][2], duration: 2 },
+        { z: -0.5-(0.049 * linesData[index][2]), duration: 2 },
         linesData[index][1]
       );
     });
