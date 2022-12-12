@@ -2,7 +2,7 @@ export default [
   {
     name: 'model',
     type: 'glbModel',
-    path: '/ModelNew.glb',
+    path: '/rv.glb',
   },
   // {
   //   name: 'model',
