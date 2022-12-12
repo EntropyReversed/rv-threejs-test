@@ -60,7 +60,7 @@ export default class Model {
     this.setModelPart(this.letters);
 
     this.lettersTop = this.group.children[2];
-    this.setModelPart(this.lettersTop, 1, true);
+    this.setModelPart(this.lettersTop, 0, true);
 
     this.rimRingGroup.scale.set(0.47, 0.47, 0.47);
     this.group.add(this.rimRingGroup);
