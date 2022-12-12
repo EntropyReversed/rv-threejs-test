@@ -26,6 +26,7 @@ export default class World {
     const modelTimeline2 = this.model.timeline2;
     // const modelTimeline3 = this.model.timeline3;
     const cameraTimeline = this.camera.getTimeline();
+    // const cameraTimeline2 = this.camera.getTimeline2();
     const gradientTimeline = this.model.gradientCircle.timeline;
     const modelLinesTimeline = this.model.modelLines.getTimeline();
 
@@ -38,7 +39,8 @@ export default class World {
       .add(gradientTimeline, '-=0.1')
       // .add(modelTimeline3);
       .add(cameraTimeline)
-      .add(modelLinesTimeline, '<+0.7');
+      .add(modelLinesTimeline, '<+=0.2')
+      // .add(cameraTimeline2);
 
     this.scrollTrigger = new TriggerScroll();
   }

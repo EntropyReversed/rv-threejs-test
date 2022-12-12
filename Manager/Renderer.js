@@ -75,12 +75,11 @@ export default class Renderer {
   }
 
   update() {
-
     // this.renderer.clear();
-  
+
     // this.camera.perspectiveCamera.layers.set(1);
     // this.composer.render();
-    
+
     // this.renderer.clearDepth();
     // this.camera.perspectiveCamera.layers.set(0);
     this.renderer.render(this.scene, this.camera.perspectiveCamera);

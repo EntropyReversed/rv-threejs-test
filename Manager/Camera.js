@@ -37,25 +37,20 @@ export default class Camera {
     // // target.copy( lookAtVector ).add( rotAtVector );
     // // object.lookAt( target );
 
-    // const gui = new GUI();
-    // const folder = gui.addFolder('Camera');
+    const gui = new GUI();
+    const folder = gui.addFolder('Camera Pos');
 
-    // folder
-    //   .add(this.perspectiveCamera.position, 'x', -30, 30, 0.01)
-    //   .onChange((val) => {
-    //     this.perspectiveCamera.lookAt(0, 0, 0);
-    //   });
-    // folder
-    //   .add(this.perspectiveCamera.position, 'y', -30, 30, 0.01)
-    //   .onChange((val) => {
-    //     this.perspectiveCamera.lookAt(0, 0, 0);
-    //   });
-    // folder
-    //   .add(this.perspectiveCamera.position, 'z', -30, 30, 0.01)
-    //   .onChange((val) => {
-    //     this.perspectiveCamera.lookAt(0, 0, 0);
-    //   });
-    // folder.open();
+    folder.add(this.perspectiveCamera.position, 'x', -30, 30, 0.01);
+    folder.add(this.perspectiveCamera.position, 'y', -30, 30, 0.01);
+    folder.add(this.perspectiveCamera.position, 'z', -30, 30, 0.01);
+    folder.open();
+
+    const folder2 = gui.addFolder('Camera Rot');
+
+    folder2.add(this.perspectiveCamera.rotation, 'x', -10, 10, 0.01);
+    folder2.add(this.perspectiveCamera.rotation, 'y', -10, 10, 0.01);
+    folder2.add(this.perspectiveCamera.rotation, 'z', -10, 10, 0.01);
+    folder2.open();
 
     this.setPath();
   }
@@ -66,7 +61,31 @@ export default class Camera {
       .to(
         this.perspectiveCamera.rotation,
 
-        { x: 0, y: 0, z: -0.8, duration: 1 }
+        { x: 0, y: 0, z: -0.8, duration: 0.5 }
+      )
+
+      .to(this.perspectiveCamera.position, {
+        x: -2,
+        y: 1,
+        z: 3.5,
+        duration: 1,
+      }, '<')
+      .to(
+        this.perspectiveCamera.rotation,
+
+        { x: 0, y: 0, z: -1.1, duration: 1 },
+        // '<'
+      );
+    return this.timeline;
+  }
+
+  getTimeline2() {
+    this.timeline2 = gsap
+      .timeline()
+      .to(
+        this.perspectiveCamera.rotation,
+
+        { x: 0, y: 0, z: -0.8, duration: 0.5 }
       )
       .to(
         this.perspectiveCamera.position,
@@ -74,31 +93,12 @@ export default class Camera {
           x: -1,
           y: 0.5,
           z: 9,
-          duration: 1,
+          duration: 0.5,
         },
-        '<'
-      )
-      .to(this.perspectiveCamera.position, {
-        x: -2,
-        y: 1,
-        z: 3.5,
-        duration: 1,
-      })
-      .to(
-        this.perspectiveCamera,
-
-        { zoom: 1.5, duration: 1 },
-        '<'
-      )
-      .to(
-        this.perspectiveCamera.rotation,
-
-        { x: 0, y: 0, z: -1.1, duration: 1 },
         '<'
       );
 
-
-    return this.timeline;
+    return this.timeline2;
   }
 
   setPath() {

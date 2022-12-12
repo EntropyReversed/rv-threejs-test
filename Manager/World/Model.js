@@ -4,6 +4,7 @@ import Manager from '../Manager';
 import GradientCircle from './GradientCircle';
 import LinesAnimation from './LinesAnimation';
 import ModelLines from '../../Manager/World/ModelLines';
+import EdgeRim from '../../Manager/World/EdgeRim';
 
 export default class Model {
   constructor() {
@@ -32,10 +33,13 @@ export default class Model {
       if (child.name === 'ring') {
         this.mLines = child
       }
+      if (child.name === 'rim') {
+        this.edge = child
+      }
     });
 
     this.modelLines = new ModelLines(this.mLines, this.rimRingGroup)
-
+    this.edgeRim = new EdgeRim(this.edge, this.rimRingGroup)
 
     // this.ring.visible = false;
     // this.setModelPart(this.ring, 0, false, false);

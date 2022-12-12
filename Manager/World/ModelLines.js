@@ -2,24 +2,25 @@ import { GUI } from 'dat.gui';
 import * as THREE from 'three';
 import gsap from 'gsap';
 
-
 const linesData = [
-  ['red', ''],
-  ['blue', '<'],
-  ['green', '<'],
-  ['purple', '<'],
-  ['teal', '<'],
-  ['blue', '<'],
-  ['purple', '<'],
-  ['red', '<'],
-  ['crimson', '<'],
-  ['orange', '<'],
-  ['red', '<'],
-  ['red', '<'],
-  ['red', '<'],
-  ['red', '<'],
-  ['red', '<'],
+  ['red', '', 0],
+  ['blue', '<', 2],
+  ['green', '<', 4],
+  ['purple', '<', 1],
+  ['teal', '<', 5],
+  ['blue', '<', 11],
+  ['purple', '<', 8],
+  ['red', '<', 7],
+  ['crimson', '<', 20],
+  ['orange', '<', 21],
+  ['purple', '<', 14],
+  ['crimson', '<', 5],
+  ['teal', '<', 8],
+  ['blue', '<', 10],
+  ['red', '<', 22],
 ];
+
+const modelLineMaterial = new THREE.MeshStandardMaterial();
 
 export default class ModelLines {
   constructor(line, group) {
@@ -34,17 +35,21 @@ export default class ModelLines {
     this.lines = [];
     for (let i = 0; i < linesData.length; i++) {
       const mesh = this.line.clone();
-      mesh.material = new THREE.MeshStandardMaterial();
+      mesh.material = modelLineMaterial.clone();
       mesh.material.color = new THREE.Color(linesData[i][0]);
       mesh.visible = false;
-      // mesh.material.wireframe = true
-      mesh.material.flatShading = false;
+      mesh.material.wireframe = true;
+
+      console.log(mesh.geometry);
+      // mesh.material.flatShading = false;
+      // mesh.geometry.computeVertexNormals();
+      // console.log(mesh.material)
 
       mesh.position.z = i * -this.posOffsetZ;
-      mesh.rotation.z = 2.5;
+      mesh.rotation.z = 2.4 + 0.049 * linesData[i][2];
+      mesh.scale.z = 1;
       mesh.layers.enable(1);
 
-      mesh.scale.z = 1;
       this.lines.push(mesh);
       this.group.add(mesh);
     }
@@ -58,14 +63,13 @@ export default class ModelLines {
     });
 
     this.lines.forEach((line, index) => {
-      console.log(linesData[index]);
       this.timeline.to(
         line.rotation,
-        { z: 1, duration: Math.random() * 3 + 1 },
+        { z: 0, duration: 1 },
         linesData[index][1]
       );
     });
-
+    // Math.random() * 3 + 1
     return this.timeline;
   }
 }
