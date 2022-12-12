@@ -13,7 +13,7 @@ export default class Camera {
     this.createPerspectiveCamera();
     this.createPerspectiveCameraMain();
 
-    this.setOrbitControls();
+    // this.setOrbitControls();
   }
 
   createPerspectiveCamera() {
@@ -24,8 +24,8 @@ export default class Camera {
       200
     );
     this.perspectiveCamera.position.z = 12;
-    this.perspectiveCamera.lookAt(0, 0, 0);
-    this.perspectiveCamera.rotation.order = 'YXZ';
+    // this.perspectiveCamera.lookAt(0, 0, 0);
+    // this.perspectiveCamera.rotation.order = 'YXZ';
     this.scene.add(this.perspectiveCamera);
     // this.helper = new THREE.CameraHelper(this.perspectiveCamera);
     // this.scene.add(this.helper);
@@ -58,6 +58,35 @@ export default class Camera {
     // folder.open();
 
     this.setPath();
+  }
+
+  getTimeline() {
+    let test = {
+      val: 0,
+    };
+    this.timeline = gsap
+      .timeline()
+      .to(this.perspectiveCamera.position, {
+        x: -2,
+        y: -0.3,
+        z: 7,
+        duration: 2,
+      })
+      .to(this.perspectiveCamera.position, { x: 0, y: -0.9, z: 6, duration: 2 })
+      .to(
+        this.perspectiveCamera.rotation,
+
+        { x: -1, y: 1.5, z: 0, duration: 2 },
+        '<'
+      );
+
+    // .to(
+    //   this.perspectiveCamera.rotation,
+    //   { x: -0.6, y: 0.4, z: Math.PI * 0.25 },
+
+    // );
+
+    return this.timeline;
   }
 
   setPath() {
@@ -118,8 +147,7 @@ export default class Camera {
   }
 
   update() {
-    this.controls.update();
-
+    // this.controls.update();
     // this.helper.matrixWorldNeedsUpdate = true;
     // this.helper.update();
     // this.helper.position.copy(this.perspectiveCameraMain.position);

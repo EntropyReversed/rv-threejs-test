@@ -128,7 +128,7 @@ export default class GradientCircle {
         color: new THREE.Color('rgb(0,0,0)'),
       })
       // .set(this.model.lettersTop.material, { metalness: 0.97 })
-
+      .set(this.model.rim.material, { opacity: 0 })
       .set(this.model.circle.material, { opacity: 1 })
       .set(this.model.letters.material, { opacity: 1 })
       .set(this.model.lettersTop.material, { opacity: 1 })

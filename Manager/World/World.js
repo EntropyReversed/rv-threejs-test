@@ -10,6 +10,7 @@ export default class World {
     this.masterTimeline = this.manager.masterTimeline;
     this.resources = this.manager.resources;
     this.text = new Text();
+    this.camera = this.manager.camera;
     this.enviroment = new Enviroment();
     this.resources.on('ready', () => {
       this.model = new Model();
@@ -23,6 +24,7 @@ export default class World {
     const title1 = this.text.getTimeline();
     const modelTimeline1 = this.model.timeline;
     const modelTimeline2 = this.model.timeline2;
+    const cameraTimeline = this.camera.getTimeline();
     const gradientTimeline = this.model.gradientCircle.timeline;
 
     this.masterTimeline
@@ -31,7 +33,8 @@ export default class World {
       .add(linesTimeline, '-=0.35')
       .add(modelTimeline2, '-=1')
       .add(linesReverse, '-=0.3')
-      .add(gradientTimeline, '-=0.1');
+      .add(gradientTimeline, '-=0.1')
+      .add(cameraTimeline);
 
     this.scrollTrigger = new TriggerScroll();
   }

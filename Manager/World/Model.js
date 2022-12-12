@@ -30,10 +30,12 @@ export default class Model {
     });
 
     this.ring = this.model.scene.children[0];
+    this.ring.visible = false;
     this.rimRingGroup.add(this.ring);
     this.setModelPart(this.ring, 0, false);
 
     this.rim = this.model.scene.children[1];
+    // this.rim.visible = false;
     this.rimRingGroup.add(this.rim);
     this.setModelPart(this.rim, 0, false);
 
@@ -97,6 +99,7 @@ export default class Model {
 
     this.timeline2 = gsap
       .timeline()
+
       .set(this.circle.material, { opacity: 0 })
       .set(this.group.rotation, { z: 0 })
       .set(this.group.position, { x: 0.3, y: 0.08 })
