@@ -68,18 +68,18 @@ export default class Camera {
         x: -2,
         y: 1,
         z: 3.5,
-        duration: 1,
+        duration:0.7,
       }, '<')
+      // .to(
+      //   this.perspectiveCamera.rotation,
+
+      //   { x: 0, y: 0, z: -1.1, duration: 0.5 },
+      //   // '<'
+      // )
       .to(
         this.perspectiveCamera.rotation,
 
-        { x: 0, y: 0, z: -1.1, duration: 0.5 },
-        // '<'
-      )
-      .to(
-        this.perspectiveCamera.rotation,
-
-        { x: 0, y: -1.09, z: -0.41, duration: 2 }
+        { x: 0, y: -1.09, z: -0.41, duration: 1.5 }
       );
     return this.timeline;
   }

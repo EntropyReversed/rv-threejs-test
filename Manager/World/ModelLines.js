@@ -3,21 +3,21 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 
 const linesData = [
-  ['red', '', 0],
+  ['red', '', 1],
   ['blue', '<', 2],
   ['green', '<', 4],
-  ['purple', '<', 1],
+  ['purple', '<', 6],
   ['teal', '<', 5],
   ['blue', '<', 11],
   ['purple', '<', 8],
   ['red', '<', 7],
-  ['crimson', '<', 20],
-  ['orange', '<', 21],
-  ['purple', '<', 14],
+  ['crimson', '<', 12],
+  ['orange', '<', 9],
+  ['purple', '<', 5],
   ['crimson', '<', 5],
   ['teal', '<', 8],
   ['blue', '<', 10],
-  ['red', '<', 22],
+  ['red', '<', 13],
 ];
 
 const modelLineMaterial = new THREE.MeshStandardMaterial();
@@ -46,7 +46,7 @@ export default class ModelLines {
       // console.log(mesh.material)
 
       mesh.position.z = i * -this.posOffsetZ;
-      mesh.rotation.z = 2.5 + 0.049 * linesData[i][2];
+      mesh.rotation.z = 2.4 + 0.049 * linesData[i][2];
       mesh.scale.z = 1;
       mesh.layers.enable(1);
 
@@ -65,7 +65,7 @@ export default class ModelLines {
     this.lines.forEach((line, index) => {
       this.timeline.to(
         line.rotation,
-        { z: -0.5-(0.049 * linesData[index][2]), duration: 2 },
+        { z: -0.7-(0.049 * linesData[index][2]), duration: 3},
         linesData[index][1]
       );
     });
