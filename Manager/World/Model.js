@@ -43,7 +43,7 @@ export default class Model {
   setModelPart(part, startOp = 0) {
     // part.material = new THREE.MeshNormalMaterial();
 
-    part.geometry.computeTangents();
+    // part.geometry.computeTangents();
     part.geometry.computeVertexNormals();
     console.log(part.geometry);
     part.geometry.verticesNeedUpdate = true;
@@ -52,8 +52,8 @@ export default class Model {
     part.material.transparent = true;
     part.material.color = new THREE.Color('rgb(200,200,200)');
     part.material.morphTargets = true;
-    part.material.morphNormals = true;
-    part.material.side = THREE.DoubleSide;
+    // part.material.morphNormals = true;
+    // part.material.side = THREE.DoubleSide;
     part.material.depthWrite = true;
     // part.material.skinning = true;
     // part.material.roughnessMap = this.manager.resources.items.roughTex;
@@ -61,7 +61,7 @@ export default class Model {
     part.material.metalness = 0;
     part.material.roughness = 0.1;
     // part.material.wireframe = true;
-    // part.material.flatShading = true;
+    part.material.flatShading = true;
     // part.material.vertexColors = true;
     part.material.needsUpdate = true;
 
