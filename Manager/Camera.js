@@ -20,7 +20,7 @@ export default class Camera {
     this.perspectiveCamera = new THREE.PerspectiveCamera(
       35,
       this.sizes.aspect,
-      0.5,
+      0.1,
       200
     );
     this.perspectiveCamera.position.z = 12;
@@ -61,18 +61,16 @@ export default class Camera {
   }
 
   getTimeline() {
-    let test = {
-      val: 0,
-    };
     this.timeline = gsap
       .timeline()
+      .set(this.manager.world.model.ring, { visible: true })
       .to(this.perspectiveCamera.position, {
         x: -2,
         y: -0.3,
         z: 7,
         duration: 2,
       })
-      .to(this.perspectiveCamera.position, { x: 0, y: -0.9, z: 6, duration: 2 })
+      .to(this.perspectiveCamera.position, { x: 0, y: -1, z: 6, duration: 2 })
       .to(
         this.perspectiveCamera.rotation,
 

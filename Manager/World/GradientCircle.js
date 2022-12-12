@@ -87,9 +87,9 @@ export default class GradientCircle {
   setUpTimeline() {
     const c = new THREE.Color('rgb(0,0,0)');
     this.timeline
-      .set(this.model.circle.morphTargetInfluences, [0.0015, 0])
-      .set(this.model.letters.morphTargetInfluences, [0.0015, 0])
-      .set(this.model.lettersTop.morphTargetInfluences, [0.0015, 0])
+      .set(this.model.circle.morphTargetInfluences, [0.002, 0])
+      .set(this.model.letters.morphTargetInfluences, [0.002, 0])
+      .set(this.model.lettersTop.morphTargetInfluences, [0.002, 0])
       .fromTo(
         this.circle.scale,
         // { x: 0.463, y: 0.463 },

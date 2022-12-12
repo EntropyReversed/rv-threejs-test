@@ -30,14 +30,15 @@ export default class Model {
     });
 
     this.ring = this.model.scene.children[0];
-    this.ring.visible = false;
+
+    // this.ring.visible = false;
+    this.setModelPart(this.ring, 0, false, false);
     this.rimRingGroup.add(this.ring);
-    this.setModelPart(this.ring, 0, false);
 
     this.rim = this.model.scene.children[1];
     // this.rim.visible = false;
-    this.rimRingGroup.add(this.rim);
     this.setModelPart(this.rim, 0, false);
+    this.rimRingGroup.add(this.rim);
 
     this.rimRingGroup.scale.set(0.47, 0.47, 0.47);
     this.group.add(this.rimRingGroup);
@@ -54,14 +55,13 @@ export default class Model {
     this.scene.add(this.group);
   }
 
-  setModelPart(part, startOp = 0, shade = true) {
+  setModelPart(part, startOp = 0, shade = true, castShadow = true) {
     // part.material = new THREE.MeshNormalMaterial();
 
     // part.geometry.computeTangents();
     // part.geometry.computeVertexNormals();
-    console.log(part);
-    part.geometry.verticesNeedUpdate = true;
-    part.geometry.normalsNeedUpdate = true;
+    // part.geometry.verticesNeedUpdate = true;
+    // part.geometry.normalsNeedUpdate = true;
 
     part.material.transparent = true;
     part.material.color = new THREE.Color('rgb(200,200,200)');
@@ -80,7 +80,7 @@ export default class Model {
     part.material.needsUpdate = true;
 
     part.receiveShadow = true;
-    part.castShadow = true;
+    part.castShadow = castShadow;
   }
 
   createTimeline() {
@@ -112,5 +112,9 @@ export default class Model {
       )
       .to(this.lettersTop.material, { opacity: 0.4 }, '<')
       .to(this.lettersTop.material, { opacity: 1 }, '<+0.5');
+
+    // this.timeline3 = gsap.timeline()
+    // .to(this.group.position, {z:6})
+    // .to(this.group.rotation, {x:1})
   }
 }

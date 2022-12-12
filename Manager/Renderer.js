@@ -30,6 +30,7 @@ export default class Renderer {
     this.renderer.gammaOutput = true;
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.renderer.setClearColor(new THREE.Color('rgb(13,13,13)'));
     this.renderer.setSize(this.sizes.width, this.sizes.height);
     this.renderer.setPixelRatio(this.sizes.pixelRatio);
     this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height);
