@@ -40,7 +40,7 @@ export default class World {
       // .add(modelTimeline3);
       .add(cameraTimeline)
       .add(modelLinesTimeline, '<+=0.2')
-      // .add(cameraTimeline2);
+      // .add(cameraTimeline2, "-=1");
 
     this.scrollTrigger = new TriggerScroll();
   }
