@@ -62,6 +62,7 @@ export default class Model {
   }
 
   setModelPart(part, startOp = 0, shade = true, castShadow = true) {
+    part.layers.enable(0);
     // part.material = new THREE.MeshNormalMaterial();
 
     // part.geometry.computeTangents();

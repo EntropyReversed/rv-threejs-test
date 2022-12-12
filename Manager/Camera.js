@@ -82,18 +82,18 @@ export default class Camera {
         x: -2,
         y: 1,
         z: 3.5,
-        duration: 2,
+        duration: 1,
       })
       .to(
         this.perspectiveCamera,
 
-        { zoom: 2, duration: 2 },
+        { zoom: 2, duration: 1 },
         '<'
       )
       .to(
         this.perspectiveCamera.rotation,
 
-        { x: 0, y: 0, z: -1.15, duration: 2 },
+        { x: 0, y: 0, z: -1.15, duration: 1 },
         '<'
       );
     // .to(this.perspectiveCamera.position, { x: -1, y: 1, z: 6, duration: 2 })

@@ -1,5 +1,15 @@
 import Manager from './Manager';
 import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+const params = {
+  exposure: 1,
+  bloomStrength: 5,
+  bloomThreshold: 0,
+  bloomRadius: 0,
+};
 
 export default class Renderer {
   constructor() {
@@ -36,6 +46,26 @@ export default class Renderer {
     this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height);
 
     console.log('renderer info', this.renderer.info);
+
+    this.renderScene = new RenderPass(
+      this.scene,
+      this.camera.perspectiveCamera
+    );
+
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(this.sizes.width, this.sizes.height),
+      1.5,
+      0.4,
+      0.85
+    );
+    bloomPass.threshold = params.bloomThreshold;
+    bloomPass.strength = params.bloomStrength;
+    bloomPass.radius = params.bloomRadius;
+
+    this.composer = new EffectComposer(this.renderer);
+    this.composer.renderToScreen = true;
+    this.composer.addPass(this.renderScene);
+    this.composer.addPass(bloomPass);
   }
 
   resize() {
@@ -45,6 +75,14 @@ export default class Renderer {
   }
 
   update() {
+
+    // this.renderer.clear();
+  
+    // this.camera.perspectiveCamera.layers.set(1);
+    // this.composer.render();
+    
+    // this.renderer.clearDepth();
+    // this.camera.perspectiveCamera.layers.set(0);
     this.renderer.render(this.scene, this.camera.perspectiveCamera);
 
     // second screen
