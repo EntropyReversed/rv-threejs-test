@@ -1,6 +1,7 @@
 import { GUI } from 'dat.gui';
 import * as THREE from 'three';
 import gsap from 'gsap';
+import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
 export default class EdgeRim {
   constructor(edge, group) {
@@ -10,8 +11,7 @@ export default class EdgeRim {
   }
 
   setUp() {
-    this.group.add(this.edge)
+    this.edge.visible = false;
+    this.group.add(this.edge);
   }
-
-
 }

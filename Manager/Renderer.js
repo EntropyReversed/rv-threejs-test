@@ -66,7 +66,7 @@ export default class Renderer {
     this.composer.renderToScreen = true;
     this.composer.addPass(this.renderScene);
     this.composer.addPass(bloomPass);
-    console.log(this.camera.perspectiveCamera)
+    console.log(this.camera.perspectiveCamera);
   }
 
   resize() {
@@ -84,7 +84,6 @@ export default class Renderer {
     // this.renderer.clearDepth();
     // this.camera.perspectiveCamera.layers.set(0);
     this.renderer.render(this.scene, this.camera.perspectiveCamera);
-
 
     // second screen
     // this.renderer.setScissorTest(true);

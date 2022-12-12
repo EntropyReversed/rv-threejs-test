@@ -5,6 +5,7 @@ import GradientCircle from './GradientCircle';
 import LinesAnimation from './LinesAnimation';
 import ModelLines from '../../Manager/World/ModelLines';
 import EdgeRim from '../../Manager/World/EdgeRim';
+import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
 export default class Model {
   constructor() {
@@ -31,15 +32,15 @@ export default class Model {
         this.group = child;
       }
       if (child.name === 'ring') {
-        this.mLines = child
+        this.mLines = child;
       }
       if (child.name === 'rim') {
-        this.edge = child
+        this.edge = child;
       }
     });
 
-    this.modelLines = new ModelLines(this.mLines, this.rimRingGroup)
-    this.edgeRim = new EdgeRim(this.edge, this.rimRingGroup)
+    this.modelLines = new ModelLines(this.mLines, this.rimRingGroup);
+    this.edgeRim = new EdgeRim(this.edge, this.rimRingGroup);
 
     // this.ring.visible = false;
     // this.setModelPart(this.ring, 0, false, false);
@@ -50,27 +51,29 @@ export default class Model {
     // this.setModelPart(this.rim, 0, false);
     // this.rimRingGroup.add(this.rim);
 
-    this.rimRingGroup.scale.set(0.47, 0.47, 0.47);
-    this.group.add(this.rimRingGroup);
-
     this.circle = this.group.children[0];
-    this.setModelPart(this.circle, 1);
+
+    this.setModelPart(this.circle, 1, true);
 
     this.letters = this.group.children[1];
+
     this.setModelPart(this.letters);
 
     this.lettersTop = this.group.children[2];
-    this.setModelPart(this.lettersTop);
+    this.setModelPart(this.lettersTop, 1, true);
+
+    this.rimRingGroup.scale.set(0.47, 0.47, 0.47);
+    this.group.add(this.rimRingGroup);
 
     this.scene.add(this.group);
   }
 
-  setModelPart(part, startOp = 0, shade = true, castShadow = true) {
-    part.layers.enable(0);
+  setModelPart(part, startOp = 0, shade = false) {
+    // part.layers.enable(0);
     // part.material = new THREE.MeshNormalMaterial();
 
     // part.geometry.computeTangents();
-    // part.geometry.computeVertexNormals();
+    part.geometry.computeVertexNormals();
     // part.geometry.verticesNeedUpdate = true;
     // part.geometry.normalsNeedUpdate = true;
 
@@ -80,7 +83,6 @@ export default class Model {
     // part.material.morphNormals = true;
     // part.material.side = THREE.DoubleSide;
     // part.material.depthWrite = false;
-    // part.material.skinning = true;
     // part.material.roughnessMap = this.manager.resources.items.roughTex;
     part.material.opacity = startOp;
     part.material.metalness = 0;
@@ -91,7 +93,7 @@ export default class Model {
     part.material.needsUpdate = true;
 
     part.receiveShadow = true;
-    part.castShadow = castShadow;
+    part.castShadow = true;
   }
 
   createTimeline() {

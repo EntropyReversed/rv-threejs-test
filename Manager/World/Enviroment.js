@@ -33,9 +33,9 @@ export default class Enviroment {
     // const gui = new GUI();
     // const lightFolder = gui.addFolder('Light');
 
-    // lightFolder.add(this.sunLight.position, 'x', -30, 30);
-    // lightFolder.add(this.sunLight.position, 'y', -30, 30);
-    // lightFolder.add(this.sunLight.position, 'z', -30, 30);
+    // lightFolder.add(this.spotLight.position, 'x', -30, 30);
+    // lightFolder.add(this.spotLight.position, 'y', -30, 30);
+    // lightFolder.add(this.spotLight.position, 'z', -30, 30);
     // lightFolder.open();
   }
 }
