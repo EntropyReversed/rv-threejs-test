@@ -65,7 +65,7 @@ export default class ModelLines {
     this.lines.forEach((line, index) => {
       this.timeline.to(
         line.rotation,
-        { z: -0.7-(0.049 * linesData[index][2]), duration: 3},
+        { z: -1.4+(0.049 * linesData[index][2]), duration: 3},
         linesData[index][1]
       );
     });

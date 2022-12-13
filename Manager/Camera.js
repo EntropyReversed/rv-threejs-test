@@ -79,7 +79,7 @@ export default class Camera {
       .to(
         this.perspectiveCamera.rotation,
 
-        { x: 0, y: -1.09, z: -0.41, duration: 1.5 }
+        { x: 0, y: -1.09, z: -0.41, duration: 1.5 }, 
       );
     return this.timeline;
   }
