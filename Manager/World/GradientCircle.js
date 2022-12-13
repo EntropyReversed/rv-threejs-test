@@ -81,6 +81,7 @@ export default class GradientCircle {
     this.model.circle.updateMorphTargets();
     this.model.letters.updateMorphTargets();
     this.model.lettersTop.updateMorphTargets();
+    console.log(this.model)
     this.model.group.add(this.circle);
   }
 

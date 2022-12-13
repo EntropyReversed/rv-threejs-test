@@ -40,7 +40,7 @@ export default class ModelLines {
       mesh.visible = false;
       // mesh.material.wireframe = true;
 
-      console.log(mesh.geometry);
+   
       // mesh.material.flatShading = false;
       // mesh.geometry.computeVertexNormals();
       // console.log(mesh.material)
